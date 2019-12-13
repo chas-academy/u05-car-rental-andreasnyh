@@ -17,3 +17,4 @@ CREATE TABLE Cars (registration INTEGER NOT NULL KEY,
                     FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
                     rentStartTime TIMESTAMP
                   );
+
