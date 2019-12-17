@@ -54,6 +54,5 @@ Filters
     timezone_name
     title
     trim
-    u
     upper
     url_encode
