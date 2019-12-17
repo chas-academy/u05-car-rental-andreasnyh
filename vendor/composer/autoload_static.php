@@ -21,6 +21,10 @@ class ComposerStaticInit3a5ffa4b5f89bc95c74e8384d54cd0fd
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
+        'M' => 
+        array (
+            'Main\\' => 5,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -36,15 +40,9 @@ class ComposerStaticInit3a5ffa4b5f89bc95c74e8384d54cd0fd
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'T' => 
+        'Main\\' => 
         array (
-            'Twig_' => 
-            array (
-                0 => __DIR__ . '/..' . '/twig/twig/lib',
-            ),
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
@@ -53,7 +51,6 @@ class ComposerStaticInit3a5ffa4b5f89bc95c74e8384d54cd0fd
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit3a5ffa4b5f89bc95c74e8384d54cd0fd::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit3a5ffa4b5f89bc95c74e8384d54cd0fd::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3a5ffa4b5f89bc95c74e8384d54cd0fd::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

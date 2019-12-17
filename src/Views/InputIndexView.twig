@@ -1,0 +1,42 @@
+<h1>Input Index</h1>
+<p>
+<form method="post" action="/listIndex" onsubmit="return validateIndex();">
+  Index: <input type="text" name="index" id="index">
+  <input type="submit" value="Submit">
+</form>
+<p>
+<form method="post" action="/">
+  <input type="submit" value="Main Menu">
+</form>
+
+<script>
+   // Funktionen allDigits returnerar sant om texten innehåller minst en
+   // siffra, och enbart siffror. Om texten alltså utgör ett icke-negativt
+   // heltal.
+   // Vi använder mönstermatchning för att avgöra om texten består av
+   // minst en siffra, och enbart siffror.
+   // ^ början av texten, $ slutet av texten
+   // [0-9] något av siffrorna 0-9
+   // + ett eller flera, * noll eller flera, ? exakt ett
+   function allDigits(text) { 
+     return text.match(/^[0-9]+$/) 
+   } 
+
+   // Funktionen validateIndex anropas då användaren klickar på Submit-
+   // knappen. Om användaren angav ett korrekt värde i indatafältet
+   // returneras sant.
+   function validateIndex() {
+     let index = document.getElementById("index").value;
+     
+     if (allDigits(index)) {
+       return true;
+     }
+
+     // Om användaren angav ett inkorrekt värde i indatafältet skrivs ett
+     // felmeddelande ut, och falskt returneras.
+     else {
+       alert("\"" + index + "\" is not a valid index.");
+       return false;
+     }
+   }
+</script>    

@@ -1,0 +1,22 @@
+<h1>List Index</h1>
+<p>
+  <!-- ListIndexView undersöker först om personen är null.
+       Om inte skriver den ut indexet och personen med det indexet. -->
+  {% if person is not null %}
+    Index: {{index}}
+    <p>
+    <ul>
+      <li>{{person.name}}</li>
+      <li>{{person.address}}</li>
+      <li>{{person.phone}}</li>
+    </ul>
+
+  <!-- Om personen är null skriver vi ut att det
+       inte finns en person med det avgivna indexet. -->
+  {% else %}
+    No person at index {{index}}.
+  {% endif %}
+<p>
+<form method="post" action="/">
+  <input type="submit" value="Main Menu">
+</form>
