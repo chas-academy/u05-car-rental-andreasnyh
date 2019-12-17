@@ -3,19 +3,22 @@ CREATE DATABASE carRental;
 USE carRental;
 
 
-CREATE TABLE Customers (socialSecurityNumber INTEGER NOT NULL PRIMARY KEY,
+CREATE TABLE Customers (socialSecurityNumber BIGINT NOT NULL UNIQUE KEY,
                         customerName VARCHAR(256),
                         address VARCHAR(256),
                         postalAddress VARCHAR(256),
                         phoneNumber INTEGER
                        );
 
-CREATE TABLE Cars (registration VARCHAR(100) NOT NULL PRIMARY KEY,
+CREATE TABLE Cars (registration VARCHAR(100) NOT NULL,
                     year YEAR,
                     cost FLOAT,
-                    renter INTEGER NOT NULL,
+                    renter BIGINT NOT NULL,
                     FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
-                    rentStartTime DATETIME
+                    rentStartTime DATETIME,
+                    returnTime DATETIME,
+                    UNIQUE KEY (registration),
+                    PRIMARY KEY (rentStartTime, returnTime)
                   );
 
 CREATE TABLE Makes (make VARCHAR(256));
@@ -40,4 +43,10 @@ insert INTO Colors (color) values ("Black"),
                                   ("Orange"),
                                   ("Green");
 
-#CREATE TABLE History ();
+CREATE TABLE History (registration VARCHAR(100), FOREIGN KEY (registration) REFERENCES Cars(registration),
+                      renter BIGINT NOT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
+                      rentStartTime DATETIME, FOREIGN KEY (rentStartTime) REFERENCES Cars(rentStartTime),
+                      #returnTime DATETIME, FOREIGN KEY (returnTime) REFERENCES Cars(returnTime),
+                      #days INTEGER,
+                      cost FLOAT, FOREIGN KEY (cost) REFERENCES Cars(cost)
+                      );
