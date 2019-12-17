@@ -46,7 +46,7 @@ insert INTO Colors (color) values ("Black"),
 CREATE TABLE History (registration VARCHAR(100), FOREIGN KEY (registration) REFERENCES Cars(registration),
                       renter BIGINT NOT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
                       rentStartTime DATETIME, FOREIGN KEY (rentStartTime) REFERENCES Cars(rentStartTime),
-                      #returnTime DATETIME, FOREIGN KEY (returnTime) REFERENCES Cars(returnTime),
+                      returnTime DATETIME, CONSTRAINT carRental FOREIGN KEY (returnTime) REFERENCES Cars(returnTime)
                       #days INTEGER,
-                      cost FLOAT, FOREIGN KEY (cost) REFERENCES Cars(cost)
+                      #cost FLOAT, FOREIGN KEY (cost) REFERENCES Cars(cost)
                       );
