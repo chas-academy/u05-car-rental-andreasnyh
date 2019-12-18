@@ -12,7 +12,7 @@ $connection = new Login();
 $connection->login();
 
 $object = new Customers;
-print_r($object->getCustomers());
+echo($object->getCustomers());
 
 /*
 
