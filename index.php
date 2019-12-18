@@ -1,26 +1,34 @@
 <?php
-use Main\Core\Router;
-use Main\Core\Request;
-use Main\Core\Login;
+use Main\core\Router;
+use Main\core\Request;
+use Main\includes\Login;
+use Main\includes\Customers;
+//include_once './src/Core/Login.php';
 
 // Twig 3.0
 require_once "./vendor/autoload.php";
 
-$loader = new \Twig\Loader\FilesystemLoader("./src/Views");
-$twig = new \Twig\Environment($loader
-//    , ['cache' => "./compilation_cache"]
-    );
+$connection = new Login();
+$connection->login();
 
-// Vi skapar objekt av klasserna Request och Router.
-//$request = new Request();
-//$router = new Router();
+$object = new Customers;
+print_r($object->getCustomers());
 
-// Vi anropar route I Router-objektet, som returnerar
-// den färdiga HMTL-koden, som vi skriver ut med echo.
-//echo $router->route($request, $twig);
+/*
 
-$connection = new login();
-$request = new Request();                    // En request innehåller path och form
-$router = new Router($connection, $request); // Dirigerar begäran till rätt controller
-echo $router->route($request, $twig);
+//$connection = login();
+//$request = new Request();                    // En request innehåller path och form
+//$router = new Router($connection, $request); // Dirigerar begäran till rätt controller
+$question = 'SELECT * FROM Customers';
+$query = $connection->prepare($question, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+$query->execute();
+$customers = $query->fetchALL();
+while ($result = $query->fetch(PDO::FETCH_ASSOC)) {
+    echo $customers."<br/>";
+}
+$statement = $connection->prepare($query);
+echo $statement->execute();
+//echo $router->route($request, $statement);
+
+*/
 ?>

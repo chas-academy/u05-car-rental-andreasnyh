@@ -1,9 +1,9 @@
 <?php
-  namespace Main\Core;
+  namespace Main\core;
 
-  use Main\Controllers\ListController;
-  use Main\Controllers\InputController;
-  use Main\Controllers\MainController;
+  use Main\controllers\ListController;
+  use Main\controllers\InputController;
+  use Main\controllers\MainController;
 
   // Routerns metod route tar ett object vardera av Request och Twig.
   class Router {
