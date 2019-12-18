@@ -4,19 +4,27 @@ namespace Main\includes;
 
 class Customers extends Login {
     public function getCustomers() {
-        $statement = $this->login()->query("SELECT * FROM Customers");
-        /*
-        while ($row = $statement->fetchAll()) {
+        $customers = $this->login()->query("SELECT * FROM Customers");
 
-            return($row);
+        // Traverse through the result of the select call, row-by-row
+        foreach ($customers as $customer) {
+            $customerName = htmlspecialchars($customer["customerName"]);
+            $phoneNumber = htmlspecialchars($customer["phoneNumber"]);
+            echo $customerName . " " . $phoneNumber . "<br>";
         }
-        */
-        // Select all the customers in the Customers table
+    }
 
-        // Traverse throught the result of the select call, row-by-row
-        foreach ($statement as $row) {
-            $customerName = htmlspecialchars($row["customerName"]);
-            echo $customerName . "<br>";
+    public function findSinglePerson() {
+        $name = "Frida Fridh";
+
+        $statement = $this->login()->prepare("Select * from Customers where customerName=?");
+        $statement->execute([$name]);
+
+        if ($statement->rowCount()){
+            foreach ($statement as $customer) {
+                $customerName = htmlspecialchars($customer["customerName"]);
+                echo $customerName . "<br>";
+            }
         }
-}
+    }
 };

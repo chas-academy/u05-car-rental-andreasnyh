@@ -3,17 +3,16 @@ use Main\core\Router;
 use Main\core\Request;
 use Main\includes\Login;
 use Main\includes\Customers;
-//include_once './src/Core/Login.php';
-
 // Twig 3.0
 require_once "./vendor/autoload.php";
+
 
 $connection = new Login();
 $connection->login();
 
 $object = new Customers;
 echo($object->getCustomers());
-
+//echo($object->findSinglePerson());
 /*
 
 //$connection = login();
