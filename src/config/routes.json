@@ -1,0 +1,118 @@
+{
+  "addCustomer": {
+    "controller": "Customer",
+    "method": "addCustomer"
+  },
+  "customerAdded": {
+    "controller": "Customer",
+    "method": "customerAdded"
+  },
+  "editCustomer/:customerNumber/:customerName": {
+    "controller": "Customer",
+    "method": "editCustomer",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string"
+    }
+  },
+  "customerEdited/:customerNumber/:customerName": {
+    "controller": "Customer",
+    "method": "customerEdited",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string"
+    }
+  },
+  "removeCustomer/:customerNumber/:customerName": {
+    "controller": "Customer",
+    "method": "removeCustomer",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string"
+    }
+  },
+  "addAccount/:customerNumber/:customerName": {
+    "controller": "Customer",
+    "method": "addAccount",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string"
+    }
+  },
+  "deposit/:customerNumber/:customerName/:accountNumber": {
+    "controller": "Account",
+    "method": "deposit",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string",
+      "accountNumber": "number"
+    }
+  },
+  "depositDone/:customerNumber/:customerName/:accountNumber": {
+    "controller": "Account",
+    "method": "depositDone",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string",
+      "accountNumber": "number"
+    }
+  },
+  "withdraw/:customerNumber/:customerName/:accountNumber": {
+    "controller": "Account",
+    "method": "withdraw",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string",
+      "accountNumber": "number"
+    }
+  },
+  "withdrawDone/:customerNumber/:customerName/:accountNumber": {
+    "controller": "Account",
+    "method": "withdrawDone",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string",
+      "accountNumber": "number"
+    }
+  },
+  "transfer/:customerNumber/:customerName/:accountNumber": {
+    "controller": "Account",
+    "method": "transfer",
+    "params": {
+      "fromCustomerNumber": "number",
+      "fromCustomerName": "string",
+      "fromAccountNumber": "number"
+    }
+  },
+  "transferDone/:fromCustomerNumber/:fromCustomerName/:fromAccountNumber": {
+    "controller": "Account",
+    "method": "transferDone",
+    "params": {
+      "fromCustomerNumber": "number",
+      "fromCustomerName": "string",
+      "fromAccountNumber": "number"
+    }
+  },
+  "viewAccount/:customerNumber/:customerName/:accountNumber": {
+    "controller": "Account",
+    "method": "viewAccount",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string",
+      "accountNumber": "number"
+    }
+  },
+  "removeAccount/:customerNumber/:customerName/:accountNumber": {
+    "controller": "Account",
+    "method": "removeAccount",
+    "params": {
+      "customerNumber": "number",
+      "customerName": "string",
+      "accountNumber": "number"
+    }
+  },
+  "": {
+    "controller": "MainMenu",
+    "method": "customerList"
+  }  
+}

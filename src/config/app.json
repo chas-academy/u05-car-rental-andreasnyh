@@ -1,0 +1,9 @@
+{
+  "database": {
+    "host": "localhost",
+    "database": "Bank",
+    "user": "root",
+    "password": "secret"
+  },
+  "log": "/var/log/bookstore.log"
+}

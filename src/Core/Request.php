@@ -1,12 +1,15 @@
 <?php
-  namespace Main\Core;
+  namespace Main\core;
 
   class Request {
-    private $path, $form;
+    private $path, $method, $form;
 
     public function __construct() {
-      $this->path = $_SERVER["REQUEST_URI"]; // path-delen av URL:en car.rental/____ex____
-      $this->form = $_POST;                  // indata till formulären
+        $pathArray = explode("?", $_SERVER["REQUEST_URI"]);
+        #$this->path = $_SERVER["REQUEST_URI"]; // path-delen av URL:en car.rental/____ex____
+        $this->path = substr($pathArray[0],1);
+        $this->method = $_SERVER["REQUEST_METHOD"];
+        $this->form = array_merge($_POST, $_GET);                  // indata till formulären
     }
 
     public function getPath() {
