@@ -113,6 +113,6 @@
   },
   "": {
     "controller": "MainMenu",
-    "method": "customerList"
+    "method": "getCustomers"
   }  
 }

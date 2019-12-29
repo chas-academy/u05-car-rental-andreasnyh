@@ -1,4 +1,16 @@
 {% block mainMenu %}
+
+  <!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Car rental Main Menu</title>
+  </head>
+  <body>
+
   <style>
     .column {
       width: 20mm;
@@ -22,9 +34,10 @@
 
     {% for customer in customers %}
       <tr>
-        <td><b>{{customer.customerNumber}}</b></td>
-            <td colspan = "2"><b>{{customer.customerName}}</b></td>
-
+        <td><b>{{customer.customerName}}</b></td>
+        <td colspan = "2"><b>{{customer.address}}</b></td>
+        <td colspan = "3"><b>{{customer.postalAddress}}</b></td>
+{#
         <td>
           <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}">
             <input type="submit" style="width:100%" value="Edit">
@@ -86,6 +99,10 @@
           </td>
         </tr>
       {% endfor %}
+      #}
     {% endfor %}
   </table>
+
+  </body>
+</html>
 {% endblock %}

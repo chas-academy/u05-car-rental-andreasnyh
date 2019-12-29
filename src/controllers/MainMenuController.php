@@ -6,7 +6,7 @@ use Main\models\MainMenuModel;
 
 class MainMenuController extends AbstractController {
 
-    public function customerList(){
+    public function getCustomers(){
         $Model = new MainMenuModel($this->db);
         $customers = $Model->getCustomers();
         $properties = ["customers" => $customers];
