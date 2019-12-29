@@ -12,4 +12,8 @@ class CustomersController extends AbstractController {
         $properties = ["customers" => $customers];
         return $this->render("CustomersView.twig", $properties);
     }
+
+    public function addCustomer() {
+        return $this->render("AddCustomer.twig",[]);
+    }
 }

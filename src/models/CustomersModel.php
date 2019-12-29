@@ -32,4 +32,14 @@ class CustomersModel extends AbstractModel {
         #print_r($customerArray);
         return $customerArray;
   }
+  //(8205030789, "Glen Hysen", "Kungsportsavenyen 2", "411 38 Göteborg", "0709123432"),
+  public function addCustomer($socialSecurityNumber,$customerName, $address, $postalAddress, $phoneNumber){
+        $query = "INSERT INTO Customers VALUES (:socialSecurityNumber, :customerName, :address, :postalAddress, :phoneNumber)";
+
+        $statement = $this->login->prepare($query);
+        $statement->execute(["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName,
+                            "address" => $address, "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber]);
+
+
+  }
 }

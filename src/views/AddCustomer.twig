@@ -1,0 +1,16 @@
+{% block addCustomer %}
+
+<h1>Add Customer</h1>
+
+<form method="post" action="/customerAdded">
+    <table>
+    <tr><td>SSN: <input type="text" name="socialSecurityNumber"></td></tr>
+    <tr><td>Name: <input type="text" name="customerName"></td></tr>
+    <tr><td>Address: <input type="text" name="address"></td></tr>
+    <tr><td>Postal Address: <input type="text" name="postalAddress"></td></tr>
+    <tr><td>Phone Number: <input type="text" name="phoneNumber"></td></tr>
+
+    </table><input type="submit" name="OK">
+</form>
+
+{% endblock %}
