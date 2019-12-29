@@ -34,7 +34,7 @@
         {% for customer in customers %}
         <tr>
             <td colspan="">{{ customer.SSN }}</td>
-            <td colspan="">{{ customer.customerName }}</td>
+            <td colspan="">{{ customer.customerName|raw }}</td>
             <td colspan="">{{ customer.address }}</td>
             <td colspan="">{{ customer.postalAddress }}</td>
             <td colspan="">{{ customer.phoneNumber }}</td>
