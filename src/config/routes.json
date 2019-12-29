@@ -1,7 +1,7 @@
 {
-  "addCustomer": {
-    "controller": "Customer",
-    "method": "addCustomer"
+  "customers": {
+    "controller": "Customers",
+    "method": "getCustomers"
   },
   "customerAdded": {
     "controller": "Customer",

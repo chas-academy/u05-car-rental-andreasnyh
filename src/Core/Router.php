@@ -3,7 +3,7 @@
 
   use Main\controllers\ListController;
   use Main\controllers\InputController;
-  use Main\controllers\MainController;
+  use Main\controllers\CustomersController;
   use Main\controllers\MainMenuController;
 
   /*

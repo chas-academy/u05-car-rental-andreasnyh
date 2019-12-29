@@ -3,7 +3,6 @@ use Main\core\Router;
 use Main\core\Request;
 use Main\core\Config;
 use Main\includes\Login;
-use Main\includes\Customers;
 use Main\utils\DependencyInjector;
 // Twig 3.0
 require_once "./vendor/autoload.php";
