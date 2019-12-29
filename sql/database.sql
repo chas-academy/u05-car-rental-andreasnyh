@@ -66,11 +66,15 @@ INSERT INTO Cars VALUES ("ABC123", 2018, 250,"Ford", "Focus","Black", NULL),
 -- History
 CREATE TABLE History (registration VARCHAR(100), FOREIGN KEY (registration) REFERENCES Cars(registration),
                       renter BIGINT NOT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
-                      rentStartTime TIMESTAMP,
-                      returnTime TIMESTAMP,
+                      rentStartTime TIMESTAMP NULL ,
+                      returnTime TIMESTAMP NULL ,
                       days INTEGER,
                       totalCost FLOAT
                       );
 
+-- ALTER TABLE  Cars ADD (rentStartTime TIMESTAMP, FOREIGN KEY (rentStartTime) REFERENCES History (rentStartTime));
+
+
 -- SELECT * from Cars;
 -- SELECT * from Customers;
+

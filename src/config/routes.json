@@ -39,14 +39,9 @@
       "customerName": "string"
     }
   },
-  "deposit/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "deposit",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
+  "cars": {
+    "controller": "Cars",
+    "method": "getCars"
   },
   "depositDone/:customerNumber/:customerName/:accountNumber": {
     "controller": "Account",

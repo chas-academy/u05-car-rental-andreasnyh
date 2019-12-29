@@ -2,7 +2,7 @@
   namespace Main\core;
 
   use Main\controllers\ListController;
-  use Main\controllers\InputController;
+  use Main\controllers\CarsController;
   use Main\controllers\CustomersController;
   use Main\controllers\MainMenuController;
 

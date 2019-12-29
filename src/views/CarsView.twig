@@ -1,4 +1,4 @@
-{% block customers %}
+{% block cars %}
 
     <!doctype html>
     <html lang="en">
@@ -13,7 +13,7 @@
 
     <table border>
         <tr>
-            <td colspan="100%"><h1>Customers</h1></td>
+            <td colspan="100%"><h1>Cars</h1></td>
         </tr>
         {#
                 <tr><td colspan="1">
@@ -23,29 +23,41 @@
                     </td></tr>
                 #}
         <tr>
-            <td colspan=""><strong>Social Security Number</strong></td>
-            <td colspan=""><strong>Name</strong></td>
-            <td colspan=""><strong>Address</strong></td>
-            <td colspan=""><strong>Postal</strong></td>
-            <td colspan=""><strong>Phone Number</strong></td>
+            <td colspan=""><strong>Registration</strong></td>
+            <td colspan=""><strong>Make</strong></td>
+            <td colspan=""><strong>Model</strong></td>
+            <td colspan=""><strong>Color</strong></td>
+            <td colspan=""><strong>Year</strong></td>
+            <td colspan=""><strong>Cost</strong></td>
+            <td colspan=""><strong>Rented By</strong></td>
+            <td colspan=""><strong>Rent Start Time</strong></td>
+
 
         </tr>
 
-        {% for customer in customers %}
+        {% for car in cars %}
         <tr>
-            <td colspan="">{{ customer.SSN }}</td>
-            <td colspan="">{{ customer.customerName }}</td>
-            <td colspan="">{{ customer.address }}</td>
-            <td colspan="">{{ customer.postalAddress }}</td>
-            <td colspan="">{{ customer.phoneNumber }}</td>
+            <td colspan="">{{ car.reg }}</td>
+            <td colspan="">{{ car.make }}</td>
+            <td colspan=""> {{ car.model }}</td>
+            <td colspan="">{{ car.color }}</td>
+            <td colspan="">{{ car.year }}</td>
+            <td colspan="">{{ car.cost }}</td>
+
+            {% if not car.rentStartTime %}
+                <td colspan="2">Available</td>
+            {% else %}
+                <td colspan="">Renters SSN</td>
+                <td colspan="">{{ car.rentStartTime }}</td>
+            {% endif %}
 
             <td colspan="1">
-                <form action="/editCustomer" method="post">
+                <form action="/editCar" method="post">
                     <input type="submit" style="width:100%" value="Edit">
                 </form>
             </td>
             <td colspan="1">
-                <form action="/removeCustomer" method="post">
+                <form action="/removeCar" method="post">
                     <input type="submit" style="width:100%" value="Remove">
                 </form>
             </td>
@@ -117,12 +129,12 @@
             {# Menu Buttons #}
         <tr>
             <td colspan="100%">
-                <form action="/addCustomer" method="post">
-                    <input type="submit" style="width:100%" value="Add Customer">
+                <form action="/addCar" method="post">
+                    <input type="submit" style="width:100%" value="Add Car">
                 </form>
             </td>
         </tr>
-
+        
         <tr>
             <td colspan="100%">
                 <form action="/" method="post">
