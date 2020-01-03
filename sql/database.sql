@@ -83,3 +83,4 @@ INSERT INTO History(registration, renter, rentStartTime) VALUES ("DEF456", 99050
  SELECT * from Cars;
  SELECT * from Customers;
  SELECT * FROM History;
+SELECT * FROM History WHERE registration = "bcd234";

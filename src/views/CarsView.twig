@@ -47,7 +47,7 @@
             {% if not car.rentStartTime %}
                 <td colspan="2">Available</td>
             {% else %}
-                <td colspan="">Renters SSN</td>
+                <td colspan="">{{ car.renter}}</td>
                 <td colspan="">{{ car.rentStartTime }}</td>
             {% endif %}
 
