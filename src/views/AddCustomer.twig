@@ -10,7 +10,13 @@
     <tr><td>Postal Address: <input type="text" name="postalAddress"></td></tr>
     <tr><td>Phone Number: <input type="text" name="phoneNumber"></td></tr>
 
-    </table><input type="submit" name="OK">
+    </table>
+    <input type="submit" name="OK" value="Add Customer">
+
 </form>
+
+    <form method="post" action="/customers">
+        <input type="submit" name="Cancel" value="Cancel">
+    </form>
 
 {% endblock %}
