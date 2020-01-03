@@ -7,6 +7,10 @@
     "controller": "Customers",
     "method": "addCustomer"
   },
+  "customerAdded": {
+    "controller": "Customers",
+    "method": "customerAdded"
+  },
   "editCustomer/:customerNumber/:customerName": {
     "controller": "Customer",
     "method": "editCustomer",

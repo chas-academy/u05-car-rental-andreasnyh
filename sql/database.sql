@@ -10,7 +10,8 @@ CREATE TABLE Customers (socialSecurityNumber BIGINT NOT NULL UNIQUE KEY,
                         phoneNumber VARCHAR(10)
                        );
 
-INSERT INTO Customers VALUES (2905039497, "Göran Persson", "Lingonstigen 8", "181 64 Lidingö", "0733456456"),
+INSERT INTO Customers VALUES
+     (2905039497, "Göran Persson", "Lingonstigen 8", "181 64 Lidingö", "0733456456"),
      (8205030789, "Glen Hysen", "Kungsportsavenyen 2", "411 38 Göteborg", "0709123432"),
      (1802222685, "Frida Fridh", "Eksätravägen 471", "126 54 Stockholm", "0763452722"),
      (9905085115, "Kristina Kristen", "Kyrkängsbacken 14", "141 35 Huddinge", "0702456776"),
@@ -64,17 +65,21 @@ INSERT INTO Cars VALUES ("ABC123", 2018, 250,"Ford", "Focus","Black", NULL),
 
 
 -- History
-CREATE TABLE History (registration VARCHAR(100), FOREIGN KEY (registration) REFERENCES Cars(registration),
+CREATE TABLE History (registration VARCHAR(100) NOT NULL, FOREIGN KEY (registration) REFERENCES Cars(registration),
                       renter BIGINT NOT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
-                      rentStartTime TIMESTAMP NULL ,
-                      returnTime TIMESTAMP NULL ,
-                      days INTEGER,
-                      totalCost FLOAT
+                      rentStartTime DATETIME,
+                      returnTime DATETIME #,
+                     # days INTEGER,
+                     # totalCost FLOAT
                       );
 
--- ALTER TABLE  Cars ADD (rentStartTime TIMESTAMP, FOREIGN KEY (rentStartTime) REFERENCES History (rentStartTime));
+-- INSERT INTO History VALUES ("BCD234", 6505088283)
+INSERT INTO History(registration, renter, rentStartTime) VALUES ("BCD234", 6505088283, CURRENT_TIMESTAMP);
+INSERT INTO History(registration, renter, rentStartTime) VALUES ("DEF456", 9905085115, CURRENT_DATE() );
+
+# ALTER TABLE  Cars ADD (rentStartTime TIMESTAMP, FOREIGN KEY (rentStartTime) REFERENCES History (rentStartTime));
 
 
--- SELECT * from Cars;
--- SELECT * from Customers;
-
+ SELECT * from Cars;
+ SELECT * from Customers;
+ SELECT * FROM History;
