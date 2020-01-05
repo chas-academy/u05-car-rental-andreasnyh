@@ -46,21 +46,34 @@
 
             {% if not car.rentStartTime %}
                 <td colspan="2">Available</td>
+
+                <td colspan="1">
+                    <form action="/editCar" method="post">
+                        <input type="submit" style="width:100%" value="Edit">
+                    </form>
+                </td>
+                <td colspan="1">
+                    <form action="/removeCar" method="post">
+                        <input type="submit" style="width:100%" value="Remove">
+                    </form>
+                </td>
             {% else %}
                 <td colspan="">{{ car.renter}}</td>
                 <td colspan="">{{ car.rentStartTime }}</td>
+
+                <td colspan="1">
+                    <form action="/editCar" method="post">
+                        <input type="submit" style="width:100%" value="Edit" DISABLED>
+                    </form>
+                </td>
+                <td colspan="1">
+                    <form action="/removeCar" method="post">
+                        <input type="submit" style="width:100%" value="Remove" DISABLED>
+                    </form>
+                </td>
             {% endif %}
 
-            <td colspan="1">
-                <form action="/editCar" method="post">
-                    <input type="submit" style="width:100%" value="Edit">
-                </form>
-            </td>
-            <td colspan="1">
-                <form action="/removeCar" method="post">
-                    <input type="submit" style="width:100%" value="Remove">
-                </form>
-            </td>
+
             {#
                     <td>
                       <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}">
