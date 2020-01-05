@@ -8,7 +8,7 @@ use Main\exceptions\NotFoundException;
 use Main\includes\Login;
 
 class MainMenuModel extends AbstractModel {
-
+/*
     public function getCustomers() {
         $customersDB = $this->login->login()->query("SELECT * FROM Customers");
 
@@ -32,4 +32,5 @@ class MainMenuModel extends AbstractModel {
         #print_r($customerArray);
         return $customerArray;
   }
+*/
 }
