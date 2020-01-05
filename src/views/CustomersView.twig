@@ -39,8 +39,9 @@
             <td colspan="">{{ customer.postalAddress }}</td>
             <td colspan="">{{ customer.phoneNumber }}</td>
 
+            {% if not customer.renter %}
             <td colspan="1">
-                <form action="/editCustomer" method="post">
+                <form action="/editCustomer/{{customer.SSN}}/{{customer.customerName|raw}}/{{customer.address}}/{{customer.postalAddress}}/{{customer.phoneNumber}}" method="post">
                     <input type="submit" style="width:100%" value="Edit">
                 </form>
             </td>
@@ -49,7 +50,19 @@
                     <input type="submit" style="width:100%" value="Remove">
                 </form>
             </td>
-            {#
+            {% else %}
+                <td colspan="1">
+                    <form action="/editCustomer" method="post">
+                        <input type="submit" style="width:100%" value="Renting a car" DISABLED>
+                    </form>
+                </td>
+                <td colspan="1">
+                    <form action="/removeCustomer" method="post">
+                        <input type="submit" style="width:100%" value="Renting a car" DISABLED>
+                    </form>
+                </td>
+            {% endif %}
+                {#
                     <td>
                       <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}">
                         <input type="submit" style="width:100%" value="Edit">
@@ -112,7 +125,7 @@
                     </tr>
                   {% endfor %}
                   #}
-            {% endfor %}
+        {% endfor %}
 
             {# Menu Buttons #}
         <tr>

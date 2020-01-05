@@ -34,4 +34,10 @@ class CustomersController extends AbstractController {
         print_r($customer);
         return $this->render("CustomerAdded.twig", $customer);
     }
+
+    public function editCustomer($socialSecurityNumber,$customerName, $address, $postalAddress, $phoneNumber){
+        $customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName, "address" => $address,
+            "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber];
+        return $this->render("EditCustomer.twig", $customer);
+    }
 }

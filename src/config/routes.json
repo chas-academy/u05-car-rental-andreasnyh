@@ -11,12 +11,15 @@
     "controller": "Customers",
     "method": "customerAdded"
   },
-  "editCustomer/:customerNumber/:customerName": {
-    "controller": "Customer",
+  "editCustomer/:SSN/:customerName/:address/:postalAddress/:phoneNumber": {
+    "controller": "Customers",
     "method": "editCustomer",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string"
+      "SSN": "number",
+      "customerName": "string",
+      "address": "string",
+      "postalAddress": "string",
+      "phoneNumber": "number"
     }
   },
   "customerEdited/:customerNumber/:customerName": {
