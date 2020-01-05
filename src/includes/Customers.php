@@ -3,6 +3,7 @@
 namespace Main\includes;
 
 class Customers extends Login {
+
     public function getCustomers() {
         $customers = $this->login()->query("SELECT * FROM Customers");
 

@@ -1,18 +1,37 @@
 <?php
 use Main\core\Router;
 use Main\core\Request;
+use Main\core\Config;
 use Main\includes\Login;
-use Main\includes\Customers;
+use Main\utils\DependencyInjector;
 // Twig 3.0
 require_once "./vendor/autoload.php";
 
+$config = new Config();
+
+$loader = new \Twig\Loader\FilesystemLoader('./src/views');
+$twig = new \Twig\Environment($loader);
 
 $connection = new Login();
-$connection->login();
+#$connection->login();
 
+$di = new DependencyInjector();
+$di->set('Database', $connection);
+$di->set('Twig', $twig);
+$di->set('Config', $config);
+
+$router = new Router($di);
+$response = $router->route(new Request());
+echo $response;
+
+/*
 $object = new Customers;
 echo($object->getCustomers());
-//echo($object->findSinglePerson());
+echo ("<h1>");
+echo($object->findSinglePerson());
+echo ("</h1>");
+*/
+
 /*
 
 //$connection = login();
@@ -30,4 +49,3 @@ echo $statement->execute();
 //echo $router->route($request, $statement);
 
 */
-?>

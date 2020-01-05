@@ -1,0 +1,9 @@
+{
+  "database": {
+    "host": "localhost",
+    "database": "carRental",
+    "user": "root",
+    "password": "secret",
+    "charset": "utf8mb4"
+  }
+}
