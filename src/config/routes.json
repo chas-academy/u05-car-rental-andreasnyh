@@ -3,8 +3,12 @@
     "controller": "Customers",
     "method": "getCustomers"
   },
+  "addCustomer": {
+    "controller": "Customers",
+    "method": "addCustomer"
+  },
   "customerAdded": {
-    "controller": "Customer",
+    "controller": "Customers",
     "method": "customerAdded"
   },
   "editCustomer/:customerNumber/:customerName": {

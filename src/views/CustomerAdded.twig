@@ -1,0 +1,13 @@
+{% block customerAdded %}
+
+<h1>Customer Added</h1>
+
+   <p>
+       Added customer <strong>{{ customerName }}.</strong>
+   </p>
+
+    <form method="post" action="/customers">
+        <input type="submit" name="OK">
+    </form>
+
+{% endblock %}
