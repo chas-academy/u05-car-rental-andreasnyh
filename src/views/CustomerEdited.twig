@@ -1,0 +1,9 @@
+{% block customerEdited %}
+    <h1>Customer Edited</h1>
+
+    <p>{{customerNameOld}} to {{customerNameNew}}.</p>
+
+    <form method="post" action="/customers">
+        <input type="submit" value="Ok">
+    </form>
+{% endblock %}

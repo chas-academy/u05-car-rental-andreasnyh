@@ -13,34 +13,36 @@
 
     <h1>Edit Customer</h1>
 
-    <form method="post" action="/customerAdded">
+    <form method="post" action="/customerEdited/{{ socialSecurityNumber }}/{{customerName|raw}}/{{address}}/{{postalAddress}}/{{phoneNumber}}"
+          onsubmit="return confirm('Are these changes to {{ customerName }} correct?')">
         <table>
             <tr>
                 <td>SSN:</td>
-                <td><input type="text" name="socialSecurityNumber" placeholder="{{ socialSecurityNumber }}" DISABLED>
+                <td><input type="text" name="socialSecurityNumber" placeholder="{{ socialSecurityNumber }}"  DISABLED>
                 </td>
             </tr>
             <tr>
                 <td>Name:</td>
-                <td><input type="text" name="customerName" placeholder="{{ customerName }}"></td>
+                <td><input type="text" name="customerName" value="{{ customerName }}"></td>
             </tr>
             <tr>
                 <td>Address:</td>
-                <td><input type="text" name="address" placeholder="{{ address }}"></td>
+                <td><input type="text" name="address" value="{{ address }}"></td>
             </tr>
             <tr>
                 <td>Postal Address:</td>
-                <td><input type="text" name="postalAddress" placeholder="{{ postalAddress }}"></td>
+                <td><input type="text" name="postalAddress" value="{{ postalAddress }}"></td>
             </tr>
             <tr>
                 <td>Phone Number:</td>
-                <td><input type="text" name="phoneNumber" placeholder="{{ phoneNumber }}"></td>
+                <td><input type="text" name="phoneNumber" value="{{ phoneNumber }}"></td>
             </tr>
 
         </table>
-        <input type="submit" name="OK" value="Confirm Edit">
 
+        <input type="submit" name="OK" value="Confirm Edit">
     </form>
+
 
     <form method="post" action="/customers">
         <input type="submit" name="Cancel" value="Cancel">

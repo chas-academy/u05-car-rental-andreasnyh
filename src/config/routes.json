@@ -22,16 +22,19 @@
       "phoneNumber": "number"
     }
   },
-  "customerEdited/:customerNumber/:customerName": {
-    "controller": "Customer",
+  "customerEdited/:SSN/:customerName/:address/:postalAddress/:phoneNumber": {
+    "controller": "Customers",
     "method": "customerEdited",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string"
+      "SSN": "number",
+      "customerName": "string",
+      "address": "string",
+      "postalAddress": "string",
+      "phoneNumber": "number"
     }
   },
-  "removeCustomer/:customerNumber/:customerName": {
-    "controller": "Customer",
+  "removeCustomer/:SSN/:customerName/:address/:postalAddress/:phoneNumber": {
+    "controller": "Customers",
     "method": "removeCustomer",
     "params": {
       "customerNumber": "number",
@@ -39,7 +42,7 @@
     }
   },
   "addAccount/:customerNumber/:customerName": {
-    "controller": "Customer",
+    "controller": "Customers",
     "method": "addAccount",
     "params": {
       "customerNumber": "number",

@@ -63,10 +63,33 @@ class CustomersModel extends AbstractModel {
         if(!$statement) die();
   }
 
-  public function editCustomer($socialSecurityNumber,$customerName, $address, $postalAddress, $phoneNumber){
+  public function editCustomer($socialSecurityNumber,$customerNameNew, $addressNew, $postalAddressNew, $phoneNumberNew){
       #$customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName, "address" => $address,
        #   "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber];
         #var_dump($customer);
       #echo $socialSecurityNumber;
+      $query = "UPDATE Customers SET customerName = :customerName ," .
+                                    "address = :address ," .
+                                    "postalAddress = :postalAddress ," .
+                                    "phoneNumber = :phoneNumber " .
+               "WHERE socialSecurityNumber = :socialSecurityNumber";
+
+      $statement = $this->login->login()->prepare($query);
+      $customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerNameNew, "address" => $addressNew,
+                   "postalAddress" => $postalAddressNew, "phoneNumber" => $phoneNumberNew];
+
+      $result = $statement->execute($customer);
+      if (!$result) die($this->login->login()->errorInfo());
   }
 }
+
+/*
+ *  public function editCustomer($customerNumber, $customerNewName) {
+    $customersQuery = "UPDATE Customers SET customerName = :customerName " .
+                      "WHERE customerNumber = :customerNumber";
+    $customersStatement = $this->db->prepare($customersQuery);
+    $customersParameters = ["customerName" => $customerNewName,
+                            "customerNumber" => $customerNumber];
+    $customersResult = $customersStatement->execute($customersParameters);
+    if (!$customersResult) die($this->db->errorInfo()[2]);
+  }*/
