@@ -33,11 +33,11 @@
       "phoneNumber": "number"
     }
   },
-  "removeCustomer/:SSN/:customerName/:address/:postalAddress/:phoneNumber": {
+  "removeCustomer/:SSN/:customerName": {
     "controller": "Customers",
     "method": "removeCustomer",
     "params": {
-      "customerNumber": "number",
+      "SSN": "number",
       "customerName": "string"
     }
   },

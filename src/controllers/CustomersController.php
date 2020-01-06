@@ -31,7 +31,7 @@ class CustomersController extends AbstractController {
                     "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber];
 
         $model->addCustomer($socialSecurityNumber, $customerName, $address, $postalAddress, $phoneNumber);
-        print_r($customer);
+
         return $this->render("CustomerAdded.twig", $customer);
     }
 
@@ -47,6 +47,7 @@ class CustomersController extends AbstractController {
         $addressNew = $form["address"];
         $postalAddressNew = $form["postalAddress"];
         $phoneNumberNew = $form["phoneNumber"];
+
         $model = new CustomersModel($this->db);
         $model->editCustomer($socialSecurityNumber,$customerNameNew,$addressNew,$postalAddressNew,$phoneNumberNew);
 
@@ -61,5 +62,12 @@ class CustomersController extends AbstractController {
             "phoneNumberNew" => $phoneNumberNew];
 
         return $this->render("CustomerEdited.twig", $customer);
+    }
+
+    public function removeCustomer($socialSecurityNumber, $customerName) {
+        $model = new CustomersModel($this->db);
+        $model->removeCustomer($socialSecurityNumber, $customerName);
+        $properties = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName];
+        return $this->render("CustomerRemoved.twig", $properties);
     }
 }

@@ -64,10 +64,13 @@ class CustomersModel extends AbstractModel {
   }
 
   public function editCustomer($socialSecurityNumber,$customerNameNew, $addressNew, $postalAddressNew, $phoneNumberNew){
-      #$customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName, "address" => $address,
-       #   "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber];
-        #var_dump($customer);
-      #echo $socialSecurityNumber;
+
+      #$socialSecurityNumber = htmlspecialchars($socialSecurityNumber);
+      $customerNameNew = htmlspecialchars($customerNameNew);
+      $addressNew = htmlspecialchars($addressNew);
+      $postalAddressNew = htmlspecialchars($postalAddressNew);
+      $phoneNumberNew = htmlspecialchars($phoneNumberNew);
+
       $query = "UPDATE Customers SET customerName = :customerName ," .
                                     "address = :address ," .
                                     "postalAddress = :postalAddress ," .
@@ -81,8 +84,24 @@ class CustomersModel extends AbstractModel {
       $result = $statement->execute($customer);
       if (!$result) die($this->login->login()->errorInfo());
   }
+
+public function removeCustomer($socialSecurityNumber) {
+    /*$accountsQuery = "SELECT COUNT(*) FROM Accounts WHERE customerNumber = :customerNumber";
+    $accountsStatement = $this->db->prepare($accountsQuery);
+    $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
+    if (!$accountsResult) die($this->db->errorInfo()[2]);
+    $accountsRows = $accountsStatement->fetchAll();
+    $numberOfAccounts = htmlspecialchars($accountsRows[0]["COUNT(*)"]);
+
+    if ($numberOfAccounts == 0) {*/
+        $query = "DELETE FROM Customers WHERE socialSecurityNumber = :socialSecurityNumber";
+        $statement = $this->login->login()->prepare($query);
+        $customer = ["socialSecurityNumber" => $socialSecurityNumber];
+        $result = $statement->execute($customer);
+        if (!$result) die($this->login->login()->errorInfo());
 }
 
+}
 /*
  *  public function editCustomer($customerNumber, $customerNewName) {
     $customersQuery = "UPDATE Customers SET customerName = :customerName " .
