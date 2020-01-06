@@ -1,14 +1,26 @@
 {% block addCustomer %}
 
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+        <title>Car rental Add Customer</title>
+    </head>
+    <body>
+
 <h1>Add Customer</h1>
 
 <form method="post" action="/customerAdded">
     <table>
-    <tr><td>SSN: <input type="text" name="socialSecurityNumber"></td></tr>
-    <tr><td>Name: <input type="text" name="customerName"></td></tr>
-    <tr><td>Address: <input type="text" name="address"></td></tr>
-    <tr><td>Postal Address: <input type="text" name="postalAddress"></td></tr>
-    <tr><td>Phone Number: <input type="text" name="phoneNumber"></td></tr>
+    <tr><td>SSN: </td><td><input type="text" name="socialSecurityNumber"></td></tr>
+    <tr><td>Name: </td><td><input type="text" name="customerName"></td></tr>
+    <tr><td>Address: </td><td><input type="text" name="address"></td></tr>
+    <tr><td>Postal Address: </td><td><input type="text" name="postalAddress"></td></tr>
+    <tr><td>Phone Number: </td><td><input type="text" name="phoneNumber"></td></tr>
 
     </table>
     <input type="submit" name="OK" value="Add Customer">
@@ -18,5 +30,6 @@
     <form method="post" action="/customers">
         <input type="submit" name="Cancel" value="Cancel">
     </form>
-
+    </body>
+</html>
 {% endblock %}

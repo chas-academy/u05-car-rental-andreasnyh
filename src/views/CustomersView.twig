@@ -7,6 +7,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
         <title>Car rental Customers</title>
     </head>
     <body>
@@ -39,17 +40,31 @@
             <td colspan="">{{ customer.postalAddress }}</td>
             <td colspan="">{{ customer.phoneNumber }}</td>
 
+            {% if not customer.renter %}
             <td colspan="1">
-                <form action="/editCustomer" method="post">
+                <form action="/editCustomer/{{customer.SSN}}/{{customer.customerName|raw}}/{{customer.address}}/{{customer.postalAddress}}/{{customer.phoneNumber}}" method="post">
                     <input type="submit" style="width:100%" value="Edit">
                 </form>
             </td>
             <td colspan="1">
-                <form action="/removeCustomer" method="post">
+                <form action="/removeCustomer/{{customer.SSN}}/{{customer.customerName|raw}}" method="post"
+                      onsubmit="return confirm('Are you sure you want to remove customer {{customer.customerName}}?')">
                     <input type="submit" style="width:100%" value="Remove">
                 </form>
             </td>
-            {#
+            {% else %}
+                <td colspan="1">
+                    <form action="/editCustomer" method="post">
+                        <input type="submit" style="width:100%" value="Renting a car" DISABLED>
+                    </form>
+                </td>
+                <td colspan="1">
+                    <form action="/removeCustomer" method="post">
+                        <input type="submit" style="width:100%" value="Renting a car" DISABLED>
+                    </form>
+                </td>
+            {% endif %}
+                {#
                     <td>
                       <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}">
                         <input type="submit" style="width:100%" value="Edit">
@@ -112,7 +127,7 @@
                     </tr>
                   {% endfor %}
                   #}
-            {% endfor %}
+        {% endfor %}
 
             {# Menu Buttons #}
         <tr>

@@ -11,32 +11,38 @@
     "controller": "Customers",
     "method": "customerAdded"
   },
-  "editCustomer/:customerNumber/:customerName": {
-    "controller": "Customer",
+  "editCustomer/:SSN/:customerName/:address/:postalAddress/:phoneNumber": {
+    "controller": "Customers",
     "method": "editCustomer",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string"
+      "SSN": "number",
+      "customerName": "string",
+      "address": "string",
+      "postalAddress": "string",
+      "phoneNumber": "number"
     }
   },
-  "customerEdited/:customerNumber/:customerName": {
-    "controller": "Customer",
+  "customerEdited/:SSN/:customerName/:address/:postalAddress/:phoneNumber": {
+    "controller": "Customers",
     "method": "customerEdited",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string"
+      "SSN": "number",
+      "customerName": "string",
+      "address": "string",
+      "postalAddress": "string",
+      "phoneNumber": "number"
     }
   },
-  "removeCustomer/:customerNumber/:customerName": {
-    "controller": "Customer",
+  "removeCustomer/:SSN/:customerName": {
+    "controller": "Customers",
     "method": "removeCustomer",
     "params": {
-      "customerNumber": "number",
+      "SSN": "number",
       "customerName": "string"
     }
   },
   "addAccount/:customerNumber/:customerName": {
-    "controller": "Customer",
+    "controller": "Customers",
     "method": "addAccount",
     "params": {
       "customerNumber": "number",
@@ -112,6 +118,6 @@
   },
   "": {
     "controller": "MainMenu",
-    "method": "getCustomers"
+    "method": "showMenu"
   }  
 }
