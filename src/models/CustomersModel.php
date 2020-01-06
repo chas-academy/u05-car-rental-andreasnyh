@@ -10,7 +10,7 @@ use Main\includes\Login;
 class CustomersModel extends AbstractModel {
 
     public function getCustomers() {
-        $customersDB = $this->login->login()->query("SELECT * FROM Customers");
+        $customersDB = $this->login->login()->query("SELECT * FROM Customers ORDER BY customerName");
 
         if (!$customersDB) die($this->login->login()->errorInfo());
 

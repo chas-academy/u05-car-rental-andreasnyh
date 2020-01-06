@@ -7,116 +7,47 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
         <title>Car rental Main Menu</title>
     </head>
     <body>
 
     <table border>
         <tr>
-            <td colspan="10"><h1>Car Rental</h1></td>
+            <td colspan="5"><h1>Car Rental</h1></td>
         </tr>
 
         <tr>
-            <td colspan="2">
+            <td colspan="1">
                 <form action="/customers" method="post">
                     <input type="submit" style="width:100%" value="Customers">
                 </form>
             </td>
 
-          <td colspan="2">
+          <td colspan="1">
             <form action="/cars" method="post">
               <input type="submit" style="width:100%" value="Cars">
             </form>
           </td>
 
-          <td colspan="2">
+          <td colspan="1">
             <form action="/rentcar" method="post">
               <input type="submit" style="width:100%" value="Rent Car">
             </form>
           </td>
 
-          <td colspan="2">
+          <td colspan="1">
             <form action="/returncar" method="post">
               <input type="submit" style="width:100%" value="Return Car">
             </form>
           </td>
 
-          <td colspan="2">
+          <td colspan="1">
             <form action="/history" method="post">
               <input type="submit" style="width:100%" value="History">
             </form>
           </td>
         </tr>
-        {#
-            {% for customer in customers %}
-              <tr>
-                <td><b>{{customer.customerName}}</b></td>
-                <td colspan = "2"><b>{{customer.address}}</b></td>
-                <td colspan = "3"><b>{{customer.postaddress}}</b></td>
-        {#
-                <td>
-                  <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}">
-                    <input type="submit" style="width:100%" value="Edit">
-                  </form>
-                </td>
-
-                <td>
-                  <form method="post" action="/removeCustomer/{{customer.customerNumber}}/{{customer.customerName}}"
-                        onsubmit="return confirm('Are you sure you want to remove customer {{customer.customerName}}?')">
-                    <input type="submit" style="width:100%" value="Remove">
-                  </form>
-                </td>
-
-                <td colspan="3">
-                  <form method="post" action="/addAccount/{{customer.customerNumber}}/{{customer.customerName}}">
-                    <input type="submit" style="width:100%" value="Add Account">
-                  </form>
-                </td>
-              </tr>
-
-              {% for account in customer.accounts %}
-                <tr>
-                  <td></td>
-                  <td>{{account["accountNumber"]}}</td>
-                  <td>{{account["accountBalance"]}}</td>
-
-                  <!--<td>{{account.accountNumber}}</td>
-                  <td>{{account.accountBalance}}</td>-->
-
-                  <td class="column">
-                    <form method="post" action="/deposit/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                      <input type="submit" style="width:100%" value="Deposit">
-                    </form>
-                  </td>
-
-                  <td class="column">
-                    <form method="post" action="/withdraw/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                      <input type="submit" style="width:100%" value="Withdraw">
-                    </form>
-                  </td>
-
-                  <td class="column">
-                    <form method="post" action="/transfer/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                      <input type="submit" style="width:100%" value="Transfer">
-                    </form>
-                  </td>
-
-                  <td class="column">
-                    <form method="post" action="/viewAccount/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                      <input type="submit" style="width:100%" value="View">
-                    </form>
-                  </td>
-
-                  <td class="column">
-                    <form method="post" action="/removeAccount/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}"
-                        onsubmit="return confirm('Are you sure you want to remove account {{account.accountNumber}}?')">
-                      <input type="submit" style="width:100%" value="Remove">
-                    </form>
-                  </td>
-                </tr>
-              {% endfor %}
-
-        {% endfor %}#}
     </table>
 
     </body>
