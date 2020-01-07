@@ -42,4 +42,13 @@ class CarsController extends AbstractController {
 
         return $this->render("CarAdded.twig", $car);
     }
+
+
+
+    public function removeCar($registration, $make) {
+        $model = new CarsModel($this->db);
+        $model->removeCar($registration, $make);
+        $properties = ["registration" => $registration, "make" => $make];
+        return $this->render("CarRemoved.twig", $properties);
+    }
 }

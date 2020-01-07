@@ -66,67 +66,12 @@
       "renter": "number"
     }
   },
-  "depositDone/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "depositDone",
+  "removeCar/:registration/:make": {
+    "controller": "Cars",
+    "method": "removeCar",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
-  },
-  "withdraw/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "withdraw",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
-  },
-  "withdrawDone/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "withdrawDone",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
-  },
-  "transfer/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "transfer",
-    "params": {
-      "fromCustomerNumber": "number",
-      "fromCustomerName": "string",
-      "fromAccountNumber": "number"
-    }
-  },
-  "transferDone/:fromCustomerNumber/:fromCustomerName/:fromAccountNumber": {
-    "controller": "Account",
-    "method": "transferDone",
-    "params": {
-      "fromCustomerNumber": "number",
-      "fromCustomerName": "string",
-      "fromAccountNumber": "number"
-    }
-  },
-  "viewAccount/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "viewAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
-  },
-  "removeAccount/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "removeAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
+      "registration": "string",
+      "make": "string"
     }
   },
   "": {
