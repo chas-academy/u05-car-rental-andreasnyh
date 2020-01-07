@@ -3,6 +3,7 @@
 namespace Main\controllers;
 
 use Main\models\CarsModel;
+use Main\models\MakesModel;
 
 class CarsController extends AbstractController {
 
@@ -14,7 +15,12 @@ class CarsController extends AbstractController {
     }
 
     public function addCar() {
-        return $this->render("AddCar.twig", []);
+        $makesModel = new CarsModel($this->db);
+        $makes = $makesModel->getMakes();
+
+        $properties = ["make" => $makes];
+        #var_dump($properties);
+        return $this->render("AddCar.twig", $properties);
     }
 
     public function carAdded(){
