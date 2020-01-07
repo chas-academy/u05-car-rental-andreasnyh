@@ -71,4 +71,15 @@ class CarsModel extends AbstractModel {
 */
         return $carArray;
   }
+
+    public function addCar($registration,$year, $cost, $make, $model, $color, $renter){
+        $query = "INSERT INTO Cars(registration, year, cost, make, model, color, renter) " .
+            "VALUES (:registration, :year, :cost, :make, :model, :color, :renter)";
+
+        $statement = $this->login->login()->prepare($query);
+        $statement->execute(["registration" => $registration, "year" => $year, "cost" => $cost,
+            "make" => $make, "model" => $model, "color" => $color, "renter" => $renter]);
+
+        if(!$statement) die();
+    }
 }

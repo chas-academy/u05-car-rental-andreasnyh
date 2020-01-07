@@ -41,17 +41,26 @@
       "customerName": "string"
     }
   },
-  "addAccount/:customerNumber/:customerName": {
-    "controller": "Customers",
-    "method": "addAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string"
-    }
-  },
   "cars": {
     "controller": "Cars",
     "method": "getCars"
+  },
+  "addCar": {
+  "controller": "Cars",
+  "method": "addCar"
+  },
+  "editCar/:registration/:year/:cost/:make/:model/:color/:renter": {
+    "controller": "Cars",
+    "method": "editCar",
+    "params": {
+      "registration": "string",
+      "year": "number",
+      "cost": "number",
+      "make": "string",
+      "model": "string",
+      "color": "string",
+      "renter": "number"
+    }
   },
   "depositDone/:customerNumber/:customerName/:accountNumber": {
     "controller": "Account",
