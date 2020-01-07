@@ -49,6 +49,10 @@
   "controller": "Cars",
   "method": "addCar"
   },
+  "carAdded": {
+    "controller": "Cars",
+    "method": "carAdded"
+  },
   "editCar/:registration/:year/:cost/:make/:model/:color/:renter": {
     "controller": "Cars",
     "method": "editCar",

@@ -26,12 +26,12 @@ class CarsController extends AbstractController {
     public function carAdded(){
         $carModel = new CarsModel($this->db);
         $form = $this->request->getForm();
-
+        var_dump($form);
         $registration = $form["registration"];
         $year = $form["year"];
         $cost = $form["cost"];
-        $make = $form["model"];
-        $model = $form["make"];
+        $make = $form["make"];
+        $model = $form["model"];
         $color = $form["color"];
         $renter = NULL;
 

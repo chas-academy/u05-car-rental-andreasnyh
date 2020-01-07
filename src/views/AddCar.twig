@@ -18,16 +18,21 @@
         <table>
             <tr>
                 <td>Registration:</td>
-                <td><input type="text" name="registration"></td>
+                <td><input type="text" name="registration" required></td>
             </tr>
             <tr>
                 <td>Manufacture year:</td>
-                <td><input type="text" name="year"></td>
+                <td><input type="text" name="year" required></td>
+            </tr>
+            <tr>
+                <td>Cost per Day:</td>
+                <td><input type="text" name="cost" required></td>
             </tr>
             <tr>
                 <td>Make:</td>
                 <td>
-                    <select style="width: 100%">
+                    <select name="make" type="text" required  style="width: 100%">
+                        <option value="" disabled selected hidden>-- Select a Make --</option>
                         {% for makes in make %}
                             <option value="{{ makes.make }}">{{ makes.make }}</option>
                         {% endfor %}
@@ -37,12 +42,13 @@
 
             <tr>
                 <td>Model:</td>
-                <td><input type="text" name="model"></td>
+                <td><input type="text" name="model" required></td>
             </tr>
             <tr>
                 <td>Color:</td>
                 <td>
-                    <select style="width: 100%">
+                    <select name="color" type="text" required style="width: 100%">
+                        <option value="" disabled selected hidden>-- Select a Color --</option>
                         {% for colors in color %}
                             <option value="{{ colors.color }}">{{ colors.color }}</option>
                         {% endfor %}
