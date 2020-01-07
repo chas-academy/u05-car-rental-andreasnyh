@@ -41,79 +41,48 @@
       "customerName": "string"
     }
   },
-  "addAccount/:customerNumber/:customerName": {
-    "controller": "Customers",
-    "method": "addAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string"
-    }
-  },
   "cars": {
     "controller": "Cars",
     "method": "getCars"
   },
-  "depositDone/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "depositDone",
+  "addCar": {
+  "controller": "Cars",
+  "method": "addCar"
+  },
+  "carAdded": {
+    "controller": "Cars",
+    "method": "carAdded"
+  },
+  "editCar/:registration/:year/:cost/:make/:model/:color": {
+    "controller": "Cars",
+    "method": "editCar",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
+      "registration": "string",
+      "year": "number",
+      "cost": "number",
+      "make": "string",
+      "model": "string",
+      "color": "string"
     }
   },
-  "withdraw/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "withdraw",
+  "carEdited/:registration/:year/:cost/:make/:model/:color/": {
+    "controller": "Cars",
+    "method": "carEdited",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
+      "registration": "string",
+      "year": "number",
+      "cost": "number",
+      "make": "string",
+      "model": "string",
+      "color": "string"
     }
   },
-  "withdrawDone/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "withdrawDone",
+  "removeCar/:registration/:make": {
+    "controller": "Cars",
+    "method": "removeCar",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
-  },
-  "transfer/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "transfer",
-    "params": {
-      "fromCustomerNumber": "number",
-      "fromCustomerName": "string",
-      "fromAccountNumber": "number"
-    }
-  },
-  "transferDone/:fromCustomerNumber/:fromCustomerName/:fromAccountNumber": {
-    "controller": "Account",
-    "method": "transferDone",
-    "params": {
-      "fromCustomerNumber": "number",
-      "fromCustomerName": "string",
-      "fromAccountNumber": "number"
-    }
-  },
-  "viewAccount/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "viewAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
-  },
-  "removeAccount/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "removeAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
+      "registration": "string",
+      "make": "string"
     }
   },
   "": {

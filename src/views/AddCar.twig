@@ -1,0 +1,69 @@
+{% block addCar %}
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+        <title>Car rental Add Car</title>
+    </head>
+    <body>
+
+    <h1>Add Car</h1>
+
+    <form method="post" action="/carAdded">
+        <table>
+            <tr>
+                <td>Registration:</td>
+                <td><input type="text" name="registration" required></td>
+            </tr>
+            <tr>
+                <td>Manufacture year:</td>
+                <td><input type="text" name="year" required></td>
+            </tr>
+            <tr>
+                <td>Cost per Day:</td>
+                <td><input type="text" name="cost" required></td>
+            </tr>
+            <tr>
+                <td>Make:</td>
+                <td>
+                    <select name="make" type="text" required  style="width: 100%">
+                        <option value="" disabled selected hidden>-- Select a Make --</option>
+                        {% for makes in make %}
+                            <option value="{{ makes.make }}">{{ makes.make }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Model:</td>
+                <td><input type="text" name="model" required></td>
+            </tr>
+            <tr>
+                <td>Color:</td>
+                <td>
+                    <select name="color" type="text" required style="width: 100%">
+                        <option value="" disabled selected hidden>-- Select a Color --</option>
+                        {% for colors in color %}
+                            <option value="{{ colors.color }}">{{ colors.color }}</option>
+                        {% endfor %}
+                    </select>
+                </td>            </tr>
+
+        </table>
+        <input type="submit" name="OK" value="Add Car">
+
+    </form>
+
+    <form method="post" action="/cars">
+        <input type="submit" name="Cancel" value="Cancel">
+    </form>
+
+    </body>
+    </html>
+{% endblock %}
