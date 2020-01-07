@@ -53,7 +53,7 @@
     "controller": "Cars",
     "method": "carAdded"
   },
-  "editCar/:registration/:year/:cost/:make/:model/:color/:renter": {
+  "editCar/:registration/:year/:cost/:make/:model/:color": {
     "controller": "Cars",
     "method": "editCar",
     "params": {
@@ -62,8 +62,19 @@
       "cost": "number",
       "make": "string",
       "model": "string",
-      "color": "string",
-      "renter": "number"
+      "color": "string"
+    }
+  },
+  "carEdited/:registration/:year/:cost/:make/:model/:color/": {
+    "controller": "Cars",
+    "method": "carEdited",
+    "params": {
+      "registration": "string",
+      "year": "number",
+      "cost": "number",
+      "make": "string",
+      "model": "string",
+      "color": "string"
     }
   },
   "removeCar/:registration/:make": {

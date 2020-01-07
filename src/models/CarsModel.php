@@ -109,7 +109,29 @@ class CarsModel extends AbstractModel {
         if(!$statement) die();
     }
 
+    public function editCar($registration, $yearNew, $costNew, $makeNew, $modelNew, $colorNew){
 
+        $yearNew = htmlspecialchars($yearNew);
+        $costNew = htmlspecialchars($costNew);
+        $makeNew = htmlspecialchars($makeNew);
+        $modelNew = htmlspecialchars($modelNew);
+        $colorNew = htmlspecialchars($colorNew);
+
+        $query = "UPDATE Cars SET year = :year ," .
+            "year = :year ," .
+            "cost = :cost ," .
+            "make = :make ," .
+            "model = :model ," .
+            "color = :color " .
+            "WHERE registration = :registration";
+
+        $statement = $this->login->login()->prepare($query);
+        $car = ["registration" => $registration, "year" => $yearNew, "cost" => $costNew,
+            "make" => $makeNew, "model" => $modelNew, "color" => $colorNew];
+
+        $result = $statement->execute($car);
+        if (!$result) die($this->login->login()->errorInfo());
+    }
 
     public function removeCar($registration) {
         $query = "DELETE FROM Cars WHERE registration = :registration";
