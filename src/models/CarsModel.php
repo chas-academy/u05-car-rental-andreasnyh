@@ -108,4 +108,14 @@ class CarsModel extends AbstractModel {
 
         if(!$statement) die();
     }
+
+
+
+    public function removeCar($registration) {
+        $query = "DELETE FROM Cars WHERE registration = :registration";
+        $statement = $this->login->login()->prepare($query);
+        $car = ["registration" => $registration];
+        $result = $statement->execute($car);
+        if (!$result) die($this->login->login()->errorInfo());
+    }
 }

@@ -54,12 +54,12 @@
                     </form>
                 </td>
                 <td colspan="1">
-                    <form action="/removeCar" method="post">
+                    <form action="/removeCar/{{ car.reg }}/{{ car.make }}" method="post">
                         <input type="submit" style="width:100%" value="Remove">
                     </form>
                 </td>
             {% else %}
-                <td colspan="">{{ car.renter}}</td>
+                <td colspan="">{{ car.renter }}</td>
                 <td colspan="">{{ car.rentStartTime }}</td>
 
                 <td colspan="1">
