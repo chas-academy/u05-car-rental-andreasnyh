@@ -17,8 +17,8 @@ class CarsController extends AbstractController {
     public function addCar() {
         $makesModel = new CarsModel($this->db);
         $makes = $makesModel->getMakes();
-
-        $properties = ["make" => $makes];
+        $colors = $makesModel->getColors();
+        $properties = ["make" => $makes, "color" => $colors];
         #var_dump($properties);
         return $this->render("AddCar.twig", $properties);
     }

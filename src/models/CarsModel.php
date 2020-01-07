@@ -75,19 +75,27 @@ class CarsModel extends AbstractModel {
     public function getMakes()
     {
         $makesDB = $this->login->login()->query("SELECT * FROM Makes");
-
         // Traverse through the result of the select call, row-by-row
-        $makeArray = [];
+        $makesArray = [];
         foreach ($makesDB as $makesFromDB) {
             $make = htmlspecialchars($makesFromDB["make"]);
-
             $makes = ["make" => $make];
-
-            $makeArray[] = $makes;
+            $makesArray[] = $makes;
         }
-            return $makeArray;
+            return $makesArray;
+    }
 
-
+    public function getColors()
+    {
+        $colorsDB = $this->login->login()->query("SELECT * FROM Colors");
+        // Traverse through the result of the select call, row-by-row
+        $colorsArray = [];
+        foreach ($colorsDB as $colorsFromDB) {
+            $color = htmlspecialchars($colorsFromDB["color"]);
+            $colors = ["color" => $color];
+            $colorsArray[] = $colors;
+        }
+        return $colorsArray;
     }
 
     public function addCar($registration,$year, $cost, $make, $model, $color, $renter){
