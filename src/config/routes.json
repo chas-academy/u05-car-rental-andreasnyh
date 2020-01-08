@@ -85,6 +85,21 @@
       "make": "string"
     }
   },
+  "rentCar": {
+    "controller": "History",
+    "method": "getCarsAndCustomers"
+  },
+  "carRented/:registration/:color/:make/:SSN/:customerName": {
+    "controller": "History",
+    "method": "removeCar",
+    "params": {
+      "registration": "string",
+      "color": "string",
+      "make": "string",
+      "SSN": "number",
+      "customerName": "string"
+    }
+  },
   "": {
     "controller": "MainMenu",
     "method": "showMenu"
