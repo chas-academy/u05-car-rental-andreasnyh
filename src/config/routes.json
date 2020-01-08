@@ -89,13 +89,10 @@
     "controller": "History",
     "method": "getCarsAndCustomers"
   },
-  "carRented/:registration/:SSN": {
+  "carRented": {
     "controller": "History",
-    "method": "rentCar",
-    "params": {
-      "registration": "string",
-      "SSN": "number"
-    }
+    "method": "rentCar"
+
   },
   "": {
     "controller": "MainMenu",

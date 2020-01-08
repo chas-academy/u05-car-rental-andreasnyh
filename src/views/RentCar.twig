@@ -14,14 +14,14 @@
 
     <h1>Rent Car</h1>
 
-    <form method="post" action="/carRented/{{ car }}/{{ customer }}"
-          onsubmit="return confirm('Let Customer: {{ customer }} rent car: reg:{{ car.reg }}  car:{{ car }}?')">
+    <form method="post" action="/carRented"
+          onsubmit="return confirm('Let Customer: {{ customer }} rent car: reg:{{ registration }}  car:{{ car }}?')">
         <table>
             <tr>
                 <td>Customer:</td>
                 <td>
-                    <select name="customer" type="text" required style="width: 100%">
-                        <option value="" disabled selected hidden>-- Select Customer --</option>
+                    <select name="SSN" type="text" required style="width: 100%">
+                        <option value="{{ SSN }}" disabled selected hidden>-- Select Customer --</option>
                         {% for customer in customerList %}
                             <option value="{{ customer.SSN }}">{{ customer.SSN }} {{ customer.customerName|raw }}</option>
                         {% endfor %}
@@ -32,8 +32,8 @@
             <tr>
                 <td>Car:</td>
                 <td>
-                    <select name="car" type="text" required style="width: 100%">
-                        <option value="car" disabled selected hidden>-- Select Car --</option>
+                    <select name="registration" type="text" required style="width: 100%">
+                        <option value="{{ registration }}" disabled selected hidden>-- Select Car --</option>
                         {% for car in carList %}
                             {% if not car.renter %}
                                 <option value="{{ car.reg }}">{{ car.reg }} {{ car.color }} {{ car.make }} {{ car.model }}</option>
