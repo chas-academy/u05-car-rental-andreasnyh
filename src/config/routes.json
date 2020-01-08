@@ -89,15 +89,12 @@
     "controller": "History",
     "method": "getCarsAndCustomers"
   },
-  "carRented/:registration/:color/:make/:SSN/:customerName": {
+  "carRented/:registration/:SSN": {
     "controller": "History",
-    "method": "removeCar",
+    "method": "rentCar",
     "params": {
       "registration": "string",
-      "color": "string",
-      "make": "string",
-      "SSN": "number",
-      "customerName": "string"
+      "SSN": "number"
     }
   },
   "": {

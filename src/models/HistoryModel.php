@@ -8,9 +8,6 @@ use Main\models\CustomersModel;
 
 class HistoryModel extends AbstractModel {
 
-    public function getCarsAndCustomers() {
-
-  }
 
 
 }

@@ -15,7 +15,7 @@
     <h1>Edit Car</h1>
 
     <form method="post" action="/carEdited/{{ registration }}/{{ year }}/{{ cost }}/{{ make }}/{{ model }}/{{ color }}/{{ renter }}"
-          onsubmit="return confirm('Are these changes to {{ customerName }} correct?')">
+          onsubmit="return confirm('Are these changes to {{ registration }} {{ make }} correct?')">
         <table>
             <tr>
                 <td>Registration:</td>
@@ -63,7 +63,7 @@
     </form>
 
 
-    <form method="post" action="/customers">
+    <form method="post" action="/cars">
         <input type="submit" name="Cancel" value="Cancel">
     </form>
 
