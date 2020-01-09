@@ -28,7 +28,7 @@ SQL;
 
         $date = new \DateTime();
         $returnTimeHistory = $date->getTimestamp();
-        #$returnTimeHistory = date('Y-m-d H:i:s',$returnTimeHistory);
+        $returnTimeHistory = date('Y-m-d H:i:s',$returnTimeHistory);
         #var_dump($returnTimeHistory);
         $addToHistoryStatement = $this->login->login()->prepare($addToHistoryQuery);
         $addToHistoryParams = ["registration" => $registration, "renter" => $renter,
@@ -50,9 +50,8 @@ SQL;
        # $historyStatement->execute($historyParams);
 
         $returnParams = ["registration" => $registration];
-        echo "returnParams";
-        var_dump($returnParams);
-        $returnStatement->execute($returnParams);
 
+        $returnStatement->execute($returnParams);
+        return $returnTimeHistory;
     }
 }

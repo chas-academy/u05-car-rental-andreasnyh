@@ -51,6 +51,16 @@ class CustomersModel extends AbstractModel {
         #print_r($customerArray);
         return $customerArray;
   }
+
+    public function getCustomer($renter)
+    {
+        $customerDB = $this->login->login()->query("SELECT * FROM Customers WHERE socialSecurityNumber = $renter");
+        $customer = $customerDB->fetch();
+
+        if (!$customerDB) die($this->login->login()->errorInfo());
+        return $customer;
+    }
+
   //(8205030789, "Glen Hysen", "Kungsportsavenyen 2", "411 38 Göteborg", "0709123432"),
   public function addCustomer($socialSecurityNumber,$customerName, $address, $postalAddress, $phoneNumber){
         $query = "INSERT INTO Customers(socialSecurityNumber, customerName, address, postalAddress, phoneNumber) " .
