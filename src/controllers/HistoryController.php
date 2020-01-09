@@ -50,5 +50,25 @@ class HistoryController extends AbstractController {
         return $this->render("ReturnCar.twig", $carsAndCustomers);
     }
 
-    
+    public function carReturned() {
+       $form = $this->request->getForm();
+       $form = explode("|", $form["returnedCar"]);
+       $registration = $form[0];
+       $renter = $form[1];
+       $rentStartTime = $form[2];
+
+    var_dump($form);
+        $model = new HistoryModel($this->db);
+       # $model->returnCar($registration, $renter, $rentStartTime);
+
+        $carReturned = [
+            "registration" => $registration,
+            "renter" => $renter,
+            "rentStartTime" => $rentStartTime
+        ];
+
+        $model->returnCar($registration,$renter,$rentStartTime);
+
+        return $this->render("CarEdited.twig", $carReturned);
+    }
 }

@@ -20,7 +20,7 @@
             <tr>
                 <td>Cars Rented:</td>
                 <td>
-                    <select name="SSN" type="text" required style="width: 100%">
+                    <select name="returnedCar" type="text" required style="width: 100%">
                         <option value="" disabled selected hidden>-- Select Car to return --</option>
                        {# {% for customer in customerList %}
                             <option value="{{ customer.SSN }}">{{ customer.SSN }} {{ customer.customerName|raw }}</option>
@@ -28,7 +28,7 @@
                         {% for car in carList %}
                             {% for customer in customerList %}
                                 {% if car.renter == customer.SSN %}
-                                    <option value="{{ car.reg }} {{ customer.renter }} {{ customer.rentStartTime }}">{{ car.reg }} {{ car.make }} - {{ customer.SSN }} {{ customer.customerName|raw }}</option>
+                                    <option value="{{ car.reg }}|{{ customer.renter }}|{{ customer.rentStartTime }}">{{ car.reg }} {{ car.make }} - {{ customer.SSN }} {{ customer.customerName|raw }}</option>
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
@@ -38,7 +38,7 @@
 
         </table>
 
-        <input type="submit" name="OK" value="Confirm Edit">
+        <input type="submit" name="OK" value="Return Car">
     </form>
 
     <form method="post" action="/cars">

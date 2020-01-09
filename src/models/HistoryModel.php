@@ -18,11 +18,19 @@ class HistoryModel extends AbstractModel {
         if(!$statement) die();
     }
 
-    public function returnCar() {
-        $rentQuery = "Select * from History";
+    public function returnCar($registration, $renter, $rentStartTime) {
+        $returnQuery = <<<SQL
+        INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES (
+            registrationHistory = :registration,
+            renterHistory = :renter,
+            rentStartHistory = :rentStartTime,
+            returnTimeHistory = :returnTimeHistory 
+        );
+SQL;
 
-        $statement = $this->login->login()->prepare($rentQuery);
-        $statement->execute();
+        $statement = $this->login->login()->prepare($returnQuery);
+        $params = ["registrationHistory" => $registration, "renterHistory" => $renter, "rentStartHistory" => $rentStartTime, "returnTimeHistory" => ];
+        $statement->execute($params);
 
         if(!$statement) die();
     }
