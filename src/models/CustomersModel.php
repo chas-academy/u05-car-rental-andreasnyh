@@ -23,7 +23,7 @@ class CustomersModel extends AbstractModel {
             $postalAddress = htmlspecialchars($customerFromDB["postalAddress"]);
             $phoneNumber = htmlspecialchars($customerFromDB["phoneNumber"]);
 
-            $historyQuery = "SELECT * FROM History WHERE renter = :renter";
+            $historyQuery = "SELECT * FROM Rents WHERE renter = :renter";
             $histStatement = $this->login->login()->prepare($historyQuery);
             $histResult = $histStatement->execute(["renter" => $socialSecurityNumber]);
             if (!$histResult) die($this->login->login()->errorInfo());

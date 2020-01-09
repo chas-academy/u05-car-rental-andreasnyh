@@ -51,13 +51,13 @@ class HistoryController extends AbstractController {
     }
 
     public function carReturned() {
-       $form = $this->request->getForm();
-       $form = explode("|", $form["returnedCar"]);
-       $registration = $form[0];
-       $renter = $form[1];
-       $rentStartTime = $form[2];
-
-    var_dump($form);
+        $form = $this->request->getForm();
+        $form = explode("|", $form["returnedCar"]);
+        $registration = $form[0];
+        $renter = intval($form[1]);
+        $rentStartTime = strtotime($form[2]);
+        $rentStartTime = date('Y-m-d H:i:s',$rentStartTime);
+        #2020-01-03 13:10:02
         $model = new HistoryModel($this->db);
        # $model->returnCar($registration, $renter, $rentStartTime);
 
@@ -66,7 +66,7 @@ class HistoryController extends AbstractController {
             "renter" => $renter,
             "rentStartTime" => $rentStartTime
         ];
-
+        var_dump($rentStartTime);
         $model->returnCar($registration,$renter,$rentStartTime);
 
         return $this->render("CarEdited.twig", $carReturned);
