@@ -18,4 +18,12 @@ class HistoryModel extends AbstractModel {
         if(!$statement) die();
     }
 
+    public function returnCar() {
+        $rentQuery = "Select * from History";
+
+        $statement = $this->login->login()->prepare($rentQuery);
+        $statement->execute();
+
+        if(!$statement) die();
+    }
 }

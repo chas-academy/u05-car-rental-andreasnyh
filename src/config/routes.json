@@ -92,7 +92,14 @@
   "carRented": {
     "controller": "History",
     "method": "rentCar"
-
+  },
+  "returnCar": {
+    "controller": "History",
+    "method": "returnCar"
+  },
+  "carReturned": {
+    "controller": "History",
+    "method": "carReturned"
   },
   "": {
     "controller": "MainMenu",

@@ -6,6 +6,7 @@ namespace Main\models;
 #use Main\Exceptions\DbException;
 use Main\exceptions\NotFoundException;
 use Main\includes\Login;
+use Main\utils\DependencyInjector;
 
 class CarsModel extends AbstractModel {
 

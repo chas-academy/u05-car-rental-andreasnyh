@@ -38,4 +38,17 @@ class HistoryController extends AbstractController {
         return $this->render("CarRented.twig", $rented);
     }
 
+    public function returnCar(){
+        $customersModel = new CustomersModel($this->db);
+        $carModel = new CarsModel($this->db);
+        $customerList = $customersModel->getCustomers();
+        $carList = $carModel->getCars();
+        $makesList = $carModel->getMakes();
+
+        $carsAndCustomers = ["customerList" => $customerList, "carList" => $carList, "makesList" => $makesList];
+
+        return $this->render("ReturnCar.twig", $carsAndCustomers);
+    }
+
+    
 }

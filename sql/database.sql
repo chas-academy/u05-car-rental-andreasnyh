@@ -73,6 +73,10 @@ CREATE TABLE History (registration VARCHAR(100) NOT NULL, FOREIGN KEY (registrat
                      # totalCost FLOAT
                       );
 
+-- Add columns to history (not run)
+alter table History
+    add (registrationHistory VARCHAR(100), renterHistory BIGINT, rentStartHistory DATETIME, returnTimeHistory DATETIME);
+
 -- INSERT INTO History VALUES ("BCD234", 6505088283)
 INSERT INTO History(registration, renter, rentStartTime) VALUES ("BCD234", 6505088283, CURRENT_TIMESTAMP);
 INSERT INTO History(registration, renter, rentStartTime) VALUES ("DEF456", 9905085115, CURRENT_DATE() );

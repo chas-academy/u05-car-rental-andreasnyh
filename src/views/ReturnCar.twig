@@ -1,0 +1,54 @@
+{% block returnCar %}
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+        <title>Return Car</title>
+    </head>
+    <body>
+
+    <h1>Return Car</h1>
+
+    <form method="post" action="/carReturned"
+          onsubmit="return confirm('Let Customer: {{ customer }} rent car: reg:{{ registration }}  car:{{ car }}?')">
+        <table>
+            <tr>
+                <td>Cars Rented:</td>
+                <td>
+                    <select name="SSN" type="text" required style="width: 100%">
+                        <option value="" disabled selected hidden>-- Select Car to return --</option>
+                       {# {% for customer in customerList %}
+                            <option value="{{ customer.SSN }}">{{ customer.SSN }} {{ customer.customerName|raw }}</option>
+                        {% endfor %}#}
+                        {% for car in carList %}
+                            {% for customer in customerList %}
+                                {% if car.renter == customer.SSN %}
+                                    <option value="{{ car.reg }} {{ customer.renter }} {{ customer.rentStartTime }}">{{ car.reg }} {{ car.make }} - {{ customer.SSN }} {{ customer.customerName|raw }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+
+        <input type="submit" name="OK" value="Confirm Edit">
+    </form>
+
+    <form method="post" action="/cars">
+        <input type="submit" name="Cars" value="Cars">
+    </form>
+
+    <form method="post" action="/">
+        <input type="submit" name="Cancel" value="Cancel">
+    </form>
+
+    </body>
+    </html>
+{% endblock %}
