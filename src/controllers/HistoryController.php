@@ -8,6 +8,11 @@ use Main\models\HistoryModel;
 
 class HistoryController extends AbstractController {
 
+    public function getHistory(){
+
+        return $this->render("viewHistory.twig", []);
+    }
+
     public function getCarsAndCustomers(){
         $customersModel = new CustomersModel($this->db);
         $carModel = new CarsModel($this->db);

@@ -10,6 +10,10 @@ use PDOException;
 
 class HistoryModel extends AbstractModel {
 
+    public function getHistory(){
+
+    }
+
     public function rentCar($registration, $SSN) {
         $rentQuery = "INSERT INTO Rents(registration, renter, rentStartTime) " .
                      "VALUES (:registration, :SSN, CURRENT_TIMESTAMP)";
