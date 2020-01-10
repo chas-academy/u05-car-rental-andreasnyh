@@ -12,6 +12,34 @@ class HistoryModel extends AbstractModel {
 
     public function getHistory(){
 
+        $historyDB = $this->login->login()->query("SELECT * FROM History");
+
+
+        $historyArray = [];
+        foreach ($historyDB as $historyFromDB) {
+            $registration = htmlspecialchars($historyFromDB["registrationHistory"]);
+            $renter = htmlspecialchars($historyFromDB["renterHistory"]);
+            #$customer = $customerModel->getCustomer($renter);
+            $rentStart = htmlspecialchars($historyFromDB["rentStartHistory"]);
+            $returnTime = htmlspecialchars($historyFromDB["returnTimeHistory"]);
+
+            $rentStartDate = date_create($rentStart);
+            $returnTimeDate = date_create($returnTime);
+            $result = date_diff($rentStartDate, $returnTimeDate);
+            $result = $result->days;
+            if ($result == 0){
+                $result = 1;
+            }
+            $historyRow = ["registration" => $registration,
+                            "renter" => $renter,
+                            "rentedDays" => $result,
+                            "rentStart" => $rentStart,
+                            "returnTime" => $returnTime];
+
+            $historyArray[] = $historyRow;
+        }
+        var_dump($historyArray);
+        return $historyArray;
     }
 
     public function rentCar($registration, $SSN) {

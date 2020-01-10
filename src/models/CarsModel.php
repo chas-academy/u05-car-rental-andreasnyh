@@ -73,6 +73,13 @@ class CarsModel extends AbstractModel {
         return $carArray;
   }
 
+    public function getCar($registration)
+    {
+        $carDB = $this->login->login()->query("SELECT * FROM Cars WHERE registration = $registration");
+var_dump($carDB->fetch());
+        return $carDB->fetch();
+    }
+
     public function getMakes()
     {
         $makesDB = $this->login->login()->query("SELECT * FROM Makes");
