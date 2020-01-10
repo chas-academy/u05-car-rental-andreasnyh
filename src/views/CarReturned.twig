@@ -15,8 +15,8 @@
     <table border="1">
         <tr> <td><h3>Registration</h3></td> <td><h3>Social Security Number</h3></td> <td><h3>Customer Name</h3></td>
             <td><h3>Rented From</h3> <td><h3>Returned</h3></tr>
-        <tr><td>{{ registration }}</td><td>{{ renter }}</td><td>{{ customer.customerName }}</td>
-            <td>{{ rentStartTime }}</td> <td>{{ returnTimeHistory }}</td></tr>
+        <tr><td>{{ car.registrationHistory }}</td><td>{{ customer.socialSecurityNumber }}</td><td>{{ customer.customerName }}</td>
+            <td>{{ car.rentStartHistory }}</td> <td>{{ car.returnTimeHistory }}</td></tr>
 
     </table>
 

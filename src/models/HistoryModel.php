@@ -5,7 +5,8 @@ namespace Main\models;
 use Main\exceptions\NotFoundException;
 use Main\includes\Login;
 use Main\models\CustomersModel;
-use MongoDB\BSON\Timestamp;
+use PDO;
+use PDOException;
 
 class HistoryModel extends AbstractModel {
 
@@ -34,8 +35,13 @@ SQL;
         $addToHistoryParams = ["registration" => $registration, "renter" => $renter,
             "rentStartTime" => $rentStartTime];
         #var_dump($addToHistoryParams);
-        $addToHistoryStatement->execute($addToHistoryParams);
-
+        try {
+            $addToHistoryStatement->execute($addToHistoryParams);
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                echo "Duplicate entry, you can´t return a car twice!";
+            }
+        }
         if(!$addToHistoryStatement) die();
 
     # RETURN CAR TO POOL
@@ -51,7 +57,27 @@ SQL;
 
         $returnParams = ["registration" => $registration];
 
-        $returnStatement->execute($returnParams);
+        try {
+            $returnStatement->execute($returnParams);
+        } catch (PDOException $e){}
+
         return $returnTimeHistory;
     }
+
+    public function getCarHistoryData($registration, $rentStartHistory)
+    {
+        #var_dump($registration);
+        #var_dump($rentStartHistory);
+        $carHistoryQuery = <<<SQL
+            SELECT * FROM History WHERE registrationHistory = :registration AND rentStartHistory = :rentStartHistory;
+SQL;
+        $carHistoryStatement = $this->login->login()->prepare($carHistoryQuery);
+        if (!$carHistoryQuery) die($this->login->login()->errorInfo());
+
+        $carHistoryStatement->execute(["registration" => $registration, "rentStartHistory" => $rentStartHistory]);
+        #$carHistory = ;
+    #var_dump($carHistoryStatement->fetchAll());
+        return $carHistoryStatement->fetch();
+    }
+
 }

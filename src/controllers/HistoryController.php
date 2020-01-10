@@ -52,6 +52,7 @@ class HistoryController extends AbstractController {
         $form = explode("|", $form["returnedCar"]);
         $registration = $form[0];
         $renter = intval($form[1]);
+        $rentStartTimeString = $form[2];
         $rentStartTime = strtotime($form[2]);
         $rentStartTime = date('Y-m-d H:i:s',$rentStartTime);
 
@@ -61,13 +62,23 @@ class HistoryController extends AbstractController {
         $customerModel = new CustomersModel($this->db);
         #$customer = $customerModel->getCustomer($renter);
 
-        $carReturned = [
+/*        $carReturned = [
             "registration" => $registration,
             "renter" => $renter,
             "rentStartTime" => $rentStartTime,
             "customer" => $customerModel->getCustomer($renter)
+        ];*/
+
+        $carReturned = [
+            "car" => $historyModel->getCarHistoryData($registration, $rentStartTimeString),
+            "customer" => $customerModel->getCustomer($renter)
         ];
         #var_dump($carReturned);
         return $this->render("CarReturned.twig", $carReturned);
+    }
+
+    public function getCarHistoryData($registration, $rentStartHistory){
+        $carHistoryModel = new HistoryModel($this->db);
+        return $carHistoryModel->getCarHistoryData($registration, $rentStartHistory);
     }
 }
