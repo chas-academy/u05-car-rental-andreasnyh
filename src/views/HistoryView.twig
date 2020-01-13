@@ -16,8 +16,8 @@
         <tr> <td><h3>Registration</h3></td> <td><h3>Social Security Number</h3></td> <td><h3>Customer Name</h3></td>
             <td><h3>Rented From</h3> <td><h3>Returned</h3></td> <td><h3>Rented Days</h3></td> <td><h3>Total cost</h3></td></tr>
         {% for rent in history %}
-        <tr><td>{{ rent.registration }}</td><td>{{ rent.renter }}</td><td>{{ customer.customerName }}</td>
-            <td>{{ rent.rentStart }}</td> <td>{{ rent.returnTime }}</td> <td>{{ rent.rentedDays }}</td> <td></td> </tr>
+        <tr><td>{{ rent.registration }}</td><td>{{ rent.renter }}</td><td>{{ rent.customer.customerName }}</td>
+            <td>{{ rent.rentStart }}</td> <td>{{ rent.returnTime }}</td> <td>{{ rent.rentedDays }}</td> <td>{{ rent.car.cost }}</td> </tr>
         {% endfor %}
     </table>
 

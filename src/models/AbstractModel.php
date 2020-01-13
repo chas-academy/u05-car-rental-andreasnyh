@@ -4,6 +4,7 @@ namespace Main\Models;
 
 use Main\includes\Login;
 use Main\utils\DependencyInjector;
+use PDO;
 
 abstract class AbstractModel {
     protected $login;
