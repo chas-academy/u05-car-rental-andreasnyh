@@ -75,9 +75,18 @@ class CarsModel extends AbstractModel {
 
     public function getCar($registration)
     {
+<<<<<<< Updated upstream
         $carDB = $this->login->login()->query("SELECT * FROM Cars WHERE registration = $registration");
 var_dump($carDB->fetch());
         return $carDB->fetch();
+=======
+        var_dump($registration);
+        $carDB = $this->db->query("SELECT * FROM Cars WHERE registration = $registration");
+
+        $car = $carDB->fetch();
+        var_dump($car);
+        return $car;
+>>>>>>> Stashed changes
     }
 
     public function getMakes()

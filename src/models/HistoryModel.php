@@ -12,8 +12,13 @@ class HistoryModel extends AbstractModel {
 
     public function getHistory(){
 
+<<<<<<< Updated upstream
         $historyDB = $this->login->login()->query("SELECT * FROM History");
         $carsDB = $this->login->login()->query("SELECT * FROM Cars");
+=======
+        $historyDB = $this->db->query("SELECT * FROM History");
+
+>>>>>>> Stashed changes
 
         $historyArray = [];
         foreach ($historyDB as $historyFromDB) {
@@ -32,6 +37,7 @@ class HistoryModel extends AbstractModel {
             if ($result == 0){
                 $result = 1;
             }
+            /*
             foreach ($carsDB as $car) {
                 if ($registration == htmlspecialchars($car["registration"])){
                     $reg = htmlspecialchars($car["registration"]);
@@ -47,18 +53,23 @@ class HistoryModel extends AbstractModel {
                     #var_dump($car);
                 }
             }
+            */
+
+            #$car = $this->db->query("SELECT * From Cars WHERE registration = $registration");
+            $carDB = new CarsModel($this->db);
+            #$car = $carDB->getCar();
             $historyRow = ["registration" => $registration,
                             "renter" => $renter,
                             "rentedDays" => $result,
                             "rentStart" => $rentStart,
                             "returnTime" => $returnTime,
-                            "car" => $carRow,
+                            "car" => $carDB->getCar($registration),
                             "customer" => $customer
             ];
 
             $historyArray[] = $historyRow;
         }
-        #var_dump($historyArray);
+        var_dump($historyArray);
         return $historyArray;
     }
 
