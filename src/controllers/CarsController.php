@@ -14,6 +14,11 @@ class CarsController extends AbstractController {
         return $this->render("CarsView.twig", $properties);
     }
 
+    public function getCar($registration){
+        $Model = new CarsModel($this->db);
+        return $Model->getCar($registration);
+    }
+
     public function addCar() {
         $makesModel = new CarsModel($this->db);
         $makes = $makesModel->getMakes();

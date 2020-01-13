@@ -8,6 +8,25 @@ use Main\models\HistoryModel;
 
 class HistoryController extends AbstractController {
 
+    public function getHistory(){
+        $historyModel = new HistoryModel($this->db);
+        $customersModel = new CustomersModel($this->db);
+        $carModel = new CarsModel($this->db);
+
+        $history = $historyModel->getHistory();
+        $customer = $customersModel->getCustomer($history[0]["renter"]);
+     /*   foreach ($history as $row){
+            $customer = $customersModel->getCustomer($history[count($row)]["renter"]);
+            $properties = ["history" => $history, "customer" => $customer];
+        }*/
+        $properties = ["history" => $history];
+        #echo "controller properties";
+        #var_dump($history[0]["registration"]);
+        #$car = $carModel->getCar($registration);
+        var_dump($properties);
+        return $this->render("HistoryView.twig", $properties);
+    }
+
     public function getCarsAndCustomers(){
         $customersModel = new CustomersModel($this->db);
         $carModel = new CarsModel($this->db);

@@ -101,6 +101,10 @@
     "controller": "History",
     "method": "carReturned"
   },
+  "history": {
+    "controller": "History",
+    "method": "getHistory"
+  },
   "": {
     "controller": "MainMenu",
     "method": "showMenu"
