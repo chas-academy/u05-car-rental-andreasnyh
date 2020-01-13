@@ -23,7 +23,7 @@ class HistoryController extends AbstractController {
         #echo "controller properties";
         #var_dump($history[0]["registration"]);
         #$car = $carModel->getCar($registration);
-        var_dump($properties);
+        #var_dump($properties);
         return $this->render("HistoryView.twig", $properties);
     }
 
@@ -89,9 +89,10 @@ class HistoryController extends AbstractController {
         ];*/
 
         $carReturned = [
-            "car" => $historyModel->getCarHistoryData($registration, $rentStartTimeString),
+            "car" => $historyModel->getCarHistoryData($registration,$rentStartTimeString),
             "customer" => $customerModel->getCustomer($renter)
         ];
+
         #var_dump($carReturned);
         return $this->render("CarReturned.twig", $carReturned);
     }

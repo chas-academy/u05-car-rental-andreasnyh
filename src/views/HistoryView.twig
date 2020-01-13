@@ -17,11 +17,7 @@
             <td><h3>Rented From</h3> <td><h3>Returned</h3></td> <td><h3>Rented Days</h3></td> <td><h3>Total cost</h3></td></tr>
         {% for rent in history %}
         <tr><td>{{ rent.registration }}</td><td>{{ rent.renter }}</td><td>{{ rent.customer.customerName }}</td>
-<<<<<<< Updated upstream
-            <td>{{ rent.rentStart }}</td> <td>{{ rent.returnTime }}</td> <td>{{ rent.rentedDays }}</td> <td>{{ rent.car.cost }}</td> </tr>
-=======
             <td>{{ rent.rentStart }}</td> <td>{{ rent.returnTime }}</td> <td>{{ rent.rentedDays }}</td> <td>Cost: {{rent.car.cost}} - {{ rent.rentedDays * rent.car.cost }}</td> </tr>
->>>>>>> Stashed changes
         {% endfor %}
     </table>
 

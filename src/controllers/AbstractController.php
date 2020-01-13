@@ -1,6 +1,6 @@
 <?php
 namespace Main\controllers;
-use Main\exceptions\NotFoundException;
+#use Main\exceptions\NotFoundException;
 use Main\core\Request;
 use Main\utils\DependencyInjector;
 
@@ -14,7 +14,7 @@ abstract class AbstractController {
     public function __construct(DependencyInjector $di, Request $request) {
         $this->request = $request;
         $this->di = $di;
-        $this->db = $di->get("Database");
+        $this->db = $di->get("PDO");
         #$this->log = $di->get("Logger");
         $this->view = $di->get("Twig");
         $this->config = $di->get("Config");

@@ -2,16 +2,14 @@
 
 namespace Main\models;
 
-//use Bank\Domain\Bank;
-#use Main\Exceptions\DbException;
 use Main\exceptions\NotFoundException;
-use Main\includes\Login;
 use Main\utils\DependencyInjector;
+
 
 class CarsModel extends AbstractModel {
 
     public function getCars() {
-        $carsDB = $this->login->login()->query("SELECT * FROM Cars");
+        $carsDB = $this->db->query("SELECT * FROM Cars");
         #$historyDB = $this->login->login()->query("SELECT * FROM History");
         #if (!$customers) die($this->login->errorInfo());
 
@@ -27,9 +25,9 @@ class CarsModel extends AbstractModel {
             $cost = htmlspecialchars($carFromDB["cost"]);
 
             $historyQuery = "SELECT * FROM Rents WHERE registration = :registration";
-            $histStatement = $this->login->login()->prepare($historyQuery);
+            $histStatement = $this->db->prepare($historyQuery);
             $histResult = $histStatement->execute(["registration" => $reg]);
-            if (!$histResult) die($this->login->login()->errorInfo());
+            if (!$histResult) die($this->db->errorInfo());
 
             $historyRows = $histStatement->fetchAll();
 
@@ -75,23 +73,17 @@ class CarsModel extends AbstractModel {
 
     public function getCar($registration)
     {
-<<<<<<< Updated upstream
-        $carDB = $this->login->login()->query("SELECT * FROM Cars WHERE registration = $registration");
-var_dump($carDB->fetch());
-        return $carDB->fetch();
-=======
         var_dump($registration);
         $carDB = $this->db->query("SELECT * FROM Cars WHERE registration = $registration");
 
         $car = $carDB->fetch();
         var_dump($car);
         return $car;
->>>>>>> Stashed changes
     }
 
     public function getMakes()
     {
-        $makesDB = $this->login->login()->query("SELECT * FROM Makes");
+        $makesDB = $this->db->query("SELECT * FROM Makes");
         // Traverse through the result of the select call, row-by-row
         $makesArray = [];
         foreach ($makesDB as $makesFromDB) {
@@ -104,7 +96,7 @@ var_dump($carDB->fetch());
 
     public function getColors()
     {
-        $colorsDB = $this->login->login()->query("SELECT * FROM Colors");
+        $colorsDB = $this->db->query("SELECT * FROM Colors");
         // Traverse through the result of the select call, row-by-row
         $colorsArray = [];
         foreach ($colorsDB as $colorsFromDB) {
@@ -119,7 +111,7 @@ var_dump($carDB->fetch());
         $query = "INSERT INTO Cars(registration, year, cost, make, model, color, renter) " .
             "VALUES (:registration, :year, :cost, :make, :model, :color, :renter)";
 
-        $statement = $this->login->login()->prepare($query);
+        $statement = $this->db->prepare($query);
         $statement->execute(["registration" => $registration, "year" => $year, "cost" => $cost,
             "make" => $make, "model" => $model, "color" => $color, "renter" => $renter]);
 
@@ -142,19 +134,19 @@ var_dump($carDB->fetch());
             "color = :color " .
             "WHERE registration = :registration";
 
-        $statement = $this->login->login()->prepare($query);
+        $statement = $this->db->prepare($query);
         $car = ["registration" => $registration, "year" => $yearNew, "cost" => $costNew,
             "make" => $makeNew, "model" => $modelNew, "color" => $colorNew];
 
         $result = $statement->execute($car);
-        if (!$result) die($this->login->login()->errorInfo());
+        if (!$result) die($this->db->errorInfo());
     }
 
     public function removeCar($registration) {
         $query = "DELETE FROM Cars WHERE registration = :registration";
-        $statement = $this->login->login()->prepare($query);
+        $statement = $this->db->prepare($query);
         $car = ["registration" => $registration];
         $result = $statement->execute($car);
-        if (!$result) die($this->login->login()->errorInfo());
+        if (!$result) die($this->db->errorInfo());
     }
 }
