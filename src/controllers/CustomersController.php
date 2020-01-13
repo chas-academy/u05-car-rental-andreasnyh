@@ -13,6 +13,11 @@ class CustomersController extends AbstractController {
         return $this->render("CustomersView.twig", $properties);
     }
 
+    public function getCustomer($renter){
+        $Model = new CustomersModel($this->db);
+        return $Model->getCustomer($renter);
+    }
+
     public function addCustomer() {
         return $this->render("AddCustomer.twig", []);
     }

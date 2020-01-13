@@ -9,8 +9,6 @@ use Main\models\HistoryModel;
 class HistoryController extends AbstractController {
 
     public function getCarsAndCustomers(){
-        #$carsAndCustomersModel = new HistoryModel($this->db);
-        #$carsAndCustomers = $carsAndCustomersModel->getCarsAndCustomers();
         $customersModel = new CustomersModel($this->db);
         $carModel = new CarsModel($this->db);
         $customerList = $customersModel->getCustomers();
@@ -20,7 +18,6 @@ class HistoryController extends AbstractController {
 
         $carsAndCustomers = ["customerList" => $customerList, "carList" => $carList, "makesList" => $makesList, "colorsList" => $colorsList];
 
-        #$properties = ["carsAndCustomers" => $carsAndCustomers];
         return $this->render("RentCar.twig", $carsAndCustomers);
     }
 
@@ -38,4 +35,50 @@ class HistoryController extends AbstractController {
         return $this->render("CarRented.twig", $rented);
     }
 
+    public function returnCar(){
+        $customersModel = new CustomersModel($this->db);
+        $carModel = new CarsModel($this->db);
+        $customerList = $customersModel->getCustomers();
+        $carList = $carModel->getCars();
+        $makesList = $carModel->getMakes();
+
+        $carsAndCustomers = ["customerList" => $customerList, "carList" => $carList, "makesList" => $makesList];
+
+        return $this->render("ReturnCar.twig", $carsAndCustomers);
+    }
+
+    public function carReturned() {
+        $form = $this->request->getForm();
+        $form = explode("|", $form["returnedCar"]);
+        $registration = $form[0];
+        $renter = intval($form[1]);
+        $rentStartTimeString = $form[2];
+        $rentStartTime = strtotime($form[2]);
+        $rentStartTime = date('Y-m-d H:i:s',$rentStartTime);
+
+        $historyModel = new HistoryModel($this->db);
+        $historyModel->returnCar($registration,$renter,$rentStartTime);
+
+        $customerModel = new CustomersModel($this->db);
+        #$customer = $customerModel->getCustomer($renter);
+
+/*        $carReturned = [
+            "registration" => $registration,
+            "renter" => $renter,
+            "rentStartTime" => $rentStartTime,
+            "customer" => $customerModel->getCustomer($renter)
+        ];*/
+
+        $carReturned = [
+            "car" => $historyModel->getCarHistoryData($registration, $rentStartTimeString),
+            "customer" => $customerModel->getCustomer($renter)
+        ];
+        #var_dump($carReturned);
+        return $this->render("CarReturned.twig", $carReturned);
+    }
+
+    public function getCarHistoryData($registration, $rentStartHistory){
+        $carHistoryModel = new HistoryModel($this->db);
+        return $carHistoryModel->getCarHistoryData($registration, $rentStartHistory);
+    }
 }
