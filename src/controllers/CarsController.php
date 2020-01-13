@@ -57,9 +57,9 @@ class CarsController extends AbstractController {
         $form = $this->request->getForm();
         $yearNew = $form["year"];
         $costNew = $form["cost"];
-        $makeNew = $form["make"];
+        $makeNew = $form["make"] ?? $makeOld;
         $modelNew = $form["model"];
-        $colorNew = $form["color"];
+        $colorNew = $form["color"] ?? $colorOld;
 
         $model = new CarsModel($this->db);
         $model->editCar($registration, $yearNew, $costNew, $makeNew, $modelNew, $colorNew);

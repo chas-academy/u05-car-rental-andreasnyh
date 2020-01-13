@@ -85,6 +85,15 @@
       "make": "string"
     }
   },
+  "rentCar": {
+    "controller": "History",
+    "method": "getCarsAndCustomers"
+  },
+  "carRented": {
+    "controller": "History",
+    "method": "rentCar"
+
+  },
   "": {
     "controller": "MainMenu",
     "method": "showMenu"
