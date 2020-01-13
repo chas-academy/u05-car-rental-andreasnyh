@@ -6,6 +6,7 @@ namespace Main\models;
 #use Main\Exceptions\DbException;
 use Main\exceptions\NotFoundException;
 use Main\includes\Login;
+use Main\utils\DependencyInjector;
 
 class CarsModel extends AbstractModel {
 
@@ -25,7 +26,7 @@ class CarsModel extends AbstractModel {
             $year = htmlspecialchars($carFromDB["year"]);
             $cost = htmlspecialchars($carFromDB["cost"]);
 
-            $historyQuery = "SELECT * FROM History WHERE registration = :registration";
+            $historyQuery = "SELECT * FROM Rents WHERE registration = :registration";
             $histStatement = $this->login->login()->prepare($historyQuery);
             $histResult = $histStatement->execute(["registration" => $reg]);
             if (!$histResult) die($this->login->login()->errorInfo());
@@ -71,6 +72,13 @@ class CarsModel extends AbstractModel {
 */
         return $carArray;
   }
+
+    public function getCar($registration)
+    {
+        $carDB = $this->login->login()->query("SELECT * FROM Cars WHERE registration = $registration");
+var_dump($carDB->fetch());
+        return $carDB->fetch();
+    }
 
     public function getMakes()
     {

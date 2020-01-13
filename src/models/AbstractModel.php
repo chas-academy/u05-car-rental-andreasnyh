@@ -3,7 +3,8 @@
 namespace Main\Models;
 
 use Main\includes\Login;
-
+use Main\utils\DependencyInjector;
+use PDO;
 
 abstract class AbstractModel {
     protected $login;
@@ -11,4 +12,11 @@ abstract class AbstractModel {
     public function __construct(Login $login) {
         $this->login = $login;
     }
+/*
+    protected $di;
+
+    public function __construct(DependencyInjector $di) {
+        $this->db = $di;
+    }
+    */
 }

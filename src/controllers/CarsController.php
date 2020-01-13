@@ -14,6 +14,11 @@ class CarsController extends AbstractController {
         return $this->render("CarsView.twig", $properties);
     }
 
+    public function getCar($registration){
+        $Model = new CarsModel($this->db);
+        return $Model->getCar($registration);
+    }
+
     public function addCar() {
         $makesModel = new CarsModel($this->db);
         $makes = $makesModel->getMakes();
@@ -57,9 +62,9 @@ class CarsController extends AbstractController {
         $form = $this->request->getForm();
         $yearNew = $form["year"];
         $costNew = $form["cost"];
-        $makeNew = $form["make"];
+        $makeNew = $form["make"] ?? $makeOld;
         $modelNew = $form["model"];
-        $colorNew = $form["color"];
+        $colorNew = $form["color"] ?? $colorOld;
 
         $model = new CarsModel($this->db);
         $model->editCar($registration, $yearNew, $costNew, $makeNew, $modelNew, $colorNew);

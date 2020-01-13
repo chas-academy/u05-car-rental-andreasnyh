@@ -65,22 +65,28 @@ INSERT INTO Cars VALUES ("ABC123", 2018, 250,"Ford", "Focus","Black", NULL),
 
 
 -- History
-CREATE TABLE History (registration VARCHAR(100) NOT NULL, FOREIGN KEY (registration) REFERENCES Cars(registration),
-                      renter BIGINT NOT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
-                      rentStartTime DATETIME,
-                      returnTime DATETIME #,
+CREATE TABLE Rents (registration VARCHAR(100) NULL, FOREIGN KEY (registration) REFERENCES Cars(registration),
+                      renter BIGINT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
+                      rentStartTime DATETIME
+                     # returnTime DATETIME #,
                      # days INTEGER,
                      # totalCost FLOAT
                       );
 
+-- Add columns to history
+CREATE TABLE History (registrationHistory VARCHAR(100),
+                      renterHistory BIGINT,
+                      rentStartHistory DATETIME,
+                      returnTimeHistory DATETIME);
+
 -- INSERT INTO History VALUES ("BCD234", 6505088283)
-INSERT INTO History(registration, renter, rentStartTime) VALUES ("BCD234", 6505088283, CURRENT_TIMESTAMP);
-INSERT INTO History(registration, renter, rentStartTime) VALUES ("DEF456", 9905085115, CURRENT_DATE() );
+INSERT INTO Rents(registration, renter, rentStartTime)VALUES ("BCD234", 6505088283, CURRENT_TIMESTAMP);
+INSERT INTO Rents(registration, renter, rentStartTime)VALUES ("DEF456", 9905085115, CURRENT_DATE() );
 
 # ALTER TABLE  Cars ADD (rentStartTime TIMESTAMP, FOREIGN KEY (rentStartTime) REFERENCES History (rentStartTime));
 
 
  SELECT * from Cars;
  SELECT * from Customers;
- SELECT * FROM History;
-SELECT * FROM History WHERE registration = "bcd234";
+ SELECT * FROM Rents;
+SELECT * FROM Rents WHERE registration = "bcd234";
