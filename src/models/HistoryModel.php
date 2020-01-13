@@ -3,7 +3,6 @@
 namespace Main\models;
 
 use Main\exceptions\NotFoundException;
-use Main\includes\Login;
 use Main\models\CustomersModel;
 use PDO;
 use PDOException;
@@ -12,14 +11,14 @@ class HistoryModel extends AbstractModel {
 
     public function getHistory(){
 
-        $historyDB = $this->login->login()->query("SELECT * FROM History");
-        $carsDB = $this->login->login()->query("SELECT * FROM Cars");
+        $historyDB = $this->db->query("SELECT * FROM History");
+        $carsDB = $this->db->query("SELECT * FROM Cars");
 
         $historyArray = [];
         foreach ($historyDB as $historyFromDB) {
             $registration = htmlspecialchars($historyFromDB["registrationHistory"]);
             $renter = htmlspecialchars($historyFromDB["renterHistory"]);
-            $customer = $this->login->login()->query("SELECT * From Customers WHERE socialSecurityNumber = $renter");
+            $customer = $this->db->query("SELECT * From Customers WHERE socialSecurityNumber = $renter");
             $customer = $customer->fetch();
             $rentStart = htmlspecialchars($historyFromDB["rentStartHistory"]);
             $returnTime = htmlspecialchars($historyFromDB["returnTimeHistory"]);
@@ -66,7 +65,7 @@ class HistoryModel extends AbstractModel {
         $rentQuery = "INSERT INTO Rents(registration, renter, rentStartTime) " .
                      "VALUES (:registration, :SSN, CURRENT_TIMESTAMP)";
 
-        $statement = $this->login->login()->prepare($rentQuery);
+        $statement = $this->db->prepare($rentQuery);
         $statement->execute(["registration" => $registration, "SSN" => $SSN]);
 
         if(!$statement) die();
@@ -83,7 +82,7 @@ SQL;
         $returnTimeHistory = $date->getTimestamp();
         $returnTimeHistory = date('Y-m-d H:i:s',$returnTimeHistory);
         #var_dump($returnTimeHistory);
-        $addToHistoryStatement = $this->login->login()->prepare($addToHistoryQuery);
+        $addToHistoryStatement = $this->db->prepare($addToHistoryQuery);
         $addToHistoryParams = ["registration" => $registration, "renter" => $renter,
             "rentStartTime" => $rentStartTime];
         #var_dump($addToHistoryParams);
@@ -102,7 +101,7 @@ SQL;
         DELETE FROM Rents WHERE registration = :registration;
 SQL;
 
-        $returnStatement = $this->login->login()->prepare($returnQuery);
+        $returnStatement = $this->db->prepare($returnQuery);
 
        # $historyParams = ["registrationHistory" => $registration, "renterHistory" => $renter, "rentStartHistory" => $rentStartTime];
        # $historyStatement->execute($historyParams);
@@ -123,12 +122,12 @@ SQL;
         $carHistoryQuery = <<<SQL
             SELECT * FROM History WHERE registrationHistory = :registration AND rentStartHistory = :rentStartHistory;
 SQL;
-        $carHistoryStatement = $this->login->login()->prepare($carHistoryQuery);
-        if (!$carHistoryQuery) die($this->login->login()->errorInfo());
+        $carHistoryStatement = $this->db->prepare($carHistoryQuery);
+        if (!$carHistoryQuery) die($this->db->errorInfo());
 
         $carHistoryStatement->execute(["registration" => $registration, "rentStartHistory" => $rentStartHistory]);
         #$carHistory = ;
-    var_dump($carHistoryStatement->fetch());
+        #var_dump($carHistoryStatement->fetch());
         return $carHistoryStatement->fetch();
     }
 
