@@ -21,7 +21,7 @@
                 <td>Cars Rented:</td>
                 <td>
                     <select name="returnedCar" type="text" required style="width: 100%">
-                        <option value="" disabled selected hidden>-- Select Car to return --</option>
+                        <option value="" disabled selected hidden>-- Select Car To Return --</option>
                        {# {% for customer in customerList %}
                             <option value="{{ customer.SSN }}">{{ customer.SSN }} {{ customer.customerName|raw }}</option>
                         {% endfor %}#}
@@ -38,11 +38,11 @@
 
         </table>
 
-        <input type="submit" name="OK" value="Return Car">
+        <input type="submit" name="OK" value="Confirm Return">
     </form>
 
     <form method="post" action="/cars">
-        <input type="submit" name="Cars" value="Cars">
+        <input type="submit" name="Cars" value="View All Cars">
     </form>
 
     <form method="post" action="/">
