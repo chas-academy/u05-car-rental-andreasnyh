@@ -7,7 +7,8 @@ CREATE TABLE Customers (socialSecurityNumber BIGINT NOT NULL UNIQUE KEY,
                         customerName VARCHAR(256),
                         address VARCHAR(256),
                         postalAddress VARCHAR(256),
-                        phoneNumber VARCHAR(10)
+                        phoneNumber VARCHAR(10),
+                        renter BIGINT, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber)
                        );
 
 INSERT INTO Customers VALUES
@@ -77,7 +78,17 @@ CREATE TABLE Rents (registration VARCHAR(100) NULL, FOREIGN KEY (registration) R
 CREATE TABLE History (registrationHistory VARCHAR(100),
                       renterHistory BIGINT,
                       rentStartHistory DATETIME,
-                      returnTimeHistory DATETIME);
+                      returnTimeHistory DATETIME,
+                      FOREIGN KEY (registrationHistory) REFERENCES Cars(registration),
+                      FOREIGN KEY (renterHistory) REFERENCES Customers(socialSecurityNumber));
+
+INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES
+("PHP666", 9601248876, "2020-01-10 09:51:37", "2020-01-10 09:55:14");
+INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES
+("PHP666", 7001266894, "2020-01-10 10:26:46", "2020-01-10 10:26:55");
+INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES
+("EFG567", 3903118788, "2020-01-10 14:20:59", "2020-01-13 14:22:16");
+
 
 -- INSERT INTO History VALUES ("BCD234", 6505088283)
 INSERT INTO Rents(registration, renter, rentStartTime)VALUES ("BCD234", 6505088283, CURRENT_TIMESTAMP);
@@ -86,7 +97,7 @@ INSERT INTO Rents(registration, renter, rentStartTime)VALUES ("DEF456", 99050851
 # ALTER TABLE  Cars ADD (rentStartTime TIMESTAMP, FOREIGN KEY (rentStartTime) REFERENCES History (rentStartTime));
 
 
- SELECT * from Cars;
- SELECT * from Customers;
- SELECT * FROM Rents;
-SELECT * FROM Rents WHERE registration = "bcd234";
+# SELECT * from Cars;
+# SELECT * from Customers;
+# SELECT * FROM Rents;
+# SELECT * FROM Rents WHERE registration = "bcd234";

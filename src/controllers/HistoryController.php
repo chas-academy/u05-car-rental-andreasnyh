@@ -14,7 +14,7 @@ class HistoryController extends AbstractController {
         $carModel = new CarsModel($this->db);
 
         $history = $historyModel->getHistory();
-        $customer = $customersModel->getCustomer($history[0]["renter"]);
+        #$customer = $customersModel->getCustomer($history[0]["renter"]);
      /*   foreach ($history as $row){
             $customer = $customersModel->getCustomer($history[count($row)]["renter"]);
             $properties = ["history" => $history, "customer" => $customer];

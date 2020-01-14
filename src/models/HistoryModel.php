@@ -12,53 +12,43 @@ class HistoryModel extends AbstractModel {
     public function getHistory(){
 
         $historyDB = $this->db->query("SELECT * FROM History");
-        $carsDB = $this->db->query("SELECT * FROM Cars");
-
+        $customerDB = new CustomersModel($this->db);
         $historyArray = [];
         foreach ($historyDB as $historyFromDB) {
             $registration = htmlspecialchars($historyFromDB["registrationHistory"]);
             $renter = htmlspecialchars($historyFromDB["renterHistory"]);
-            $customer = $this->db->query("SELECT * From Customers WHERE socialSecurityNumber = $renter");
-            $customer = $customer->fetch();
+
+            #$customer = $this->db->query("SELECT * From Customers WHERE socialSecurityNumber = $renter");
+            #$customer = $customer->fetch();
+
+            #($registration);
+            #$car = $this->db->query("SELECT * FROM Cars WHERE registration = '$registration'");
+            # registration needs '' for Sql to recognise it as a string
+
+            #$car = $car->fetch();
+
             $rentStart = htmlspecialchars($historyFromDB["rentStartHistory"]);
             $returnTime = htmlspecialchars($historyFromDB["returnTimeHistory"]);
 
             $rentStartDate = date_create($rentStart);
             $returnTimeDate = date_create($returnTime);
-            $result = date_diff($rentStartDate, $returnTimeDate);
-            $result = $result->days;
+            $dateDiff = date_diff($rentStartDate, $returnTimeDate);
+            $rentedDays = $dateDiff->days;
 
-            if ($result == 0){
-                $result = 1;
+            if ($rentedDays == 0){
+                $rentedDays = 1;
             }
-            /*
-            foreach ($carsDB as $car) {
-                if ($registration == htmlspecialchars($car["registration"])){
-                    $reg = htmlspecialchars($car["registration"]);
-                    $make = htmlspecialchars($car["make"]);
-                    $model = htmlspecialchars($car["model"]);
-                    $color = htmlspecialchars($car["color"]);
-                    $year = htmlspecialchars($car["year"]);
-                    $cost = htmlspecialchars($car["cost"]);
-                    $carRow = ["registration" => $reg, "make" => $make, "model" => $model,
-                        "color" => $color, "year" => $year, "cost" => $cost, "renter" => $renter];
 
-                    #if ($car["renter"])
-                    #var_dump($car);
-                }
-            }
-            */
-
-            #$car = $this->db->query("SELECT * From Cars WHERE registration = $registration");
             $carDB = new CarsModel($this->db);
-            #$car = $carDB->getCar();
+
             $historyRow = ["registration" => $registration,
                             "renter" => $renter,
-                            "rentedDays" => $result,
+                            "rentedDays" => $rentedDays,
                             "rentStart" => $rentStart,
                             "returnTime" => $returnTime,
-                            "car" => $carDB->getCar($registration),
-                            "customer" => $customer
+                            "car" => $carDB->getCar($this->db->quote($registration)),
+                            #"customer" => $customer
+                            "customer" => $customerDB->getCustomer($this->db->quote($renter))
             ];
 
             $historyArray[] = $historyRow;
