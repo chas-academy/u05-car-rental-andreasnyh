@@ -45,7 +45,7 @@
             <td colspan="">{{ car.year }}</td>
             <td colspan="">{{ car.cost }}</td>
 
-            {% if not car.rentStartTime %}
+            {% if not car.rentStart %}
                 <td colspan="2">Available</td>
 
                 <td colspan="1">
@@ -60,7 +60,7 @@
                 </td>
             {% else %}
                 <td colspan="">{{ car.renter }}</td>
-                <td colspan="">{{ car.rentStartTime }}</td>
+                <td colspan="">{{ car.rentStart }}</td>
 
                 <td colspan="1">
                     <form action="/editCar" method="post">

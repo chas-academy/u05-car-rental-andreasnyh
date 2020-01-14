@@ -23,31 +23,33 @@ class CarsModel extends AbstractModel {
             $color = htmlspecialchars($carFromDB["color"]);
             $year = htmlspecialchars($carFromDB["year"]);
             $cost = htmlspecialchars($carFromDB["cost"]);
-
-            $historyQuery = "SELECT * FROM Rents WHERE registration = :registration";
+            $renter = htmlspecialchars($carFromDB["renter"]);
+            $rentStart = htmlspecialchars($carFromDB["rentStart"]);
+/*
+            $historyQuery = "SELECT * FROM Cars WHERE renter = $renter";
             $histStatement = $this->db->prepare($historyQuery);
-            $histResult = $histStatement->execute(["registration" => $reg]);
-            if (!$histResult) die($this->db->errorInfo());
+            #$histResult = $histStatement->execute(["registration" => $reg]);
+            #if (!$histResult) die($this->db->errorInfo());
 
             $historyRows = $histStatement->fetchAll();
 
             $history = [];
             foreach ($historyRows as $historyRow) {
                 $SSN = htmlspecialchars($historyRow["renter"]);
-                $start = htmlspecialchars($historyRow["rentStartTime"]);
+                $start = htmlspecialchars($historyRow["rentStart"]);
         #var_dump($SSN);
 
-                $history = ["renter" => $SSN, "rentStartTime" => $start];
+                $history = ["renter" => $SSN, "rentStart" => $start];
             }
-
+*/
             #var_dump($history);
             #if (isset($history["renter"])) {
-            $renter = $history["renter"] ?? "";
-            $rentStartTime = $history["rentStartTime"] ?? "";
+            #$renter = $history["renter"] ?? "";
+            #$rentStart = $history["rentStart"] ?? "";
             #}
             $car = ["reg" => $reg, "make" => $make, "model" => $model,
-                    "color" => $color, "year" => $year, "cost" => $cost, "renter" => $renter, "rentStartTime" => $rentStartTime];
-
+                    "color" => $color, "year" => $year, "cost" => $cost, "renter" => $renter, "rentStart" => $rentStart];
+    #var_dump($historyRows);
             $carArray[] = $car;
 
 

@@ -34,13 +34,12 @@ class HistoryModel extends AbstractModel {
             }
 
             $historyRow = ["registration" => $registration,
-                            "renter" => $renter,
-                            "rentedDays" => $rentedDays,
-                            "rentStart" => $rentStart,
-                            "returnTime" => $returnTime,
-                            "car" => $carDB->getCar($this->db->quote($registration)),
-                            #"customer" => $customer
-                            "customer" => $customerDB->getCustomer($this->db->quote($renter))
+                           "renter" => $renter,
+                           "rentedDays" => $rentedDays,
+                           "rentStart" => $rentStart,
+                           "returnTime" => $returnTime,
+                           "car" => $carDB->getCar($this->db->quote($registration)),
+                           "customer" => $customerDB->getCustomer($this->db->quote($renter))
             ];
 
             $historyArray[] = $historyRow;
@@ -50,8 +49,15 @@ class HistoryModel extends AbstractModel {
     }
 
     public function rentCar($registration, $SSN) {
-        $rentQuery = "INSERT INTO Rents(registration, renter, rentStartTime) " .
-                     "VALUES (:registration, :SSN, CURRENT_TIMESTAMP)";
+        #$rentQuery = "INSERT INTO Rents(registration, renter, rentStartTime) " .
+         #            "VALUES (:registration, :SSN, CURRENT_TIMESTAMP)";
+
+        $rentQuery = <<<SQL
+            UPDATE Cars SET renter = :SSN,
+                            rentStart = CURRENT_TIMESTAMP
+            WHERE registration = :registration;
+SQL;
+
 
         $statement = $this->db->prepare($rentQuery);
         $statement->execute(["registration" => $registration, "SSN" => $SSN]);
@@ -86,7 +92,10 @@ SQL;
     # RETURN CAR TO POOL
 
         $returnQuery = <<<SQL
-        DELETE FROM Rents WHERE registration = :registration;
+        -- DELETE FROM Cars WHERE registration = :registration;
+        UPDATE Cars SET renter = NULL,
+                        rentStart = NULL
+        WHERE registration = :registration;
 SQL;
 
         $returnStatement = $this->db->prepare($returnQuery);
