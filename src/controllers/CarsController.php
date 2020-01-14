@@ -39,11 +39,12 @@ class CarsController extends AbstractController {
         $model = $form["model"];
         $color = $form["color"];
         $renter = NULL;
+        $rentStart = NULL;
 
         $car = ["registration" => $registration, "year" => $year, "cost" => $cost,
-            "make" => $make, "model" => $model, "color" => $color, "renter" => $renter];
+            "make" => $make, "model" => $model, "color" => $color, "renter" => $renter, "rentStart" => $rentStart];
 
-        $carModel->addCar($registration, $year, $cost, $make, $model, $color, $renter);
+        $carModel->addCar($registration, $year, $cost, $make, $model, $color, $renter, $rentStart);
 
         return $this->render("CarAdded.twig", $car);
     }

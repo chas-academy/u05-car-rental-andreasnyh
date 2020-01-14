@@ -4,6 +4,7 @@ namespace Main\models;
 
 use Main\exceptions\NotFoundException;
 use Main\utils\DependencyInjector;
+use PDOException;
 
 
 class CarsModel extends AbstractModel {
@@ -49,7 +50,7 @@ class CarsModel extends AbstractModel {
             #}
             $car = ["reg" => $reg, "make" => $make, "model" => $model,
                     "color" => $color, "year" => $year, "cost" => $cost, "renter" => $renter, "rentStart" => $rentStart];
-    #var_dump($historyRows);
+    #var_dump($car);
             $carArray[] = $car;
 
 
@@ -109,13 +110,22 @@ class CarsModel extends AbstractModel {
         return $colorsArray;
     }
 
-    public function addCar($registration,$year, $cost, $make, $model, $color, $renter){
-        $query = "INSERT INTO Cars(registration, year, cost, make, model, color, renter) " .
-            "VALUES (:registration, :year, :cost, :make, :model, :color, :renter)";
+    public function addCar($registration,$year, $cost, $make, $model, $color, $renter, $rentStart){
+        $query = "INSERT INTO Cars(registration, year, cost, make, model, color, renter, rentStart) " .
+            "VALUES (:registration, :year, :cost, :make, :model, :color, :renter, :rentStart)";
 
         $statement = $this->db->prepare($query);
-        $statement->execute(["registration" => $registration, "year" => $year, "cost" => $cost,
-            "make" => $make, "model" => $model, "color" => $color, "renter" => $renter]);
+        $params = ["registration" => $registration, "year" => $year, "cost" => $cost,
+            "make" => $make, "model" => $model, "color" => $color, "renter" => $renter, "rentStart" => $rentStart];
+
+        try {
+            $statement->execute($params);
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                echo "Duplicate entry, you can´t add a car twice!";
+            }
+        }
+
 
         if(!$statement) die();
     }

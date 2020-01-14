@@ -102,9 +102,9 @@ INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, retur
 # ALTER TABLE  Cars ADD (rentStartTime TIMESTAMP, FOREIGN KEY (rentStartTime) REFERENCES History (rentStartTime));
 
 
- SELECT * from Cars;
- SELECT * from Customers;
-SELECT * from History;
-#SELECT * FROM Cars WHERE renter = ;
+# SELECT * from Cars;
+# SELECT * from Customers;
+# SELECT * from History;
+# SELECT * FROM Cars WHERE renter = ;
 # SELECT * FROM Rents;
 # SELECT * FROM Rents WHERE registration = "bcd234";

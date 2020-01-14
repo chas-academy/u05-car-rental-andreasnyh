@@ -65,25 +65,25 @@ SQL;
         if(!$statement) die();
     }
 
-    public function returnCar($registration, $renter, $rentStartTime) {
+    public function returnCar($registration, $renter, $rentStart) {
     # ADD RENTED CAR TO HISTORY
         $addToHistoryQuery = <<<SQL
         INSERT INTO History(registrationHistory, renterHistory, rentStartHistory, returnTimeHistory)
         VALUES (:registration, :renter, :rentStartTime, CURRENT_TIMESTAMP);
 SQL;
-
+var_dump($rentStart);
         $date = new \DateTime();
         $returnTimeHistory = $date->getTimestamp();
         $returnTimeHistory = date('Y-m-d H:i:s',$returnTimeHistory);
         #var_dump($returnTimeHistory);
         $addToHistoryStatement = $this->db->prepare($addToHistoryQuery);
         $addToHistoryParams = ["registration" => $registration, "renter" => $renter,
-            "rentStartTime" => $rentStartTime];
-        #var_dump($addToHistoryParams);
+            "rentStartTime" => $rentStart];
+        var_dump($addToHistoryParams);
         try {
             $addToHistoryStatement->execute($addToHistoryParams);
         } catch (PDOException $e) {
-            if ($e->errorInfo[1] == 1062) {
+            if ($e->errorInfo[1]) {
                 echo "Duplicate entry, you can´t return a car twice!";
             }
         }
