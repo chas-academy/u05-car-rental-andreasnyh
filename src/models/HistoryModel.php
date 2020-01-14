@@ -12,34 +12,26 @@ class HistoryModel extends AbstractModel {
     public function getHistory(){
 
         $historyDB = $this->db->query("SELECT * FROM History");
+        $carDB = new CarsModel($this->db);
         $customerDB = new CustomersModel($this->db);
+
         $historyArray = [];
         foreach ($historyDB as $historyFromDB) {
             $registration = htmlspecialchars($historyFromDB["registrationHistory"]);
             $renter = htmlspecialchars($historyFromDB["renterHistory"]);
-
-            #$customer = $this->db->query("SELECT * From Customers WHERE socialSecurityNumber = $renter");
-            #$customer = $customer->fetch();
-
-            #($registration);
-            #$car = $this->db->query("SELECT * FROM Cars WHERE registration = '$registration'");
-            # registration needs '' for Sql to recognise it as a string
-
-            #$car = $car->fetch();
 
             $rentStart = htmlspecialchars($historyFromDB["rentStartHistory"]);
             $returnTime = htmlspecialchars($historyFromDB["returnTimeHistory"]);
 
             $rentStartDate = date_create($rentStart);
             $returnTimeDate = date_create($returnTime);
+
             $dateDiff = date_diff($rentStartDate, $returnTimeDate);
             $rentedDays = $dateDiff->days;
 
             if ($rentedDays == 0){
                 $rentedDays = 1;
             }
-
-            $carDB = new CarsModel($this->db);
 
             $historyRow = ["registration" => $registration,
                             "renter" => $renter,
@@ -53,7 +45,7 @@ class HistoryModel extends AbstractModel {
 
             $historyArray[] = $historyRow;
         }
-        var_dump($historyArray);
+        #var_dump($historyArray);
         return $historyArray;
     }
 
