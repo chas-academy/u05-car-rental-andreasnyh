@@ -7,30 +7,45 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
-        <title>Car rental Add Customer</title>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+        <title>Add Customer</title>
     </head>
     <body>
 
-<h1>Add Customer</h1>
+    <h1>Add Customer</h1>
 
-<form method="post" action="/customerAdded">
-    <table>
-    <tr><td>SSN: </td><td><input type="text" name="socialSecurityNumber"></td></tr>
-    <tr><td>Name: </td><td><input type="text" name="customerName"></td></tr>
-    <tr><td>Address: </td><td><input type="text" name="address"></td></tr>
-    <tr><td>Postal Address: </td><td><input type="text" name="postalAddress"></td></tr>
-    <tr><td>Phone Number: </td><td><input type="text" name="phoneNumber"></td></tr>
+    <form method="post" action="/customerAdded">
+        <table>
+            <tr>
+                <td class="rowTitle">SSN:</td>
+                <td><input type="text" name="socialSecurityNumber"></td>
+            </tr>
+            <tr>
+                <td class="rowTitle">Name:</td>
+                <td><input type="text" name="customerName"></td>
+            </tr>
+            <tr>
+                <td class="rowTitle">Address:</td>
+                <td><input type="text" name="address"></td>
+            </tr>
+            <tr>
+                <td class="rowTitle">Postal Address:</td>
+                <td><input type="text" name="postalAddress"></td>
+            </tr>
+            <tr>
+                <td class="rowTitle">Phone Number:</td>
+                <td><input type="text" name="phoneNumber"></td>
+            </tr>
 
-    </table>
-    <input type="submit" name="OK" value="Add Customer">
+        </table>
+        <input class="submit button" type="submit" name="OK" value="Add Customer">
 
-</form>
+    </form>
 
     <form method="post" action="/customers">
-        <input type="submit" name="Cancel" value="Cancel">
+        <input class="cancel button" type="submit" name="Cancel" value="Cancel">
     </form>
     </body>
-<script src="../../script.js"></script>
-</html>
+    <script src="../../script.js"></script>
+    </html>
 {% endblock %}
