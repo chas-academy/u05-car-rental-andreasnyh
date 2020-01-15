@@ -94,12 +94,16 @@ class CustomersModel extends AbstractModel {
   }
 
   public function removeCustomer($socialSecurityNumber) {
+      $customer = ["socialSecurityNumber" => $socialSecurityNumber];
 
-        $query = "DELETE FROM Customers WHERE socialSecurityNumber = :socialSecurityNumber";
-        $statement = $this->db->prepare($query);
-        $customer = ["socialSecurityNumber" => $socialSecurityNumber];
-        $result = $statement->execute($customer);
-        if (!$result) die($this->db->errorInfo());
+      $historyQuery = "UPDATE History SET renterHistory = NULL WHERE renterHistory = $socialSecurityNumber";
+      $historyStatement = $this->db->prepare($historyQuery);
+      $historyResult = $historyStatement->execute($customer);
+
+      $customerQuery = "DELETE FROM Customers WHERE socialSecurityNumber = :socialSecurityNumber";
+      $statement = $this->db->prepare($customerQuery);
+      $result = $statement->execute($customer);
+      if (!$result) die($this->db->errorInfo());
     }
 
 }
