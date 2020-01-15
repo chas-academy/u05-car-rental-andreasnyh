@@ -27,10 +27,20 @@ class HistoryModel extends AbstractModel {
             $returnTimeDate = date_create($returnTime);
 
             $dateDiff = date_diff($rentStartDate, $returnTimeDate);
-            $rentedDays = $dateDiff->days;
 
-            if ($rentedDays == 0){
+            $rentedDays = $dateDiff->days;
+            $rentedHours = $dateDiff->h;
+            $rentedMins = $dateDiff->i;
+            $rentedSecs = $dateDiff->s;
+            #var_dump($dateDiff);
+            if ($rentedDays == 0 && $rentedHours == 0 && $rentedMins == 0 && $rentedSecs == 0){
+                $rentedDays = 0;
+            } elseif ($rentedDays == 0 && ($rentedHours != 0 || $rentedMins != 0 || $rentedSecs != 0)){
                 $rentedDays = 1;
+            } elseif ($rentedDays != 0 && ($rentedHours != 0 || $rentedMins != 0 || $rentedSecs != 0)){
+                $rentedDays++;
+            } else {
+                $rentedDays = $dateDiff->days;
             }
 
             $historyRow = ["registration" => $registration,
