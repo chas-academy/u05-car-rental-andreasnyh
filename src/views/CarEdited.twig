@@ -1,0 +1,35 @@
+{% block carEdited %}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+        <title>Car rental Car Edited </title>
+    </head>
+<body>
+    <h1>Car Edited</h1>
+
+    <table border="1">
+        <tr><td>{{ registration }}</td><td><h3>Old data:</h3></td> <td><h3>New data:</h3></td></tr>
+        <tr><td><strong>Manufacture Year:</strong> </td> <td> {{ yearOld }}</td><td> {{ yearNew }}</td></tr>
+        <tr><td><strong>Cost per Day:</strong> </td> <td> {{ costOld }}</td> <td> {{ costNew|raw }}</td></tr>
+        <tr><td><strong>Make:</strong> </td> <td> {{ makeOld }}</td> <td> {{ makeNew }}</td></tr>
+        <tr><td><strong>Model:</strong> </td> <td> {{ modelOld }}</td> <td> {{ modelNew }}</td></tr>
+        <tr><td><strong>Color:</strong> </td> <td> {{ colorOld }}</td> <td> {{ colorNew }}</td></tr>
+
+    </table>
+
+    <form method="post" action="/cars">
+        <input type="submit" value="Cars">
+    </form>
+
+    <form method="post" action="/">
+        <input type="submit" value="Main Menu">
+    </form>
+
+</body>
+</html>
+{% endblock %}

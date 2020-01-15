@@ -3,7 +3,7 @@ CREATE DATABASE carRental;
 USE carRental;
 
 -- Customers
-CREATE TABLE Customers (socialSecurityNumber BIGINT NOT NULL UNIQUE KEY,
+CREATE TABLE Customers (socialSecurityNumber BIGINT NOT NULL UNIQUE PRIMARY KEY,
                         customerName VARCHAR(256),
                         address VARCHAR(256),
                         postalAddress VARCHAR(256),
@@ -51,36 +51,60 @@ CREATE TABLE Cars (registration VARCHAR(100) NOT NULL,
                     model VARCHAR(256),
                     color VARCHAR(256),
                     renter BIGINT,
+                    rentStart DATETIME,
+                    KEY (rentStart),
                     FOREIGN KEY (make) REFERENCES Makes(make),
                     FOREIGN KEY (color) REFERENCES Colors(color),
                     FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
                     UNIQUE KEY (registration)
                   );
 
-INSERT INTO Cars VALUES ("ABC123", 2018, 250,"Ford", "Focus","Black", NULL),
-                        ("BCD234", 2019, 495,"Volkswagen", "Golf GTE", "White", NULL),
-                        ("CDE345", 2017, 200, "Toyota", "Aygo", "Gray", NULL),
-                        ("DEF456", 2019, 450, "Hyundai", "i30 N", "Blue", NULL),
-                        ("EFG567", 2019, 295, "Chevrolet", "Spark", "Gray", NULL);
+INSERT INTO Cars VALUES ("ABC123", 2018, 250,"Ford", "Focus","Black", NULL, NULL),
+                        ("BCD234", 2019, 495,"Volkswagen", "Golf GTE", "White", NULL, NULL),
+                        ("CDE345", 2017, 200, "Toyota", "Aygo", "Gray", NULL, NULL),
+                        ("DEF456", 2019, 450, "Hyundai", "i30 N", "Blue", NULL, NULL),
+                        ("EFG567", 2019, 295, "Chevrolet", "Spark", "Gray", NULL, NULL);
 
-
+UPDATE Cars SET renter = 1802222685, rentStart = CURRENT_TIMESTAMP
+WHERE registration = "ABC123";
+/*
 -- History
-CREATE TABLE History (registration VARCHAR(100) NOT NULL, FOREIGN KEY (registration) REFERENCES Cars(registration),
-                      renter BIGINT NOT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
-                      rentStartTime DATETIME,
-                      returnTime DATETIME #,
+CREATE TABLE Rents (registration VARCHAR(100) NULL, FOREIGN KEY (registration) REFERENCES Cars(registration),
+                      renter BIGINT NULL, FOREIGN KEY (renter) REFERENCES Customers(socialSecurityNumber),
+                      rentStartTime DATETIME
+                     # returnTime DATETIME #,
                      # days INTEGER,
                      # totalCost FLOAT
                       );
+*/
+-- Add columns to history
+CREATE TABLE History (registrationHistory VARCHAR(100),
+                      renterHistory BIGINT,
+                      rentStartHistory DATETIME,
+                      returnTimeHistory DATETIME,
+                      FOREIGN KEY (registrationHistory) REFERENCES Cars(registration),
+                      FOREIGN KEY (renterHistory) REFERENCES Customers(socialSecurityNumber));
+
+
+/*
+INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES
+('PHP666', 9601248876, '2020-01-10 09:51:37', '2020-01-10 09:55:14');
+INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES
+('PHP666', 7001266894, '2020-01-10 10:26:46', '2020-01-10 10:26:55');
+INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES
+('EFG567', 3903118788, '2020-01-10 14:20:59', '2020-01-13 14:22:16');
+*/
 
 -- INSERT INTO History VALUES ("BCD234", 6505088283)
-INSERT INTO History(registration, renter, rentStartTime) VALUES ("BCD234", 6505088283, CURRENT_TIMESTAMP);
-INSERT INTO History(registration, renter, rentStartTime) VALUES ("DEF456", 9905085115, CURRENT_DATE() );
+#INSERT INTO Rents(registration, renter, rentStartTime)VALUES ("BCD234", 6505088283, CURRENT_TIMESTAMP);
+#INSERT INTO Rents(registration, renter, rentStartTime)VALUES ("DEF456", 9905085115, CURRENT_DATE() );
 
 # ALTER TABLE  Cars ADD (rentStartTime TIMESTAMP, FOREIGN KEY (rentStartTime) REFERENCES History (rentStartTime));
 
 
- SELECT * from Cars;
- SELECT * from Customers;
- SELECT * FROM History;
-SELECT * FROM History WHERE registration = "bcd234";
+# SELECT * from Cars;
+# SELECT * from Customers;
+# SELECT * from History;
+# SELECT * FROM Cars WHERE renter = ;
+# SELECT * FROM Rents;
+# SELECT * FROM Rents WHERE registration = "bcd234";

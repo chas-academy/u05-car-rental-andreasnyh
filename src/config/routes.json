@@ -41,80 +41,69 @@
       "customerName": "string"
     }
   },
-  "addAccount/:customerNumber/:customerName": {
-    "controller": "Customers",
-    "method": "addAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string"
-    }
-  },
   "cars": {
     "controller": "Cars",
     "method": "getCars"
   },
-  "depositDone/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "depositDone",
+  "addCar": {
+  "controller": "Cars",
+  "method": "addCar"
+  },
+  "carAdded": {
+    "controller": "Cars",
+    "method": "carAdded"
+  },
+  "editCar/:registration/:year/:cost/:make/:model/:color": {
+    "controller": "Cars",
+    "method": "editCar",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
+      "registration": "string",
+      "year": "number",
+      "cost": "number",
+      "make": "string",
+      "model": "string",
+      "color": "string"
     }
   },
-  "withdraw/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "withdraw",
+  "carEdited/:registration/:year/:cost/:make/:model/:color/": {
+    "controller": "Cars",
+    "method": "carEdited",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
+      "registration": "string",
+      "year": "number",
+      "cost": "number",
+      "make": "string",
+      "model": "string",
+      "color": "string"
     }
   },
-  "withdrawDone/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "withdrawDone",
+  "removeCar/:registration/:make": {
+    "controller": "Cars",
+    "method": "removeCar",
     "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
+      "registration": "string",
+      "make": "string"
     }
   },
-  "transfer/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "transfer",
-    "params": {
-      "fromCustomerNumber": "number",
-      "fromCustomerName": "string",
-      "fromAccountNumber": "number"
-    }
+  "rentCar": {
+    "controller": "History",
+    "method": "getCarsAndCustomers"
   },
-  "transferDone/:fromCustomerNumber/:fromCustomerName/:fromAccountNumber": {
-    "controller": "Account",
-    "method": "transferDone",
-    "params": {
-      "fromCustomerNumber": "number",
-      "fromCustomerName": "string",
-      "fromAccountNumber": "number"
-    }
+  "carRented": {
+    "controller": "History",
+    "method": "rentCar"
   },
-  "viewAccount/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "viewAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
+  "returnCar": {
+    "controller": "History",
+    "method": "returnCar"
   },
-  "removeAccount/:customerNumber/:customerName/:accountNumber": {
-    "controller": "Account",
-    "method": "removeAccount",
-    "params": {
-      "customerNumber": "number",
-      "customerName": "string",
-      "accountNumber": "number"
-    }
+  "carReturned": {
+    "controller": "History",
+    "method": "carReturned"
+  },
+  "history": {
+    "controller": "History",
+    "method": "getHistory"
   },
   "": {
     "controller": "MainMenu",

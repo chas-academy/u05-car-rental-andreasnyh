@@ -2,17 +2,15 @@
 
 namespace Main\models;
 
-//use Bank\Domain\Bank;
-#use Main\Exceptions\DbException;
 use Main\exceptions\NotFoundException;
-use Main\includes\Login;
+use PDO;
 
 class CustomersModel extends AbstractModel {
 
     public function getCustomers() {
-        $customersDB = $this->login->login()->query("SELECT * FROM Customers ORDER BY customerName");
+        $customersDB = $this->db->query("SELECT * FROM Customers ORDER BY customerName");
 
-        if (!$customersDB) die($this->login->login()->errorInfo());
+        if (!$customersDB) die($this->db->errorInfo());
 
         // Traverse through the result of the select call, row-by-row
         $customerArray = [];
@@ -23,17 +21,17 @@ class CustomersModel extends AbstractModel {
             $postalAddress = htmlspecialchars($customerFromDB["postalAddress"]);
             $phoneNumber = htmlspecialchars($customerFromDB["phoneNumber"]);
 
-            $historyQuery = "SELECT * FROM History WHERE renter = :renter";
-            $histStatement = $this->login->login()->prepare($historyQuery);
+            $historyQuery = "SELECT * FROM Cars WHERE renter = :renter";
+            $histStatement = $this->db->prepare($historyQuery);
             $histResult = $histStatement->execute(["renter" => $socialSecurityNumber]);
-            if (!$histResult) die($this->login->login()->errorInfo());
+            if (!$histResult) die($this->db->errorInfo());
 
             $historyRows = $histStatement->fetchAll();
 
             $history = [];
             foreach ($historyRows as $historyRow) {
                 $SSN = htmlspecialchars($historyRow["renter"]);
-                $start = htmlspecialchars($historyRow["rentStartTime"]);
+                $start = htmlspecialchars($historyRow["rentStart"]);
                 #var_dump($SSN);
 
                 $history = ["renter" => $SSN, "rentStartTime" => $start];
@@ -51,12 +49,22 @@ class CustomersModel extends AbstractModel {
         #print_r($customerArray);
         return $customerArray;
   }
+
+    public function getCustomer($renter)
+    {
+        $customerDB = $this->db->query("SELECT * FROM Customers WHERE socialSecurityNumber = $renter");
+        $customer = $customerDB->fetch();
+
+        if (!$customerDB) die($this->db->errorInfo());
+        return $customer;
+    }
+
   //(8205030789, "Glen Hysen", "Kungsportsavenyen 2", "411 38 Göteborg", "0709123432"),
   public function addCustomer($socialSecurityNumber,$customerName, $address, $postalAddress, $phoneNumber){
         $query = "INSERT INTO Customers(socialSecurityNumber, customerName, address, postalAddress, phoneNumber) " .
             "VALUES (:socialSecurityNumber, :customerName, :address, :postalAddress, :phoneNumber)";
 
-        $statement = $this->login->login()->prepare($query);
+        $statement = $this->db->prepare($query);
         $statement->execute(["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName,
                             "address" => $address, "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber]);
 
@@ -77,38 +85,21 @@ class CustomersModel extends AbstractModel {
                                     "phoneNumber = :phoneNumber " .
                "WHERE socialSecurityNumber = :socialSecurityNumber";
 
-      $statement = $this->login->login()->prepare($query);
+      $statement = $this->db->prepare($query);
       $customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerNameNew, "address" => $addressNew,
                    "postalAddress" => $postalAddressNew, "phoneNumber" => $phoneNumberNew];
 
       $result = $statement->execute($customer);
-      if (!$result) die($this->login->login()->errorInfo());
+      if (!$result) die($this->db->errorInfo());
   }
 
-public function removeCustomer($socialSecurityNumber) {
-    /*$accountsQuery = "SELECT COUNT(*) FROM Accounts WHERE customerNumber = :customerNumber";
-    $accountsStatement = $this->db->prepare($accountsQuery);
-    $accountsResult = $accountsStatement->execute(["customerNumber" => $customerNumber]);
-    if (!$accountsResult) die($this->db->errorInfo()[2]);
-    $accountsRows = $accountsStatement->fetchAll();
-    $numberOfAccounts = htmlspecialchars($accountsRows[0]["COUNT(*)"]);
+  public function removeCustomer($socialSecurityNumber) {
 
-    if ($numberOfAccounts == 0) {*/
         $query = "DELETE FROM Customers WHERE socialSecurityNumber = :socialSecurityNumber";
-        $statement = $this->login->login()->prepare($query);
+        $statement = $this->db->prepare($query);
         $customer = ["socialSecurityNumber" => $socialSecurityNumber];
         $result = $statement->execute($customer);
-        if (!$result) die($this->login->login()->errorInfo());
-}
+        if (!$result) die($this->db->errorInfo());
+    }
 
 }
-/*
- *  public function editCustomer($customerNumber, $customerNewName) {
-    $customersQuery = "UPDATE Customers SET customerName = :customerName " .
-                      "WHERE customerNumber = :customerNumber";
-    $customersStatement = $this->db->prepare($customersQuery);
-    $customersParameters = ["customerName" => $customerNewName,
-                            "customerNumber" => $customerNumber];
-    $customersResult = $customersStatement->execute($customersParameters);
-    if (!$customersResult) die($this->db->errorInfo()[2]);
-  }*/

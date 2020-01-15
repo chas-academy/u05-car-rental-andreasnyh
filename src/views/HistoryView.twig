@@ -1,0 +1,38 @@
+{% block history %}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+        <title> Car History </title>
+    </head>
+    <body>
+    <h1> Car History </h1>
+
+    <table border="1">
+        <tr> <td><h3>Registration</h3></td> <td><h3>Social Security Number</h3></td> <td><h3>Customer Name</h3></td>
+            <td><h3>Rented From</h3> <td><h3>Returned</h3></td> <td><h3>Rented Days</h3></td> <td><h3>Cost Per Day</h3></td> <td><h3>Total Cost</h3></td></tr>
+        {% for rent in history %}
+        <tr><td>{{ rent.registration }}</td><td>{{ rent.renter }}</td><td>{{ rent.customer.customerName }}</td>
+            <td>{{ rent.rentStart }}</td> <td>{{ rent.returnTime }}</td> <td>{{ rent.rentedDays }}</td> <td>{{rent.car.cost}}</td> <td> {{ rent.rentedDays * rent.car.cost }}</td> </tr>
+        {% endfor %}
+    </table>
+
+    <form method="post" action="/cars">
+        <input type="submit" value="View All Cars">
+    </form>
+
+    <form method="post" action="/returnCar">
+        <input type="submit" value="Return Another Car">
+    </form>
+
+    <form method="post" action="/">
+        <input type="submit" value="Main Menu">
+    </form>
+
+    </body>
+    </html>
+{% endblock %}

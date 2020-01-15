@@ -1,0 +1,37 @@
+{% block carReturned %}
+    <!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+        <title> Car Returned </title>
+    </head>
+<body>
+    <h1> Car Returned </h1>
+
+    <table border="1">
+        <tr> <td><h3>Registration</h3></td> <td><h3>Social Security Number</h3></td> <td><h3>Customer Name</h3></td>
+            <td><h3>Rented From</h3> <td><h3>Returned</h3></tr>
+        <tr><td>{{ car.registrationHistory }}</td><td>{{ customer.socialSecurityNumber }}</td><td>{{ customer.customerName }}</td>
+            <td>{{ car.rentStartHistory }}</td> <td>{{ car.returnTimeHistory }}</td></tr>
+
+    </table>
+
+    <form method="post" action="/cars">
+        <input type="submit" value="Cars">
+    </form>
+
+    <form method="post" action="/returnCar">
+        <input type="submit" value="ReturnCars">
+    </form>
+
+    <form method="post" action="/">
+        <input type="submit" value="Main Menu">
+    </form>
+
+</body>
+</html>
+{% endblock %}
