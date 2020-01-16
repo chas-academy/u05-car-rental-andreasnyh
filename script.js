@@ -130,8 +130,26 @@ function validateRegistration(reg) {
     }
 }
 
-/*
-document.querySelector("#id-checkbox").addEventListener("click", function(event) {
-    document.getElementById("output-box").innerHTML += "Sorry! <code>preventDefault()</code> won't let you check this!<br>";
-    event.preventDefault();
-}, false);*/
+function validateYear(year) {
+    //console.log("Raw Phonenumber: " + phoneNumber);
+    let yearPattern = new RegExp(/(19[0-9]\d|20[01]\d)/);
+
+    // If registration input passes RegExp check
+    if (yearPattern.test(year)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function validateCost(cost) {
+    //console.log("Raw Phonenumber: " + phoneNumber);
+    let yearPattern = new RegExp(/(19[0-9]\d|20[01]\d)/);
+
+    // If registration input passes RegExp check
+    if (yearPattern.test(year)){
+        return true;
+    } else {
+        return false;
+    }
+}
