@@ -118,6 +118,18 @@ function validatePhoneNumber(phoneNumber) {
     }
 }
 
+function validateRegistration(reg) {
+    //console.log("Raw Phonenumber: " + phoneNumber);
+    let regPattern = new RegExp(/[A-HJ-PR-UW-Z][A-HJ-PR-UW-Z][A-HJ-PR-UW-Z]\d\d\d/i);
+
+    // If registration input passes RegExp check
+    if (regPattern.test(reg)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /*
 document.querySelector("#id-checkbox").addEventListener("click", function(event) {
     document.getElementById("output-box").innerHTML += "Sorry! <code>preventDefault()</code> won't let you check this!<br>";

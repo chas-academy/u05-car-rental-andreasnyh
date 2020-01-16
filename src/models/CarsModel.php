@@ -114,6 +114,7 @@ class CarsModel extends AbstractModel {
         $query = "INSERT INTO Cars(registration, year, cost, make, model, color, renter, rentStart) " .
             "VALUES (:registration, :year, :cost, :make, :model, :color, :renter, :rentStart)";
 
+        $registration = strtoupper($registration);
         $statement = $this->db->prepare($query);
         $params = ["registration" => $registration, "year" => $year, "cost" => $cost,
             "make" => $make, "model" => $model, "color" => $color, "renter" => $renter, "rentStart" => $rentStart];
