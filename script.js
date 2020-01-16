@@ -16,8 +16,8 @@ function validateSSN(ssn) {
     let ssnPattern = new RegExp(/\d\d[0-1]\d[0-3]\d\d\d\d\d/);
     let digitArray = [];
     let ssnDigits = ssn.split('');
-    //console.log(ssnPattern.test(ssn));
-    //console.log(typeof ssn)
+
+    // If SSN input passes RegExp check
     if (ssnPattern.test(ssn)){
 
         for (let i = 0; i < 9; i++){
@@ -28,7 +28,7 @@ function validateSSN(ssn) {
             }
             //console.log(ssnSplit[i]);
         }
-        console.log(digitArray);
+        //console.log(digitArray);
         let digitArrayString = digitArray.toString();
         // Replace all "," with nothing
         digitArrayString = digitArrayString.replace(/,/g,"");
@@ -40,18 +40,18 @@ function validateSSN(ssn) {
         let sum = eval(singleDigitArray.join('+'));
         console.log("sum: " + sum);
 
-        let controllNumber = Number(10 - (sum % 10) % 10);
-        console.log("controllNumber: " + controllNumber);
+        let controlNumber = Number(10 - (sum % 10) % 10);
+        console.log("controlNumber: " + controlNumber);
 
 
-
-        if (parseInt(ssnDigits[9]) === controllNumber) {
+        // If last digit of input equals calculated control number
+        if (parseInt(ssnDigits[9]) === controlNumber) {
             console.log("Valid SSN! " + ssn);
-            console.log(ssnDigits[9] +" === "+ controllNumber);
+            console.log(ssnDigits[9] +" === "+ controlNumber);
             return true;
         } else {
             console.log("Invalid SSN! " + ssn);
-            console.log(ssnDigits[9] +" === "+ controllNumber);
+            console.log(ssnDigits[9] +" === "+ controlNumber);
             return false;
         }
 
