@@ -15,7 +15,8 @@
     <h1>Edit Customer</h1>
 
     <form method="post" action="/customerEdited/{{ socialSecurityNumber }}/{{customerName|raw}}/{{address}}/{{postalAddress}}/{{phoneNumber}}"
-          onsubmit="return confirm('Are these changes to {{ customerName }} correct?')">
+{#          onsubmit="return confirm('Are these changes to {{ customerName }} correct?')"#}
+    >
         <table>
             <tr>
                 <td>SSN:</td>
@@ -41,7 +42,7 @@
 
         </table>
 
-        <input type="submit" name="OK" value="Confirm Edit">
+        <input type="submit" name="submitCustomer" value="Confirm Edit">
     </form>
 
 
@@ -50,5 +51,6 @@
     </form>
 
     </body>
+    <script type="text/javascript" src="../../script.js"></script>
     </html>
 {% endblock %}

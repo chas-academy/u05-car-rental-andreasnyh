@@ -32,7 +32,7 @@ class CustomersController extends AbstractController
         $form = $this->request->getForm();
 
         $socialSecurityNumber = $form["socialSecurityNumber"];
-        $socialSecurityNumber = $this->validateSSN($socialSecurityNumber);
+        #$socialSecurityNumber = $this->validateSSN($socialSecurityNumber);
         $customerName = $form["customerName"];
         $address = $form["address"];
         $postalAddress = $form["postalAddress"];

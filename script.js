@@ -1,12 +1,23 @@
 let ssn = document.querySelector("input[name='socialSecurityNumber']");
-let submitButton = document.querySelector("input[type='submit'");
+let customerName = document.querySelector("input[name='customerName']");
+let phoneNumber = document.querySelector("input[name='phoneNumber']");
+
+
+let customerSubmitButton = document.querySelector("input[name='submitCustomer']");
 
 ssn.value="8711151616";
+customerSubmitButton.value = "SKICKA!";
 
-submitButton.addEventListener("click", function (event) {
+customerSubmitButton.addEventListener("click", function (event) {
 
-    if (validateSSN(ssn.value) == false){
+    if (validateSSN(ssn.value) === false){
         alert("Please input a valid Swedish Social Security Number!");
+        event.preventDefault();
+    } else if (validateCustomerName(customerName.value) === false){
+        alert("Please input Name and Surname");
+        event.preventDefault();
+    }else if (validatePhoneNumber(phoneNumber.value) === false){
+        alert("Please input a valid Swedish Phone Number! \n Format : 0XXXXXXXXX");
         event.preventDefault();
     }
 }, false);
@@ -60,6 +71,30 @@ function validateSSN(ssn) {
         return false;
     }
 
+}
+
+function validateCustomerName(customerName) {
+    //console.log("Raw Phonenumber: " + phoneNumber);
+    let namePattern = new RegExp(/^\w+\s+\w*/);
+
+    // If phone input passes RegExp check
+    if (namePattern.test(customerName)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function validatePhoneNumber(phoneNumber) {
+    //console.log("Raw Phonenumber: " + phoneNumber);
+    let phonePattern = new RegExp(/[0]\d\d\d\d\d\d\d\d\d/);
+
+    // If phone input passes RegExp check
+    if (phonePattern.test(phoneNumber)){
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /*
