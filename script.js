@@ -14,10 +14,23 @@ submitButton.addEventListener("click", function (event) {
 function validateSSN(ssn) {
     console.log(ssn);
     let ssnPattern = new RegExp(/\d\d[0-1]\d[0-3]\d\d\d\d\d/);
-    console.log(ssnPattern.test(ssn));
+    let digitArray = [];
+    //console.log(ssnPattern.test(ssn));
+    //console.log(typeof ssn)
     if (ssnPattern.test(ssn)){
-        
-        console.log("Valid SSN" + ssn);
+        let ssnDigits = ssn.split('');
+        for (let i = 0; i < 9; i++){
+            if (i % 2 == 0) {
+                digitArray.push(ssnDigits[i] * 2);
+            } else {
+                digitArray.push(ssnDigits[i] * 1);
+            }
+            //console.log(ssnSplit[i]);
+        }
+        console.log(digitArray);
+        let digitArrayString = digitArray.toString();
+        console.log(digitArrayString.replace(/,/g,""));
+        console.log("Valid SSN! " + ssn);
         return true;
     } else {
         console.log("Invalid SSN!")

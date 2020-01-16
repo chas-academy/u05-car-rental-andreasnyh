@@ -56,9 +56,7 @@ class CustomersController extends AbstractController
             $ssnDigits = str_split($socialSecurityNumber);
             print_r($ssnDigits);
             $sum = 0;
-            for ($i = 0;
-                 $i < 9;
-                 $i++) {
+            for ($i = 0; $i < 9; $i++) {
                 if ($i % 2 == 0) {
                     $digitArray[] = $ssnDigits[$i] * 2;
                 } else {
