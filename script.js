@@ -1,12 +1,10 @@
+
 let ssn = document.querySelector("input[name='socialSecurityNumber']");
 let customerName = document.querySelector("input[name='customerName']");
 let phoneNumber = document.querySelector("input[name='phoneNumber']");
 
-
 let customerSubmitButton = document.querySelector("input[name='submitCustomer']");
 
-ssn.value="8711151616";
-customerSubmitButton.value = "SKICKA!";
 
 customerSubmitButton.addEventListener("click", function (event) {
 
@@ -22,7 +20,27 @@ customerSubmitButton.addEventListener("click", function (event) {
     }
 }, false);
 
+/*
+function validateForms(event) {
+    let ssn = document.querySelector("input[name='socialSecurityNumber']");
+    let customerName = document.querySelector("input[name='customerName']");
+    let phoneNumber = document.querySelector("input[name='phoneNumber']");
+    alert(event);
+    event.preventDefault();
+    if (validateSSN(ssn.value) === false){
+        alert("Please input a valid Swedish Social Security Number!");
+        event.preventDefault();
+    } else if (validateCustomerName(customerName.value) === false){
+        alert("Please input Name and Surname");
+        event.preventDefault();
+    }else if (validatePhoneNumber(phoneNumber.value) === false){
+        alert("Please input a valid Swedish Phone Number! \n Format : 0XXXXXXXXX");
+        event.preventDefault();
+    }
+}
+*/
 function validateSSN(ssn) {
+    //let ssn = document.querySelector("input[name='socialSecurityNumber']");
     console.log("Raw SSN: " + ssn);
     let ssnPattern = new RegExp(/\d\d[0-1]\d[0-3]\d\d\d\d\d/);
     let digitArray = [];

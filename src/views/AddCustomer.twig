@@ -14,7 +14,8 @@
 
 <h1>Add Customer</h1>
 
-<form method="post" action="/customerAdded">
+<form method="post" action="/customerAdded"
+      onsubmit="return confirm('Is this information correct?')">
     <table>
     <tr><td>SSN: </td><td><input type="text" name="socialSecurityNumber" minlength="10" maxlength="10" required></td><td class="errorMsg"></td></tr>
     <tr><td>Name: </td><td><input type="text" name="customerName" required></td></tr>
