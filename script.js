@@ -1,12 +1,12 @@
-
-let ssn = document.querySelector("input[name='socialSecurityNumber']");
-let customerName = document.querySelector("input[name='customerName']");
-let phoneNumber = document.querySelector("input[name='phoneNumber']");
-
 let customerSubmitButton = document.querySelector("input[name='submitCustomer']");
+let carSubmitButton = document.querySelector("input[name='submitCar']");
 
-
+if (customerSubmitButton){
 customerSubmitButton.addEventListener("click", function (event) {
+
+    let ssn = document.querySelector("input[name='socialSecurityNumber']");
+    let customerName = document.querySelector("input[name='customerName']");
+    let phoneNumber = document.querySelector("input[name='phoneNumber']");
 
     if (validateSSN(ssn.value) === false){
         alert("Please input a valid Swedish Social Security Number!");
@@ -19,26 +19,29 @@ customerSubmitButton.addEventListener("click", function (event) {
         event.preventDefault();
     }
 }, false);
-
-/*
-function validateForms(event) {
-    let ssn = document.querySelector("input[name='socialSecurityNumber']");
-    let customerName = document.querySelector("input[name='customerName']");
-    let phoneNumber = document.querySelector("input[name='phoneNumber']");
-    alert(event);
-    event.preventDefault();
-    if (validateSSN(ssn.value) === false){
-        alert("Please input a valid Swedish Social Security Number!");
-        event.preventDefault();
-    } else if (validateCustomerName(customerName.value) === false){
-        alert("Please input Name and Surname");
-        event.preventDefault();
-    }else if (validatePhoneNumber(phoneNumber.value) === false){
-        alert("Please input a valid Swedish Phone Number! \n Format : 0XXXXXXXXX");
-        event.preventDefault();
-    }
 }
-*/
+
+if (carSubmitButton){
+    carSubmitButton.addEventListener("click", function (event) {
+
+        let registration = document.querySelector("input[name='registration']");
+        let year = document.querySelector("input[name='year']");
+        let cost = document.querySelector("input[name='cost']");
+
+        if (validateRegistration(registration.value) === false){
+            alert("Please input a valid Swedish Registration!");
+            event.preventDefault();
+        } else if (validateYear(year.value) === false){
+            alert("Please input a year between 1900 and 2019");
+            event.preventDefault();
+        }else if (validateCost(cost.value) === false){
+            alert("Please input a positive value");
+            event.preventDefault();
+        }
+    }, false);
+}
+
+
 function validateSSN(ssn) {
     //let ssn = document.querySelector("input[name='socialSecurityNumber']");
     console.log("Raw SSN: " + ssn);
