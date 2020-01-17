@@ -12,6 +12,7 @@ $dbConfig = $config->get("database");
 
 $loader = new \Twig\Loader\FilesystemLoader('./src/views');
 $twig = new \Twig\Environment($loader);
+$twig->addGlobal('baseUrl', $config->get('baseUrl'));
 
 $dsn = "mysql:host=".$dbConfig['host'].";dbname=".$dbConfig['database'].";charset=".$dbConfig['charset'];
 $db = new PDO($dsn, $dbConfig["user"], $dbConfig["password"]);
