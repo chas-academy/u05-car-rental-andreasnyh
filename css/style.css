@@ -1,3 +1,9 @@
 * {
     font-family: sans-serif;
 }
+
+.error {
+    border-color: red;
+    transition: ease-in-out;
+}
+

@@ -35,6 +35,7 @@ class CarsController extends AbstractController {
         $registration = $form["registration"];
         $year = $form["year"];
         $cost = $form["cost"];
+        $cost = str_replace(",",".", $cost);
         $make = $form["make"];
         $model = $form["model"];
         $color = $form["color"];

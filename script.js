@@ -10,12 +10,24 @@ customerSubmitButton.addEventListener("click", function (event) {
 
     if (validateSSN(ssn.value) === false){
         alert("Please input a valid Swedish Social Security Number!");
+        ssn.classList.add("error");
+        setTimeout(function () {
+            ssn.classList.remove("error")
+        },2000);
         event.preventDefault();
     } else if (validateCustomerName(customerName.value) === false){
         alert("Please input Name and Surname");
+        customerName.classList.add("error");
+        setTimeout(function () {
+            customerName.classList.remove("error")
+        },2000);
         event.preventDefault();
     }else if (validatePhoneNumber(phoneNumber.value) === false){
         alert("Please input a valid Swedish Phone Number! \n Format : 0XXXXXXXXX");
+        phoneNumber.classList.add("error");
+        setTimeout(function () {
+            phoneNumber.classList.remove("error")
+        },2000);
         event.preventDefault();
     }
 }, false);
@@ -30,12 +42,24 @@ if (carSubmitButton){
 
         if (validateRegistration(registration.value) === false){
             alert("Please input a valid Swedish Registration!");
+            registration.classList.add("error");
+            setTimeout(function () {
+                registration.classList.remove("error")
+            },2000);
             event.preventDefault();
         } else if (validateYear(year.value) === false){
             alert("Please input a year between 1900 and 2019");
+            year.classList.add("error");
+            setTimeout(function () {
+                year.classList.remove("error")
+            },2000);
             event.preventDefault();
         }else if (validateCost(cost.value) === false){
-            alert("Please input a positive value");
+            alert("Please input Cost with a positive value.");
+            cost.classList.add("error");
+            setTimeout(function () {
+                cost.classList.remove("error")
+            },2000);
             event.preventDefault();
         }
     }, false);
@@ -144,10 +168,13 @@ function validateYear(year) {
 
 function validateCost(cost) {
     //console.log("Raw Phonenumber: " + phoneNumber);
-    let yearPattern = new RegExp(/(19[0-9]\d|20[01]\d)/);
+    let costPattern = new RegExp(/^\d*(?:\.)?\d*$/);
 
-    // If registration input passes RegExp check
-    if (yearPattern.test(year)){
+    cost = cost.replace(",", ".");
+    // If cost input passes RegExp check
+    if (costPattern.test(cost)){
+        console.log(cost);
+        console.log(costPattern.test(cost));
         return true;
     } else {
         return false;
