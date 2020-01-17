@@ -3,35 +3,36 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" type="text/css" href="../../../../../../css/style.css" />
-        <title>Car rental Customer Edited </title>
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/style.css" />
+        <link rel="icon" href="{{ baseUrl }}/favicon.ico">
+
+        <title>Customer Edited </title>
     </head>
-<body>
-    <h1>Customer Edited</h1>
 
+    <body>
+        <h1>Customer Edited</h1>
 
+        <table border="1">
 
-    <table border="1">
-        <tr><td></td><td><h3>Old data:</h3></td> <td><h3>New data:</h3></td></tr>
-        <tr><td><strong>SSN:</strong> </td> <td> {{ socialSecurityNumber }}</td><td> {{ socialSecurityNumber }}</td></tr>
-        <tr><td><strong>Name:</strong> </td> <td> {{ customerNameOld|raw }}</td> <td> {{ customerNameNew|raw }}</td></tr>
-        <tr><td><strong>Address:</strong> </td> <td> {{ addressOld }}</td> <td> {{ addressNew }}</td></tr>
-        <tr><td><strong>Postal:</strong> </td> <td> {{ postalAddressOld }}</td> <td> {{ postalAddressNew }}</td></tr>
-        <tr><td><strong>Phone:</strong> </td> <td> {{ phoneNumberOld }}</td> <td> {{ phoneNumberNew }}</td></tr>
+            <tr><td></td><td><h3>Old data:</h3></td> <td><h3>New data:</h3></td></tr>
+            <tr><td><strong>SSN:</strong> </td> <td> {{ socialSecurityNumber }}</td><td> {{ socialSecurityNumber }}</td></tr>
+            <tr><td><strong>Name:</strong> </td> <td> {{ customerNameOld|raw }}</td> <td> {{ customerNameNew|raw }}</td></tr>
+            <tr><td><strong>Address:</strong> </td> <td> {{ addressOld }}</td> <td> {{ addressNew }}</td></tr>
+            <tr><td><strong>Postal:</strong> </td> <td> {{ postalAddressOld }}</td> <td> {{ postalAddressNew }}</td></tr>
+            <tr><td><strong>Phone:</strong> </td> <td> {{ phoneNumberOld }}</td> <td> {{ phoneNumberNew }}</td></tr>
 
-    </table>
+        </table>
 
-    <form method="post" action="/customers">
-        <input type="submit" value="Customers">
-    </form>
+        <form method="post" action="/customers">
+            <input type="submit" value="Customers">
+        </form>
 
-    <form method="post" action="/">
-        <input type="submit" value="Main Menu">
-    </form>
+        <form method="post" action="/">
+            <input type="submit" value="Main Menu">
+        </form>
 
-</body>
+    </body>
 </html>
 {% endblock %}

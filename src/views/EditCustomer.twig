@@ -4,20 +4,18 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" type="text/css" href="../../../../../../css/style.css" />
-        <title>Car rental Edit Customer</title>
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/style.css" />
+        <link rel="icon" href="{{ baseUrl }}/favicon.ico">
+        <title>Edit Customer</title>
     </head>
     <body>
 
     <h1>Edit Customer</h1>
 
     <form method="post" action="/customerEdited/{{ socialSecurityNumber }}/{{customerName|raw}}/{{address}}/{{postalAddress}}/{{phoneNumber}}"
-          onsubmit="return confirm('Are these changes to {{ customerName }} correct?')"
-{#            onsubmit="return validateForms()"#}
-    >
+          onsubmit="return confirm('Are these changes to {{ customerName }} correct?')">
         <table>
             <tr>
                 <td>SSN:</td>
