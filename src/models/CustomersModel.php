@@ -13,6 +13,7 @@ class CustomersModel extends AbstractModel {
 
         // Array to save each customer in
         $customerArray = [];
+        // Loop all customers and save their data in variables
         foreach ($customersDB as $customerFromDB) {
             $socialSecurityNumber = htmlspecialchars($customerFromDB["socialSecurityNumber"]);
             $customerName = htmlspecialchars($customerFromDB["customerName"]);
@@ -20,32 +21,35 @@ class CustomersModel extends AbstractModel {
             $postalAddress = htmlspecialchars($customerFromDB["postalAddress"]);
             $phoneNumber = htmlspecialchars($customerFromDB["phoneNumber"]);
 
-            $historyQuery = "SELECT * FROM Cars WHERE renter = :renter";
-            $histStatement = $this->db->prepare($historyQuery);
-            $histResult = $histStatement->execute(["renter" => $socialSecurityNumber]);
-            if (!$histResult) die($this->db->errorInfo());
+            // Check if customer is renting a car currently
+            $rentingQuery = "SELECT * FROM Cars WHERE renter = :renter";
+            $rentingStatement = $this->db->prepare($rentingQuery);
+            $rentResult = $rentingStatement->execute(["renter" => $socialSecurityNumber]);
+            if (!$rentResult) die($this->db->errorInfo());
 
-            $historyRows = $histStatement->fetchAll();
+            // Fetch results from query
+            $rentingRows = $rentingStatement->fetchAll();
 
-            $history = [];
-            foreach ($historyRows as $historyRow) {
-                $SSN = htmlspecialchars($historyRow["renter"]);
-                $start = htmlspecialchars($historyRow["rentStart"]);
-                #var_dump($SSN);
+            $renting = [];
+            // Push SSN and Rent start time to the array if customer is renting a car
+            foreach ($rentingRows as $renterRow) {
+                $SSN = htmlspecialchars($renterRow["renter"]);
+                $start = htmlspecialchars($renterRow["rentStart"]);
 
-                $history = ["renter" => $SSN, "rentStartTime" => $start];
+                $renting = ["renter" => $SSN, "rentStartTime" => $start];
             }
 
-            $renter = $history["renter"] ?? "";
-            $rentStartTime = $history["rentStartTime"] ?? "";
+            // if $renting["renter] is not set default value to empty string
+            $renter = $renting["renter"] ?? "";
+            $rentStartTime = $renting["rentStartTime"] ?? "";
 
             $customer = ["SSN" => $socialSecurityNumber, "customerName" => $customerName, "address" => $address,
                         "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber,
                         "renter" => $renter, "rentStartTime" => $rentStartTime];
 
+            // Save individual customer to the array
             $customerArray[] = $customer;
         }
-        #print_r($customerArray);
         return $customerArray;
   }
 

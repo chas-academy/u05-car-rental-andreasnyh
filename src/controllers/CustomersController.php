@@ -4,30 +4,25 @@ namespace Main\controllers;
 
 use Main\models\CustomersModel;
 
-class CustomersController extends AbstractController
-{
+class CustomersController extends AbstractController {
 
-    public function getCustomers()
-    {
+    public function getCustomers() {
         $Model = new CustomersModel($this->db);
         $customers = $Model->getCustomers();
         $properties = ["customers" => $customers];
         return $this->render("CustomersView.twig", $properties);
     }
 
-    public function getCustomer($renter)
-    {
+    public function getCustomer($renter) {
         $Model = new CustomersModel($this->db);
         return $Model->getCustomer($renter);
     }
 
-    public function addCustomer()
-    {
+    public function addCustomer() {
         return $this->render("AddCustomer.twig", []);
     }
 
-    public function customerAdded()
-    {
+    public function customerAdded() {
         $model = new CustomersModel($this->db);
         $form = $this->request->getForm();
 
@@ -46,8 +41,7 @@ class CustomersController extends AbstractController
         return $this->render("CustomerAdded.twig", $customer);
     }
 
-    private function validateSSN($socialSecurityNumber)
-    {
+    private function validateSSN($socialSecurityNumber) {
         ## Validate SSN
         $socialSecurityNumberPattern = "/\d\d[0-1]\d[0-3]\d\d\d\d\d/";
 
@@ -97,15 +91,13 @@ class CustomersController extends AbstractController
 ## / Validate SSN
     }
 
-    public function editCustomer($socialSecurityNumber, $customerName, $address, $postalAddress, $phoneNumber)
-    {
+    public function editCustomer($socialSecurityNumber, $customerName, $address, $postalAddress, $phoneNumber) {
         $customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName, "address" => $address,
             "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber];
         return $this->render("EditCustomer.twig", $customer);
     }
 
-    public function customerEdited($socialSecurityNumber, $customerNameOld, $addressOld, $postalAddressOld, $phoneNumberOld)
-    {
+    public function customerEdited($socialSecurityNumber, $customerNameOld, $addressOld, $postalAddressOld, $phoneNumberOld) {
         $form = $this->request->getForm();
         $customerNameNew = $form["customerName"];
         $addressNew = $form["address"];
@@ -128,8 +120,7 @@ class CustomersController extends AbstractController
         return $this->render("CustomerEdited.twig", $customer);
     }
 
-    public function removeCustomer($socialSecurityNumber, $customerName)
-    {
+    public function removeCustomer($socialSecurityNumber, $customerName) {
         $model = new CustomersModel($this->db);
         $model->removeCustomer($socialSecurityNumber, $customerName);
         $properties = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName];
