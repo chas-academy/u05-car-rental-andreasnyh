@@ -2,8 +2,8 @@
 use Main\core\Router;
 use Main\core\Request;
 use Main\core\Config;
-#use Main\includes\Login;
 use Main\utils\DependencyInjector;
+
 // Twig 3.0
 require_once "./vendor/autoload.php";
 
@@ -13,6 +13,7 @@ $dbConfig = $config->get("database");
 $loader = new \Twig\Loader\FilesystemLoader('./src/views');
 $twig = new \Twig\Environment($loader);
 $twig->addGlobal('baseUrl', $config->get('baseUrl'));
+// baseUrl to be used in twig files instead of a hardcoded path to js/css
 
 $dsn = "mysql:host=".$dbConfig['host'].";dbname=".$dbConfig['database'].";charset=".$dbConfig['charset'];
 $db = new PDO($dsn, $dbConfig["user"], $dbConfig["password"]);

@@ -10,13 +10,12 @@ use PDOException;
 class CarsModel extends AbstractModel {
 
     public function getCars() {
-        $carsDB = $this->db->query("SELECT * FROM Cars");
-        #$historyDB = $this->login->login()->query("SELECT * FROM History");
-        #if (!$customers) die($this->login->errorInfo());
 
-        // Traverse through the result of the select call, row-by-row
+        $carsDB = $this->db->query("SELECT * FROM Cars");
+
+        // Array to save each individual car in
         $carArray = [];
-        $histArray = [];
+        // Loop through the results from DB query
         foreach ($carsDB as $carFromDB) {
             $reg = htmlspecialchars($carFromDB["registration"]);
             $make = htmlspecialchars($carFromDB["make"]);
@@ -26,69 +25,28 @@ class CarsModel extends AbstractModel {
             $cost = htmlspecialchars($carFromDB["cost"]);
             $renter = htmlspecialchars($carFromDB["renter"]);
             $rentStart = htmlspecialchars($carFromDB["rentStart"]);
-/*
-            $historyQuery = "SELECT * FROM Cars WHERE renter = $renter";
-            $histStatement = $this->db->prepare($historyQuery);
-            #$histResult = $histStatement->execute(["registration" => $reg]);
-            #if (!$histResult) die($this->db->errorInfo());
 
-            $historyRows = $histStatement->fetchAll();
-
-            $history = [];
-            foreach ($historyRows as $historyRow) {
-                $SSN = htmlspecialchars($historyRow["renter"]);
-                $start = htmlspecialchars($historyRow["rentStart"]);
-        #var_dump($SSN);
-
-                $history = ["renter" => $SSN, "rentStart" => $start];
-            }
-*/
-            #var_dump($history);
-            #if (isset($history["renter"])) {
-            #$renter = $history["renter"] ?? "";
-            #$rentStart = $history["rentStart"] ?? "";
-            #}
+            // Save variables from each loop as car
             $car = ["reg" => $reg, "make" => $make, "model" => $model,
                     "color" => $color, "year" => $year, "cost" => $cost, "renter" => $renter, "rentStart" => $rentStart];
-    #var_dump($car);
+
+            // Push car into array of all Cars
             $carArray[] = $car;
-
-
         }
-/*
-        $historyArray = [];
-        foreach ($historyDB as $historyFromDB) {
-            $reg = htmlspecialchars($historyFromDB["registration"]);
-            $renter = htmlspecialchars($historyFromDB["renter"]);
-            $rentStart = htmlspecialchars($historyFromDB["rentStart"]);
-            $rentEnd = htmlspecialchars($historyFromDB["rentEnd"]);
-            $days = htmlspecialchars($historyFromDB["days"]);
-            $cost = htmlspecialchars($historyFromDB["cost"]);
-
-            $history = ["reg" => $reg, "renter" => $renter, "rentStart" => $rentStart,
-                "rentEnd" => $rentEnd, "days" => $days, "cost" => $cost];
-
-            $historyArray[] = $history;
-        }
-*/
-        return $carArray;
+        return $carArray; // gets sent back to the controller to be sent to the view
   }
 
-    public function getCar($registration)
-    {
-        #var_dump($registration);
+    public function getCar($registration) {
         $carDB = $this->db->query("SELECT * FROM Cars WHERE registration = $registration");
-
         $car = $carDB->fetch();
-        #var_dump($car);
         return $car;
     }
 
-    public function getMakes()
-    {
+    public function getMakes() {
         $makesDB = $this->db->query("SELECT * FROM Makes");
-        // Traverse through the result of the select call, row-by-row
+
         $makesArray = [];
+        // Same as with cars, Save each make from database in array
         foreach ($makesDB as $makesFromDB) {
             $make = htmlspecialchars($makesFromDB["make"]);
             $makes = ["make" => $make];
@@ -97,10 +55,9 @@ class CarsModel extends AbstractModel {
             return $makesArray;
     }
 
-    public function getColors()
-    {
+    public function getColors() {
         $colorsDB = $this->db->query("SELECT * FROM Colors");
-        // Traverse through the result of the select call, row-by-row
+
         $colorsArray = [];
         foreach ($colorsDB as $colorsFromDB) {
             $color = htmlspecialchars($colorsFromDB["color"]);
@@ -114,8 +71,9 @@ class CarsModel extends AbstractModel {
         $query = "INSERT INTO Cars(registration, year, cost, make, model, color, renter, rentStart) " .
             "VALUES (:registration, :year, :cost, :make, :model, :color, :renter, :rentStart)";
 
-        $registration = strtoupper($registration);
-        $cost = str_replace(",",".", $cost);
+        $registration = strtoupper($registration); // Make registration letter uppercase...just in Case
+        $cost = str_replace(",",".", $cost); // Replace ','s with '.'s
+
         $statement = $this->db->prepare($query);
         $params = ["registration" => $registration, "year" => $year, "cost" => $cost,
             "make" => $make, "model" => $model, "color" => $color, "renter" => $renter, "rentStart" => $rentStart];
@@ -123,13 +81,10 @@ class CarsModel extends AbstractModel {
         try {
             $statement->execute($params);
         } catch (PDOException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                echo "Duplicate entry, you can´t add a car twice!";
-            }
+            die($e->getMessage());
+                #die("Duplicate entry, you can´t add a car twice!");
         }
 
-
-        if(!$statement) die();
     }
 
     public function editCar($registration, $yearNew, $costNew, $makeNew, $modelNew, $colorNew){

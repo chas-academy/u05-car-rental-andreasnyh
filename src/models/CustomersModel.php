@@ -9,10 +9,9 @@ class CustomersModel extends AbstractModel {
 
     public function getCustomers() {
         $customersDB = $this->db->query("SELECT * FROM Customers ORDER BY customerName");
-
         if (!$customersDB) die($this->db->errorInfo());
 
-        // Traverse through the result of the select call, row-by-row
+        // Array to save each customer in
         $customerArray = [];
         foreach ($customersDB as $customerFromDB) {
             $socialSecurityNumber = htmlspecialchars($customerFromDB["socialSecurityNumber"]);
