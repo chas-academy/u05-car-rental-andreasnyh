@@ -1,27 +1,20 @@
 <?php
   namespace Main\core;
 
-  use Main\controllers\CarsController;
-  use Main\controllers\CustomersController;
-  use Main\controllers\MainMenuController;
-
   use Main\utils\DependencyInjector;
 
-class Router
-{
+  class Router {
     private $di;
     private $routeMap;
 
-    public function __construct(DependencyInjector $di)
-    {
+    public function __construct(DependencyInjector $di) {
         $this->di = $di;
-        $json = file_get_contents(__DIR__ . "/../config/routes.json");
+        $json = file_get_contents(__DIR__ . "/../config/routes.json"); // get all the different routes
         $this->routeMap = json_decode($json, true);
     }
 
-    public function route(Request $request): string
-    {
-        $result = "";
+    public function route(Request $request): string {
+
         $path = $request->getPath();
 
         foreach ($this->routeMap as $route => $info) {
@@ -80,10 +73,8 @@ class Router
                     return false;
                 }
             }
-
             return true;
         }
-
         return false;
     }
 
@@ -98,8 +89,6 @@ class Router
             case "string":
                 return preg_match('/^[%a-zA-Z0-9]+$/', $value);
         }
-
         return true;
     }
 }
-?>

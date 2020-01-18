@@ -1,6 +1,6 @@
 <?php
 namespace Main\controllers;
-#use Main\exceptions\NotFoundException;
+
 use Main\core\Request;
 use Main\utils\DependencyInjector;
 
