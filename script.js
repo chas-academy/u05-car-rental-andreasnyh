@@ -142,7 +142,7 @@ function validateSSN(ssn) {
 
 function validateCustomerName(customerName) {
     // start\word\'space'\word
-    let namePattern = new RegExp(/^\w+\s+\w*/);
+    let namePattern = new RegExp(/^\D+\s\D+/);
 
     // If name input passes RegExp check
     if (namePattern.test(customerName)){
