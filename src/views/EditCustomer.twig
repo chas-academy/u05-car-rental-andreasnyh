@@ -16,7 +16,7 @@
 
     <form method="post" action="/customerEdited/{{ socialSecurityNumber }}/{{customerName|raw}}/{{address}}/{{postalAddress}}/{{phoneNumber}}"
           onsubmit="return confirm('Are these changes to {{ customerName }} correct?')">
-        <table>
+        <table border="1px">
             <tr>
                 <td>SSN:</td>
                 <td><input type="text" name="socialSecurityNumber" value="{{ socialSecurityNumber }}" placeholder="{{ socialSecurityNumber }}"  DISABLED>

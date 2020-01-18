@@ -17,7 +17,7 @@
 
     <form method="post" action="/carEdited/{{ registration }}/{{ year }}/{{ cost }}/{{ make }}/{{ model }}/{{ color }}/{{ renter }}"
           onsubmit="return confirm('Are these changes to {{ registration }} {{ make }} correct?')">
-        <table>
+        <table border="1px">
             <tr>
                 <td>Registration:</td>
                 <td><input type="text" name="registration" value="{{ registration }}" placeholder="{{ registration }}"  DISABLED>

@@ -12,44 +12,43 @@
     </head>
     <body>
 
-    <table border="1px" width="100%">
-        <tr>
-            <td colspan="100%"><h1>Customers</h1></td>
-        </tr>
+    <h1>Customers</h1>
+
+    <table border="1px">
 
         <tr>
-            <td style="padding: .5em 0" colspan=""><strong>Social Security Number</strong></td>
-            <td colspan=""><strong>Name</strong></td>
-            <td colspan=""><strong>Address</strong></td>
-            <td colspan=""><strong>Postal</strong></td>
-            <td colspan=""><strong>Phone Number</strong></td>
+            <td><h3>Social Security Number</h3></td>
+            <td><h3>Name</h3></td>
+            <td><h3>Address</h3></td>
+            <td><h3>Postal</h3></td>
+            <td><h3>Phone Number</h3></td>
 
         </tr>
 
         {% for customer in customers %}
         <tr>
-            <td colspan="">{{ customer.SSN }}</td>
-            <td colspan="">{{ customer.customerName|raw }}</td>
-            <td colspan="">{{ customer.address }}</td>
-            <td colspan="">{{ customer.postalAddress }}</td>
-            <td colspan="">{{ customer.phoneNumber }}</td>
+            <td>{{ customer.SSN }}</td>
+            <td>{{ customer.customerName|raw }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.postalAddress }}</td>
+            <td>{{ customer.phoneNumber }}</td>
 
             {% if not customer.renter %}
             <td colspan="1">
                 <form action="/editCustomer/{{customer.SSN}}/{{customer.customerName|raw}}/{{customer.address}}/{{customer.postalAddress}}/{{customer.phoneNumber}}" method="post">
-                    <input type="submit" style="width:100%; padding: .5em 2em" value="Edit">
+                    <input type="submit" style="width:100%" value="Edit">
                 </form>
             </td>
             <td colspan="1">
                 <form action="/removeCustomer/{{customer.SSN}}/{{customer.customerName|raw}}" method="post"
                       onsubmit="return confirm('Are you sure you want to remove customer {{customer.customerName}}?')">
-                    <input type="submit" style="width:100%; padding: .5em 1em" value="Remove">
+                    <input type="submit" style="width:100%" value="Remove">
                 </form>
             </td>
             {% else %}
                 <td colspan="2">
                     <form>
-                        <input type="submit" style="width:100%; padding: .5em 1em" value="Renting a car" DISABLED>
+                        <input type="submit" style="width:100%" value="Renting a car" DISABLED>
                     </form>
                 </td>
 

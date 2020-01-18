@@ -2,6 +2,10 @@
     font-family: sans-serif;
 }
 
+table {
+
+}
+
 .error {
     border-color: red;
     transition: ease-in-out;

@@ -8,7 +8,8 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/style.css" />
-        <title>Car rental Add Customer</title>
+        <link rel="icon" href="{{ baseUrl }}/favicon.ico">
+        <title>Add Customer</title>
     </head>
     <body>
 
@@ -16,13 +17,13 @@
 
 <form method="post" action="/customerAdded"
       onsubmit="return confirm('Is this information correct?')">
-    <table>
+
+    <table border="1px">
     <tr><td>SSN: </td><td><input type="text" name="socialSecurityNumber" minlength="10" maxlength="10" required></td><td class="errorMsg"></td></tr>
     <tr><td>Name: </td><td><input type="text" name="customerName" required></td></tr>
     <tr><td>Address: </td><td><input type="text" name="address" required></td></tr>
     <tr><td>Postal Address: </td><td><input type="text" name="postalAddress" required></td></tr>
     <tr><td>Phone Number: </td><td><input type="text" name="phoneNumber" minlength="10" maxlength="10" required></td></tr>
-
     </table>
     <input type="submit" name="submitCustomer" value="Add Customer">
 
