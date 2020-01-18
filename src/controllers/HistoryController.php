@@ -8,33 +8,26 @@ use Main\models\HistoryModel;
 
 class HistoryController extends AbstractController {
 
+    // Display all history of rents
     public function getHistory(){
         $historyModel = new HistoryModel($this->db);
-        $customersModel = new CustomersModel($this->db);
-        $carModel = new CarsModel($this->db);
-
         $history = $historyModel->getHistory();
-        #$customer = $customersModel->getCustomer($history[0]["renter"]);
-     /*   foreach ($history as $row){
-            $customer = $customersModel->getCustomer($history[count($row)]["renter"]);
-            $properties = ["history" => $history, "customer" => $customer];
-        }*/
-        $properties = ["history" => $history];
-        #echo "controller properties";
-        #var_dump($history[0]["registration"]);
-        #$car = $carModel->getCar($registration);
-        #var_dump($properties);
+        $properties = ["history" => $history]; // Data returned from the model
+
         return $this->render("HistoryView.twig", $properties);
     }
 
+    // Function run to display Rent car view
     public function getCarsAndCustomers(){
         $customersModel = new CustomersModel($this->db);
-        $carModel = new CarsModel($this->db);
         $customerList = $customersModel->getCustomers();
+
+        $carModel = new CarsModel($this->db);
         $carList = $carModel->getCars();
         $makesList = $carModel->getMakes();
         $colorsList = $carModel->getColors();
 
+        // All Customer, Cars, Makes and Colors
         $carsAndCustomers = ["customerList" => $customerList, "carList" => $carList, "makesList" => $makesList, "colorsList" => $colorsList];
 
         return $this->render("RentCar.twig", $carsAndCustomers);
@@ -42,13 +35,15 @@ class HistoryController extends AbstractController {
 
     public function rentCar(){
         $historyModel = new HistoryModel($this->db);
+
+        // Get form-data from RentCar view and save registration and social security number
         $form = $this->request->getForm();
-        #var_dump($form);
         $registration = $form["registration"];
         $SSN = $form["SSN"];
 
         $rented = ["registration" => $registration, "SSN" => $SSN];
 
+        // Run rentCar function in the model with parameters registration and ssn
         $historyModel->rentCar($registration, $SSN);
 
         return $this->render("CarRented.twig", $rented);
@@ -68,7 +63,7 @@ class HistoryController extends AbstractController {
 
     public function carReturned() {
         $form = $this->request->getForm();
-        $form = explode("|", $form["returnedCar"]);
+        $form = explode("|", $form["returnedCar"]); // Split values returned from view
         $registration = $form[0];
         $renter = intval($form[1]);
         $rentStartTimeString = $form[2];
@@ -76,24 +71,17 @@ class HistoryController extends AbstractController {
         $rentStartTime = date('Y-m-d H:i:s',$rentStartTime);
 
         $historyModel = new HistoryModel($this->db);
+        // Return the car with these parameters
         $historyModel->returnCar($registration,$renter,$rentStartTime);
 
         $customerModel = new CustomersModel($this->db);
-        #$customer = $customerModel->getCustomer($renter);
 
-/*        $carReturned = [
-            "registration" => $registration,
-            "renter" => $renter,
-            "rentStartTime" => $rentStartTime,
-            "customer" => $customerModel->getCustomer($renter)
-        ];*/
-
+        // Data sent to view
         $carReturned = [
             "car" => $historyModel->getCarHistoryData($registration,$rentStartTimeString),
             "customer" => $customerModel->getCustomer($renter)
         ];
 
-        #var_dump($carReturned);
         return $this->render("CarReturned.twig", $carReturned);
     }
 
