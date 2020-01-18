@@ -4,6 +4,7 @@ namespace Main\models;
 
 use Main\exceptions\NotFoundException;
 use PDO;
+use PDOException;
 
 class CustomersModel extends AbstractModel {
 
@@ -50,11 +51,11 @@ class CustomersModel extends AbstractModel {
             // Save individual customer to the array
             $customerArray[] = $customer;
         }
-        return $customerArray;
+        return $customerArray; // Array of customers sent to view
   }
 
-    public function getCustomer($renter)
-    {
+  // Get data of a single customer
+    public function getCustomer($renter) {
         $customerDB = $this->db->query("SELECT * FROM Customers WHERE socialSecurityNumber = $renter");
         $customer = $customerDB->fetch();
 
@@ -62,51 +63,64 @@ class CustomersModel extends AbstractModel {
         return $customer;
     }
 
-  //(8205030789, "Glen Hysen", "Kungsportsavenyen 2", "411 38 Göteborg", "0709123432"),
+  // Insert new customer data into database (1234567890, "Name", "Street", "123 45 Town", "0123456789")
   public function addCustomer($socialSecurityNumber,$customerName, $address, $postalAddress, $phoneNumber){
         $query = "INSERT INTO Customers(socialSecurityNumber, customerName, address, postalAddress, phoneNumber) " .
             "VALUES (:socialSecurityNumber, :customerName, :address, :postalAddress, :phoneNumber)";
 
         $statement = $this->db->prepare($query);
-        $statement->execute(["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName,
-                            "address" => $address, "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber]);
+        $params = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName,
+            "address" => $address, "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber];
 
-        if(!$statement) die();
+        try {
+           $statement->execute($params);
+        } catch (PDOException $e){
+            die($e->getMessage());
+        }
   }
 
+  // Edit customer data
   public function editCustomer($socialSecurityNumber,$customerNameNew, $addressNew, $postalAddressNew, $phoneNumberNew){
+        $customerNameNew = htmlspecialchars($customerNameNew);
+        $addressNew = htmlspecialchars($addressNew);
+        $postalAddressNew = htmlspecialchars($postalAddressNew);
+        $phoneNumberNew = htmlspecialchars($phoneNumberNew);
 
-      #$socialSecurityNumber = htmlspecialchars($socialSecurityNumber);
-      $customerNameNew = htmlspecialchars($customerNameNew);
-      $addressNew = htmlspecialchars($addressNew);
-      $postalAddressNew = htmlspecialchars($postalAddressNew);
-      $phoneNumberNew = htmlspecialchars($phoneNumberNew);
-
-      $query = "UPDATE Customers SET customerName = :customerName ," .
+        $query = "UPDATE Customers SET customerName = :customerName ," .
                                     "address = :address ," .
                                     "postalAddress = :postalAddress ," .
                                     "phoneNumber = :phoneNumber " .
                "WHERE socialSecurityNumber = :socialSecurityNumber";
 
-      $statement = $this->db->prepare($query);
-      $customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerNameNew, "address" => $addressNew,
+        $statement = $this->db->prepare($query);
+        $customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerNameNew, "address" => $addressNew,
                    "postalAddress" => $postalAddressNew, "phoneNumber" => $phoneNumberNew];
 
-      $result = $statement->execute($customer);
-      if (!$result) die($this->db->errorInfo());
+        $result = $statement->execute($customer);
+        if (!$result) die($this->db->errorInfo());
   }
 
+  // Remove customer from database
   public function removeCustomer($socialSecurityNumber) {
       $customer = ["socialSecurityNumber" => $socialSecurityNumber];
 
+      // Remove customer from History table
       $historyQuery = "UPDATE History SET renterHistory = NULL WHERE renterHistory = $socialSecurityNumber";
       $historyStatement = $this->db->prepare($historyQuery);
-      $historyResult = $historyStatement->execute($customer);
+      try {
+          $historyStatement->execute($customer);
+      } catch (PDOException $e) {
+          die($e->getMessage());
+      }
 
+      // Remove customer from Customers table
       $customerQuery = "DELETE FROM Customers WHERE socialSecurityNumber = :socialSecurityNumber";
       $statement = $this->db->prepare($customerQuery);
-      $result = $statement->execute($customer);
-      if (!$result) die($this->db->errorInfo());
-    }
+      try {
+          $statement->execute($customer);
+      } catch (PDOException $e) {
+          die($e->getMessage());
+      }
+  }
 
 }
