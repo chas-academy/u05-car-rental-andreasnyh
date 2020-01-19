@@ -2,8 +2,8 @@
     font-family: sans-serif;
 }
 
-table {
-
+td  {
+    text-align: center;
 }
 
 .error {
@@ -11,7 +11,32 @@ table {
     transition: ease-in-out;
 }
 
+input[type="text"], select[type="text"]{
+    font-size: 1rem;
+}
+
 input[type="submit"] {
     padding-top: .5em;
     padding-bottom: .5em;
+}
+
+input[value="Edit"]{
+    width: 4.15rem;
+}
+
+input[name="submitCar"],
+input[name="submitCustomer"],
+input[name="ok"],
+input[name="Cancel"]{
+    width: 100%;
+}
+
+input[name="OK"] {
+    width: 8rem;
+}
+
+select[name="returnedCar"],
+select[name="registration"],
+select[name="SSN"]{
+    padding: .5rem;
 }

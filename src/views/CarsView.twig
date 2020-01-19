@@ -41,7 +41,7 @@
 
                 <td colspan="1">
                     <form action="/editCar/{{ car.reg }}/{{ car.year }}/{{ car.cost }}/{{ car.make }}/{{ car.model }}/{{ car.color }}" method="post">
-                        <input type="submit" style="width:100%" value="Edit">
+                        <input type="submit" value="Edit">
                     </form>
                 </td>
                 <td colspan="1">
@@ -54,14 +54,9 @@
                 <td>{{ car.renter }}</td>
                 <td>{{ car.rentStart }}</td>
 
-                <td colspan="1">
-                    <form action="/editCar" method="post">
-                        <input type="submit" style="width:100%" value="Edit" DISABLED>
-                    </form>
-                </td>
-                <td colspan="1">
-                    <form action="/removeCar" method="post">
-                        <input type="submit" style="width:100%" value="Remove" DISABLED>
+                <td colspan="2">
+                    <form>
+                        <input type="submit" style="width:100%" value="Car Rented" DISABLED>
                     </form>
                 </td>
             {% endif %}

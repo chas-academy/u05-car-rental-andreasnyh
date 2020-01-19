@@ -13,12 +13,12 @@
     <body>
 
     <h1>Edit Customer</h1>
+    <table border="1px">
+        <form method="post" action="/customerEdited/{{ socialSecurityNumber }}/{{customerName|raw}}/{{address}}/{{postalAddress}}/{{phoneNumber}}"
+            onsubmit="return confirm('Are these changes to {{ customerName }} correct?')">
 
-    <form method="post" action="/customerEdited/{{ socialSecurityNumber }}/{{customerName|raw}}/{{address}}/{{postalAddress}}/{{phoneNumber}}"
-          onsubmit="return confirm('Are these changes to {{ customerName }} correct?')">
-        <table border="1px">
             <tr>
-                <td>SSN:</td>
+                <td>Social Security Number:</td>
                 <td><input type="text" name="socialSecurityNumber" value="{{ socialSecurityNumber }}" placeholder="{{ socialSecurityNumber }}"  DISABLED>
                 </td>
             </tr>
@@ -39,15 +39,20 @@
                 <td><input type="text" name="phoneNumber" minlength="10" maxlength="10" value="{{ phoneNumber }}"></td>
             </tr>
 
+            <tr><td colspan="2">
+                    <input type="submit" name="submitCustomer" value="Confirm Edit">
+            </td></tr>
+        </form>
+            <tr><td colspan="2">
+                <form method="post" action="/customers">
+                    <input type="submit" name="Cancel" value="Cancel">
+                </form>
+            </td></tr>
         </table>
 
-        <input type="submit" name="submitCustomer" value="Confirm Edit">
-    </form>
 
 
-    <form method="post" action="/customers">
-        <input type="submit" name="Cancel" value="Cancel">
-    </form>
+
 
     </body>
     <script type="text/javascript" src="{{ baseUrl }}/script.js"></script>

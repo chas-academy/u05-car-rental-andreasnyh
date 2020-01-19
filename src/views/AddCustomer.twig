@@ -15,23 +15,28 @@
 
     <h1>Add Customer</h1>
 
-<form method="post" action="/customerAdded"
-      onsubmit="return confirm('Is this information correct?')">
-
     <table border="1px">
-    <tr><td>Social Security Number: </td><td><input type="text" name="socialSecurityNumber" minlength="10" maxlength="10" required></td></tr>
-    <tr><td>Name: </td><td><input type="text" name="customerName" required></td></tr>
-    <tr><td>Address: </td><td><input type="text" name="address" required></td></tr>
-    <tr><td>Postal Address: </td><td><input type="text" name="postalAddress" required></td></tr>
-    <tr><td>Phone Number: </td><td><input type="text" name="phoneNumber" minlength="10" maxlength="10" required></td></tr>
+
+        <form method="post" action="/customerAdded"
+            onsubmit="return confirm('Is this information correct?')">
+
+            <tr><td>Social Security Number: </td><td><input type="text" name="socialSecurityNumber" minlength="10" maxlength="10" required></td></tr>
+            <tr><td>Name: </td><td><input type="text" name="customerName" required></td></tr>
+            <tr><td>Address: </td><td><input type="text" name="address" required></td></tr>
+            <tr><td>Postal Address: </td><td><input type="text" name="postalAddress" required></td></tr>
+            <tr><td>Phone Number: </td><td><input type="text" name="phoneNumber" minlength="10" maxlength="10" required></td></tr>
+
+            <tr><td colspan="2">
+                    <input type="submit" name="submitCustomer" value="Add Customer">
+            </td></tr>
+        </form>
+            <tr><td colspan="2">
+                <form method="post" action="/customers">
+                    <input class="cancel button" type="submit" name="Cancel" value="Cancel">
+                </form>
+            </td></tr>
     </table>
-    <input type="submit" name="submitCustomer" value="Add Customer">
 
-    </form>
-
-    <form method="post" action="/customers">
-        <input class="cancel button" type="submit" name="Cancel" value="Cancel">
-    </form>
     </body>
 <script type="text/javascript" src="{{ baseUrl }}/script.js"></script>
 </html>

@@ -23,15 +23,20 @@
             <tr><td><strong>Postal:</strong> </td> <td> {{ postalAddressOld }}</td> <td> {{ postalAddressNew }}</td></tr>
             <tr><td><strong>Phone:</strong> </td> <td> {{ phoneNumberOld }}</td> <td> {{ phoneNumberNew }}</td></tr>
 
+            <tr><td colspan="3">
+                <form method="post" action="/customers">
+                    <input type="submit" name="ok" value="Customers">
+                </form>
+            </td></tr>
+            <tr><td colspan="3">
+                <form method="post" action="/">
+                    <input type="submit" name="Cancel" value="Main Menu">
+                </form>
+            </td></tr>
+
         </table>
 
-        <form method="post" action="/customers">
-            <input type="submit" value="Customers">
-        </form>
 
-        <form method="post" action="/">
-            <input type="submit" value="Main Menu">
-        </form>
 
     </body>
 </html>

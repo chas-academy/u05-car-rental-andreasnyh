@@ -15,9 +15,10 @@
 
     <h1>Rent Car</h1>
 
-    <form method="post" action="/carRented"
-          onsubmit="return confirm('Let Customer rent car?')">
-        <table border="1px">
+    <table border="1px">
+        <form method="post" action="/carRented"
+            onsubmit="return confirm('Let Customer rent car?')">
+
             <tr>
                 <td>Customer:</td>
                 <td>
@@ -43,19 +44,23 @@
                     </select>
                 </td>
             </tr>
+            <tr><td colspan="2">
+                    <input type="submit" name="ok" value="Confirm Rent">
+            </td></tr>
 
-        </table>
+        </form>
 
-        <input type="submit" name="OK" value="Confirm Rent">
-    </form>
-
-    <form method="post" action="/cars">
-        <input type="submit" name="Cars" value="View All Cars">
-    </form>
-
-    <form method="post" action="/">
-        <input type="submit" name="Cancel" value="Cancel">
-    </form>
+        <tr><td colspan="2">
+            <form method="post" action="/cars">
+                <input type="submit" name="ok" value="View All Cars">
+            </form>
+        </td></tr>
+        <tr><td colspan="2">
+            <form method="post" action="/">
+                <input type="submit" name="Cancel" value="Cancel">
+            </form>
+            </td></tr>
+    </table>
 
     </body>
     </html>

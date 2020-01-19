@@ -36,7 +36,7 @@
             {% if not customer.renter %}
             <td colspan="1">
                 <form action="/editCustomer/{{customer.SSN}}/{{customer.customerName|raw}}/{{customer.address}}/{{customer.postalAddress}}/{{customer.phoneNumber}}" method="post">
-                    <input type="submit" style="width:100%" value="Edit">
+                    <input type="submit" value="Edit">
                 </form>
             </td>
             <td colspan="1">

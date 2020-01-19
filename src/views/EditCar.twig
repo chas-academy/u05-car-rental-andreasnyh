@@ -15,9 +15,9 @@
 
     <h1>Edit Car</h1>
 
-    <form method="post" action="/carEdited/{{ registration }}/{{ year }}/{{ cost }}/{{ make }}/{{ model }}/{{ color }}/{{ renter }}"
-          onsubmit="return confirm('Are these changes to {{ registration }} {{ make }} correct?')">
         <table border="1px">
+            <form method="post" action="/carEdited/{{ registration }}/{{ year }}/{{ cost }}/{{ make }}/{{ model }}/{{ color }}/{{ renter }}"
+                onsubmit="return confirm('Are these changes to {{ registration }} {{ make }} correct?')">
             <tr>
                 <td>Registration:</td>
                 <td><input type="text" name="registration" value="{{ registration }}" placeholder="{{ registration }}"  DISABLED>
@@ -58,15 +58,18 @@
                 </td>
             </tr>
 
-        </table>
+            <tr><td colspan="2"><input type="submit" name="submitCar" value="Confirm Edit"></td></tr>
+        </form>
 
-        <input type="submit" name="submitCar" value="Confirm Edit">
-    </form>
+            <tr><td colspan="2">
+                <form method="post" action="/cars">
+                    <input type="submit" name="Cancel" value="Cancel">
+                </form>
+            </td></tr>
+
+    </table>
 
 
-    <form method="post" action="/cars">
-        <input type="submit" name="Cancel" value="Cancel">
-    </form>
 
     </body>
     <script type="text/javascript" src="{{ baseUrl }}/script.js"></script>

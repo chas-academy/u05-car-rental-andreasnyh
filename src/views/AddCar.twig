@@ -16,8 +16,8 @@
 
         <h1>Add Car</h1>
 
-        <form method="post" action="/carAdded">
-            <table border="1px">
+        <table border="1px">
+            <form method="post" action="/carAdded">
                 <tr>
                     <td>Registration:</td>
                     <td><input title="Registration" type="text" name="registration" minlength="6" maxlength="6" required></td>
@@ -58,14 +58,17 @@
                     </td>
                 </tr>
 
-            </table>
-            <input type="submit" name="submitCar" value="Add Car">
-
+                <tr><td colspan="2"><input type="submit" name="submitCar" value="Add Car"></td></tr>
         </form>
+            <tr><td colspan="2">
+                <form method="post" action="/cars">
+                    <input type="submit" name="Cancel" value="Cancel">
+                </form>
+            </td></tr>
+    </table>
 
-        <form method="post" action="/cars">
-            <input type="submit" name="Cancel" value="Cancel">
-        </form>
+
+
 
     </body>
     <script type="text/javascript" src="{{ baseUrl }}/script.js"></script>
