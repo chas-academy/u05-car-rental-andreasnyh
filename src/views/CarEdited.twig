@@ -22,15 +22,20 @@
         <tr><td><strong>Model:</strong> </td> <td> {{ modelOld }}</td> <td> {{ modelNew }}</td></tr>
         <tr><td><strong>Color:</strong> </td> <td> {{ colorOld }}</td> <td> {{ colorNew }}</td></tr>
 
+        <tr><td colspan="3">
+            <form method="post" action="/cars">
+                <input type="submit" name="ok" value="Cars">
+            </form>
+        </td></tr>
+        <tr><td colspan="3">
+            <form method="post" action="/">
+                <input type="submit" name="ok" value="Main Menu">
+            </form>
+        </td></tr>
     </table>
 
-    <form method="post" action="/cars">
-        <input type="submit" value="Cars">
-    </form>
 
-    <form method="post" action="/">
-        <input type="submit" value="Main Menu">
-    </form>
+
 
 </body>
 </html>

@@ -42,20 +42,24 @@
             </tr>
             {% set sum = sum + (rent.rentedDays * rent.car.cost) %}
         {% endfor %}
-        <tr><td colspan="7" style="text-align: end"><strong>Sum of all rents:</strong></td><td>{{ sum }}</td></tr>
+        <tr><td colspan="5"></td><td colspan="2"><strong>Sum of all rents:</strong></td><td>{{ sum }}</td></tr>
+
+        <tr><td colspan="8">
+                <form method="post" action="/cars">
+                    <input type="submit" name="ok" value="View All Cars">
+                </form>
+            </td></tr>
+        <tr><td colspan="8">
+                <form method="post" action="/returnCar">
+                    <input type="submit" name="ok" value="Return A Car">
+                </form>
+            </td></tr>
+        <tr><td colspan="8">
+                <form method="post" action="/">
+                    <input type="submit" name="ok" value="Main Menu">
+                </form>
+            </td></tr>
     </table>
-
-    <form method="post" action="/cars">
-        <input type="submit" value="View All Cars">
-    </form>
-
-    <form method="post" action="/returnCar">
-        <input type="submit" value="Return Another Car">
-    </form>
-
-    <form method="post" action="/">
-        <input type="submit" value="Main Menu">
-    </form>
 
     </body>
     </html>

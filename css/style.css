@@ -4,6 +4,7 @@
 
 td  {
     text-align: center;
+    min-width: 4.15rem;
 }
 
 .error {
