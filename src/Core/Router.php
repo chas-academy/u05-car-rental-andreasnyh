@@ -1,38 +1,26 @@
 <?php
   namespace Main\core;
 
-  use Main\controllers\CarsController;
-  use Main\controllers\CustomersController;
-  use Main\controllers\MainMenuController;
-
   use Main\utils\DependencyInjector;
 
-class Router
-{
+  class Router {
     private $di;
     private $routeMap;
 
-    public function __construct(DependencyInjector $di)
-    {
+    public function __construct(DependencyInjector $di) {
         $this->di = $di;
-        $json = file_get_contents(__DIR__ . "/../config/routes.json");
+        $json = file_get_contents(__DIR__ . "/../config/routes.json"); // get all the different routes
         $this->routeMap = json_decode($json, true);
     }
 
-    public function route(Request $request): string
-    {
-        $result = "";
+    public function route(Request $request): string {
+        // request == path, method(get/post), parameters/form-data
         $path = $request->getPath();
 
         foreach ($this->routeMap as $route => $info) {
             $map = [];
+            // if a parameter is not set, set it to Null
             $params = isset($info["params"]) ? $info["params"] : null;
-
-            // $route: "editCustomer/:customerNumber/:customerName"
-            // $path: /editCustomer/7/Erik%20Dumas
-            // $params: ["customerNumber" => "number", "customerName" => "string"]
-
-            // $map = ["customerNumber" => 7, "customerName" => "Erik%20Dumas" "x" => "y"]
 
             if ($this->match($route, $path, $params, $map)) {
                 $controllerName = '\Main\controllers\\' .
@@ -80,10 +68,8 @@ class Router
                     return false;
                 }
             }
-
             return true;
         }
-
         return false;
     }
 
@@ -92,14 +78,12 @@ class Router
     private function typeMatch($value, $type)
     {
         switch ($type) {
-            case "number": // ^: början, $: slutet, +: ett eller flera, *: noll eller flera, ?, exakt ett
+            case "number":
                 return preg_match('/^[0-9]+$/', $value);
 
             case "string":
                 return preg_match('/^[%a-zA-Z0-9]+$/', $value);
         }
-
         return true;
     }
 }
-?>

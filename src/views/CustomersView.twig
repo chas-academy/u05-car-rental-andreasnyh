@@ -4,41 +4,34 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
-        <title>Car rental Customers</title>
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/style.css" />
+        <link rel="icon" href="{{ baseUrl }}/favicon.ico">
+        <title>Customers</title>
     </head>
     <body>
 
-    <table border>
+    <h1>Customers</h1>
+
+    <table border="1px">
+
         <tr>
-            <td colspan="100%"><h1>Customers</h1></td>
-        </tr>
-        {#
-                <tr><td colspan="1">
-                        <form action="/getCustomers" method="post">
-                            <input type="submit" style="width:100%" value="Customers">
-                        </form>
-                    </td></tr>
-                #}
-        <tr>
-            <td colspan=""><strong>Social Security Number</strong></td>
-            <td colspan=""><strong>Name</strong></td>
-            <td colspan=""><strong>Address</strong></td>
-            <td colspan=""><strong>Postal</strong></td>
-            <td colspan=""><strong>Phone Number</strong></td>
+            <td><h3>Social Security Number</h3></td>
+            <td><h3>Name</h3></td>
+            <td><h3>Address</h3></td>
+            <td><h3>Postal</h3></td>
+            <td><h3>Phone Number</h3></td>
 
         </tr>
 
         {% for customer in customers %}
         <tr>
-            <td colspan="">{{ customer.SSN }}</td>
-            <td colspan="">{{ customer.customerName|raw }}</td>
-            <td colspan="">{{ customer.address }}</td>
-            <td colspan="">{{ customer.postalAddress }}</td>
-            <td colspan="">{{ customer.phoneNumber }}</td>
+            <td>{{ customer.SSN }}</td>
+            <td>{{ customer.customerName|raw }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.postalAddress }}</td>
+            <td>{{ customer.phoneNumber }}</td>
 
             {% if not customer.renter %}
             <td colspan="1">
@@ -53,80 +46,13 @@
                 </form>
             </td>
             {% else %}
-                <td colspan="1">
-                    <form action="/editCustomer" method="post">
+                <td colspan="2">
+                    <form>
                         <input type="submit" style="width:100%" value="Renting a car" DISABLED>
                     </form>
                 </td>
-                <td colspan="1">
-                    <form action="/removeCustomer" method="post">
-                        <input type="submit" style="width:100%" value="Renting a car" DISABLED>
-                    </form>
-                </td>
+
             {% endif %}
-                {#
-                    <td>
-                      <form method="post" action="/editCustomer/{{customer.customerNumber}}/{{customer.customerName}}">
-                        <input type="submit" style="width:100%" value="Edit">
-                      </form>
-                    </td>
-
-                    <td>
-                      <form method="post" action="/removeCustomer/{{customer.customerNumber}}/{{customer.customerName}}"
-                            onsubmit="return confirm('Are you sure you want to remove customer {{customer.customerName}}?')">
-                        <input type="submit" style="width:100%" value="Remove">
-                      </form>
-                    </td>
-
-                    <td colspan="3">
-                      <form method="post" action="/addAccount/{{customer.customerNumber}}/{{customer.customerName}}">
-                        <input type="submit" style="width:100%" value="Add Account">
-                      </form>
-                    </td>
-                  </tr>
-
-                  {% for account in customer.accounts %}
-                    <tr>
-                      <td></td>
-                      <td>{{account["accountNumber"]}}</td>
-                      <td>{{account["accountBalance"]}}</td>
-
-                      <!--<td>{{account.accountNumber}}</td>
-                      <td>{{account.accountBalance}}</td>-->
-
-                      <td class="column">
-                        <form method="post" action="/deposit/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                          <input type="submit" style="width:100%" value="Deposit">
-                        </form>
-                      </td>
-
-                      <td class="column">
-                        <form method="post" action="/withdraw/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                          <input type="submit" style="width:100%" value="Withdraw">
-                        </form>
-                      </td>
-
-                      <td class="column">
-                        <form method="post" action="/transfer/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                          <input type="submit" style="width:100%" value="Transfer">
-                        </form>
-                      </td>
-
-                      <td class="column">
-                        <form method="post" action="/viewAccount/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}">
-                          <input type="submit" style="width:100%" value="View">
-                        </form>
-                      </td>
-
-                      <td class="column">
-                        <form method="post" action="/removeAccount/{{customer.customerNumber}}/{{customer.customerName}}/{{account.accountNumber}}"
-                            onsubmit="return confirm('Are you sure you want to remove account {{account.accountNumber}}?')">
-                          <input type="submit" style="width:100%" value="Remove">
-                        </form>
-                      </td>
-                    </tr>
-                  {% endfor %}
-                  #}
         {% endfor %}
 
             {# Menu Buttons #}

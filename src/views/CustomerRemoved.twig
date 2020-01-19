@@ -1,29 +1,30 @@
 {% block customerRemoved %}
 
-    <!doctype html>
-    <html lang="en">
+<!doctype html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
-        <title>Car rental Customer Removed</title>
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/style.css" />
+        <link rel="icon" href="{{ baseUrl }}/favicon.ico">
+
+        <title>Customer Removed</title>
     </head>
+
     <body>
+        <h1>Customer Removed</h1>
 
-    <h1>Customer Removed</h1>
+        <p>Customer <strong>{{ customerName }} - {{ socialSecurityNumber }}</strong> has been removed.</p>
 
-    <p>Customer {{ customerName }} - {{ socialSecurityNumber }} has been removed.</p>
+        <form method="post" action="/customers">
+            <input type="submit" value="Customers">
+        </form>
 
-    <form method="post" action="/customers">
-        <input type="submit" value="Customers">
-    </form>
-
-    <form method="post" action="/">
-        <input type="submit" value="Main Menu">
-    </form>
-
+        <form method="post" action="/">
+            <input type="submit" value="Main Menu">
+        </form>
     </body>
-    </html>
+</html>
 {% endblock %}

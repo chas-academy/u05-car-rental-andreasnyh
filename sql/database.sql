@@ -85,6 +85,8 @@ CREATE TABLE History (registrationHistory VARCHAR(100),
                       FOREIGN KEY (registrationHistory) REFERENCES Cars(registration),
                       FOREIGN KEY (renterHistory) REFERENCES Customers(socialSecurityNumber));
 
+INSERT INTO Customers VALUES (6505088293, "test person", "address 12", "12345 Town", "0763444567");
+INSERT INTO History values ("ABC123", 6505088293, '2020-01-10 10:00:00','2020-01-10 11:00:01');
 
 /*
 INSERT INTO History (registrationHistory, renterHistory, rentStartHistory, returnTimeHistory) VALUES

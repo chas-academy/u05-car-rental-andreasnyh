@@ -7,8 +7,9 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" type="text/css" href="../../css/style.css" />
-        <title>Car rental Edit Car</title>
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/style.css" />
+        <link rel="icon" href="{{ baseUrl }}/favicon.ico">
+        <title>Edit Car</title>
     </head>
     <body>
 
@@ -16,10 +17,10 @@
 
     <form method="post" action="/carEdited/{{ registration }}/{{ year }}/{{ cost }}/{{ make }}/{{ model }}/{{ color }}/{{ renter }}"
           onsubmit="return confirm('Are these changes to {{ registration }} {{ make }} correct?')">
-        <table>
+        <table border="1px">
             <tr>
                 <td>Registration:</td>
-                <td><input type="text" name="registration" placeholder="{{ registration }}"  DISABLED>
+                <td><input type="text" name="registration" value="{{ registration }}" placeholder="{{ registration }}"  DISABLED>
                 </td>
             </tr>
             <tr>
@@ -59,7 +60,7 @@
 
         </table>
 
-        <input type="submit" name="OK" value="Confirm Edit">
+        <input type="submit" name="submitCar" value="Confirm Edit">
     </form>
 
 
@@ -68,5 +69,6 @@
     </form>
 
     </body>
+    <script type="text/javascript" src="{{ baseUrl }}/script.js"></script>
     </html>
 {% endblock %}

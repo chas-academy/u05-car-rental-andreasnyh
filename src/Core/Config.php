@@ -6,6 +6,7 @@ use Main\exceptions\NotFoundException;
 class Config {
     private $map;
 
+    // Get config data from app.json
     public function __construct() {
         $json = file_get_contents(__DIR__ . "/../config/app.json");
         $this->map = json_decode($json, true);

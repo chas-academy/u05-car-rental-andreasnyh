@@ -2,28 +2,16 @@
     font-family: sans-serif;
 }
 
-.rowTitle {
-    font-size: 1.1rem;
-    text-align: end;
+table {
+
 }
 
-input[type=text] {
-    font-size: 1.1rem;
-    padding: 1%;
+.error {
+    border-color: red;
+    transition: ease-in-out;
 }
 
-.button {
-    /*background-color: cornsilk;*/
-    font-size: 1.1rem;
-    border-radius: 8px;
-    padding: 1%;
-    margin: 1% 0;
-}
-
-.submit {
-    background-color: forestgreen;
-}
-
-.cancel {
-    background-color: red;
+input[type="submit"] {
+    padding-top: .5em;
+    padding-bottom: .5em;
 }
