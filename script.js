@@ -1,4 +1,7 @@
 // Andréas Ny 2020
+// Fullstack Webbdeveloper student @ Chas Academy Stockholm
+// andreas.ny@chasacademy.se
+
 
 // Get submit buttons from Add Customer/Edit Customer
 // and Add Car/Edit Car
@@ -7,7 +10,7 @@ let carSubmitButton = document.querySelector("input[name='submitCar']");
 
 // If customerSubmitButton exists (not NULL) add an click event
 if (customerSubmitButton){
-customerSubmitButton.addEventListener("click", function (event) {
+    customerSubmitButton.addEventListener("click", function (event) {
 
     // The input fields we want to validate
     let ssn = document.querySelector("input[name='socialSecurityNumber']");
