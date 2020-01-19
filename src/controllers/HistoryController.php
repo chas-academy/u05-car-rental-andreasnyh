@@ -85,6 +85,7 @@ class HistoryController extends AbstractController {
         return $this->render("CarReturned.twig", $carReturned);
     }
 
+    // return info about returned car to be sent to the view
     public function getCarHistoryData($registration, $rentStartHistory){
         $carHistoryModel = new HistoryModel($this->db);
         return $carHistoryModel->getCarHistoryData($registration, $rentStartHistory);

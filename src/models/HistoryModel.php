@@ -122,6 +122,7 @@ SQL;
         return $returnTimeHistory;
     }
 
+    // used by carReturned in the controller to get historydata of a specific car
     public function getCarHistoryData($registration, $rentStartHistory) {
 
         $carHistoryQuery = <<<SQL
