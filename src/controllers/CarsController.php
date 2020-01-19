@@ -3,35 +3,37 @@
 namespace Main\controllers;
 
 use Main\models\CarsModel;
-use Main\models\MakesModel;
 
 class CarsController extends AbstractController {
 
+    // Display all cars
     public function getCars(){
         $Model = new CarsModel($this->db);
         $cars = $Model->getCars();
-        $properties = ["cars" => $cars];
+        $properties = ["cars" => $cars]; //Array of all cars
         return $this->render("CarsView.twig", $properties);
     }
 
+    // Get the data of one car
     public function getCar($registration){
         $Model = new CarsModel($this->db);
         return $Model->getCar($registration);
     }
 
+    // Add new car to database
     public function addCar() {
         $makesModel = new CarsModel($this->db);
-        $makes = $makesModel->getMakes();
-        $colors = $makesModel->getColors();
+        $makes = $makesModel->getMakes(); // List of all valid makes
+        $colors = $makesModel->getColors(); // List colors
         $properties = ["make" => $makes, "color" => $colors];
-        #var_dump($properties);
         return $this->render("AddCar.twig", $properties);
     }
 
     public function carAdded(){
         $carModel = new CarsModel($this->db);
-        $form = $this->request->getForm();
-        #var_dump($form);
+        $form = $this->request->getForm(); // get all form data as an array
+
+        // Save the form data in variables
         $registration = $form["registration"];
         $year = $form["year"];
         $cost = $form["cost"];
@@ -42,21 +44,23 @@ class CarsController extends AbstractController {
         $renter = NULL;
         $rentStart = NULL;
 
+        // Combine all data into a complete "car"
         $car = ["registration" => $registration, "year" => $year, "cost" => $cost,
             "make" => $make, "model" => $model, "color" => $color, "renter" => $renter, "rentStart" => $rentStart];
 
+        // Call the addCar function with data input
         $carModel->addCar($registration, $year, $cost, $make, $model, $color, $renter, $rentStart);
 
         return $this->render("CarAdded.twig", $car);
     }
 
     public function editCar($registration,$year, $cost, $make, $model, $color){
-        $makesModel = new CarsModel($this->db);
-        $makesList = $makesModel->getMakes();
-        $colorsList = $makesModel->getColors();
+        $carModel = new CarsModel($this->db);
+        $makesList = $carModel->getMakes();
+        $colorsList = $carModel->getColors();
 
-        $car = ["registration" => $registration, "year" => $year, "cost" => $cost,
-            "make" => $make, "model" => $model, "color" => $color, "makesList" => $makesList, "colorsList" => $colorsList];
+        $car = ["registration" => $registration, "year" => $year, "cost" => $cost, "make" => $make,
+            "model" => $model, "color" => $color, "makesList" => $makesList, "colorsList" => $colorsList];
         return $this->render("EditCar.twig", $car);
     }
 
@@ -64,7 +68,7 @@ class CarsController extends AbstractController {
         $form = $this->request->getForm();
         $yearNew = $form["year"];
         $costNew = $form["cost"];
-        $makeNew = $form["make"] ?? $makeOld;
+        $makeNew = $form["make"] ?? $makeOld; // if no new value use old value
         $modelNew = $form["model"];
         $colorNew = $form["color"] ?? $colorOld;
 

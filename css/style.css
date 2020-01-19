@@ -2,8 +2,16 @@
     font-family: sans-serif;
 }
 
+table {
+
+}
+
 .error {
     border-color: red;
     transition: ease-in-out;
 }
 
+input[type="submit"] {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
