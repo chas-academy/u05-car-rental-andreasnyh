@@ -112,8 +112,14 @@ class CarsModel extends AbstractModel {
                 "WHERE registration = :registration";
 
         $statement = $this->db->prepare($query);
-        $car = ["registration" => $registration, "year" => $yearNew, "cost" => $costNew,
-            "make" => $makeNew, "model" => $modelNew, "color" => $colorNew];
+        $car = [
+            "registration" => $registration,
+            "year" => $yearNew,
+            "cost" => $costNew,
+            "make" => $makeNew,
+            "model" => $modelNew,
+            "color" => $colorNew
+        ];
 
         $result = $statement->execute($car);
         if (!$result) die($this->db->errorInfo());
