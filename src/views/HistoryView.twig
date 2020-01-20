@@ -42,7 +42,7 @@
                 <td>{{ rent.car.cost }}</td>
                 <td>{{ rent.rentedDays * rent.car.cost }}</td>
             </tr>
-            {# Update sum and add (days*cost) to the sum. Adding upp all the rents #}
+            {# Update sum and add (days*cost) to the sum. Adding up all the rents #}
             {% set sum = sum + (rent.rentedDays * rent.car.cost) %}
         {% endfor %}
         {# Print sum #}
