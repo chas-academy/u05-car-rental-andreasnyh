@@ -27,8 +27,10 @@
             <td><h3>Total Cost</h3></td>
         </tr>
 
+        {# Init sum variable #}
         {% set sum = 0 %}
 
+        {# For each line in History print these values in a row #}
         {% for rent in history %}
             <tr>
                 <td>{{ rent.registration }}</td>
@@ -40,8 +42,10 @@
                 <td>{{ rent.car.cost }}</td>
                 <td>{{ rent.rentedDays * rent.car.cost }}</td>
             </tr>
+            {# Update sum and add (days*cost) to the sum. Adding upp all the rents #}
             {% set sum = sum + (rent.rentedDays * rent.car.cost) %}
         {% endfor %}
+        {# Print sum #}
         <tr><td colspan="5"></td><td colspan="2"><strong>Sum of all rents:</strong></td><td>{{ sum }}</td></tr>
 
         <tr><td colspan="8">
