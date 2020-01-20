@@ -37,7 +37,7 @@
                 <td>{{ rent.rentStart }}</td>
                 <td>{{ rent.returnTime }}</td>
                 <td>{{ rent.rentedDays }}</td>
-                <td>{{rent.car.cost}}</td>
+                <td>{{ rent.car.cost }}</td>
                 <td>{{ rent.rentedDays * rent.car.cost }}</td>
             </tr>
             {% set sum = sum + (rent.rentedDays * rent.car.cost) %}

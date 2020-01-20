@@ -20,15 +20,16 @@ class CarsController extends AbstractController {
         return $Model->getCar($registration);
     }
 
-    // Add new car to database
+    // Add new car form
     public function addCar() {
         $makesModel = new CarsModel($this->db);
         $makes = $makesModel->getMakes(); // List of all valid makes
-        $colors = $makesModel->getColors(); // List colors
+        $colors = $makesModel->getColors(); // List of valid colors
         $properties = ["make" => $makes, "color" => $colors];
         return $this->render("AddCar.twig", $properties);
     }
 
+    // Capture form-data and run addCar method in the model to insert it into the database
     public function carAdded(){
         $carModel = new CarsModel($this->db);
         $form = $this->request->getForm(); // get all form data as an array
@@ -37,7 +38,7 @@ class CarsController extends AbstractController {
         $registration = $form["registration"];
         $year = $form["year"];
         $cost = $form["cost"];
-        $cost = str_replace(",",".", $cost);
+        $cost = str_replace(",",".", $cost); // Replace ',' with '.' in cost if present
         $make = $form["make"];
         $model = $form["model"];
         $color = $form["color"];
@@ -54,6 +55,7 @@ class CarsController extends AbstractController {
         return $this->render("CarAdded.twig", $car);
     }
 
+    // Send existing data of a car to the view
     public function editCar($registration,$year, $cost, $make, $model, $color){
         $carModel = new CarsModel($this->db);
         $makesList = $carModel->getMakes();
@@ -64,6 +66,8 @@ class CarsController extends AbstractController {
         return $this->render("EditCar.twig", $car);
     }
 
+    // Capture form-data and send new data to the database
+    // Send both old and new data to the view to display changes
     public function carEdited($registration, $yearOld, $costOld, $makeOld, $modelOld, $colorOld) {
         $form = $this->request->getForm();
         $yearNew = $form["year"];
@@ -92,9 +96,10 @@ class CarsController extends AbstractController {
         return $this->render("CarEdited.twig", $car);
     }
 
+    // Delete a particular car from the database
     public function removeCar($registration, $make) {
         $model = new CarsModel($this->db);
-        $model->removeCar($registration, $make);
+        $model->removeCar($registration);
         $properties = ["registration" => $registration, "make" => $make];
         return $this->render("CarRemoved.twig", $properties);
     }

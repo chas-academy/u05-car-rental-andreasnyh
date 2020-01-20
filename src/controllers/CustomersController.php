@@ -9,7 +9,7 @@ class CustomersController extends AbstractController {
     public function getCustomers() {
         $Model = new CustomersModel($this->db);
         $customers = $Model->getCustomers();
-        $properties = ["customers" => $customers];
+        $properties = ["customers" => $customers]; // Array of all customers sent to view
         return $this->render("CustomersView.twig", $properties);
     }
 
@@ -18,16 +18,17 @@ class CustomersController extends AbstractController {
         return $Model->getCustomer($renter);
     }
 
+    // Show form to add a new customer
     public function addCustomer() {
         return $this->render("AddCustomer.twig", []);
     }
 
+    // Capture input from the input forms and send te data to the database
     public function customerAdded() {
         $model = new CustomersModel($this->db);
         $form = $this->request->getForm();
 
         $socialSecurityNumber = $form["socialSecurityNumber"];
-        #$socialSecurityNumber = $this->validateSSN($socialSecurityNumber);
         $customerName = $form["customerName"];
         $address = $form["address"];
         $postalAddress = $form["postalAddress"];
@@ -41,62 +42,15 @@ class CustomersController extends AbstractController {
         return $this->render("CustomerAdded.twig", $customer);
     }
 
-    private function validateSSN($socialSecurityNumber) {
-        ## Validate SSN
-        $socialSecurityNumberPattern = "/\d\d[0-1]\d[0-3]\d\d\d\d\d/";
-
-
-        if (preg_match($socialSecurityNumberPattern, $socialSecurityNumber)) {
-            $ssnDigits = str_split($socialSecurityNumber);
-            print_r($ssnDigits);
-            $sum = 0;
-            for ($i = 0; $i < 9; $i++) {
-                if ($i % 2 == 0) {
-                    $digitArray[] = $ssnDigits[$i] * 2;
-                } else {
-                    $digitArray[] = $ssnDigits[$i] * 1;
-                }
-            }
-            $digitArrayString = (implode($digitArray));
-            $digitArraySplit = str_split($digitArrayString);
-            /*
-            foreach ($digitArray as $digit){
-                $digitArraySplit[] = str_split($digit);
-                #var_dump($digitArraySplit);
-
-            }*/
-            foreach ($digitArraySplit as $number) {
-                #var_dump($number);
-                $sum += $number;
-            }
-
-
-#$digitArraySplit = explode('', $digitArray);
-            $controllNumber = (10 - ($sum % 10) % 10);
-            var_dump($controllNumber);
-            var_dump($sum);
-            var_dump($digitArraySplit);
-#echo "match: " . $socialSecurityNumber;
-            if ($ssnDigits[9] == $controllNumber) {
-                echo $socialSecurityNumber . " Is a valid SSN";
-                return $socialSecurityNumber;
-            } else {
-                echo "Invalid Social Security Number";
-                xdebug_break();
-            }
-        } else {
-            echo "Invalid Social Security Number";
-            return $php_errormsg;
-        }
-## / Validate SSN
-    }
-
+    // Send existing data of a customer to the view
     public function editCustomer($socialSecurityNumber, $customerName, $address, $postalAddress, $phoneNumber) {
         $customer = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName, "address" => $address,
             "postalAddress" => $postalAddress, "phoneNumber" => $phoneNumber];
         return $this->render("EditCustomer.twig", $customer);
     }
 
+    // Capture form-data and send new data to the database
+    // Send both old and new data to the view to display changes
     public function customerEdited($socialSecurityNumber, $customerNameOld, $addressOld, $postalAddressOld, $phoneNumberOld) {
         $form = $this->request->getForm();
         $customerNameNew = $form["customerName"];
@@ -120,9 +74,10 @@ class CustomersController extends AbstractController {
         return $this->render("CustomerEdited.twig", $customer);
     }
 
+    // Delete a particular customer from the database
     public function removeCustomer($socialSecurityNumber, $customerName) {
         $model = new CustomersModel($this->db);
-        $model->removeCustomer($socialSecurityNumber, $customerName);
+        $model->removeCustomer($socialSecurityNumber);
         $properties = ["socialSecurityNumber" => $socialSecurityNumber, "customerName" => $customerName];
         return $this->render("CustomerRemoved.twig", $properties);
     }

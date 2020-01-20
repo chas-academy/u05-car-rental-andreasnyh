@@ -51,8 +51,8 @@ class HistoryModel extends AbstractModel {
                            "rentedDays" => $rentedDays,
                            "rentStart" => $rentStart,
                            "returnTime" => $returnTime,
-                           "car" => $carDB->getCar($this->db->quote($registration)),
-                           "customer" => $customerDB->getCustomer($this->db->quote($renter))
+                           "car" => $carDB->getCar($this->db->quote($registration)), // get all information about rented car
+                           "customer" => $customerDB->getCustomer($this->db->quote($renter)) // same with the customer
             ];
 
             // Push the data to array
@@ -61,15 +61,15 @@ class HistoryModel extends AbstractModel {
         return $historyArray; // Sent to view
     }
 
+    // Connect a car with the customer who rents it
     public function rentCar($registration, $SSN) {
 
         // Query to start renting a car
-        // Set who and when someone starts renting a particular car
+        // Set who and WHEN(timestamp) someone starts renting a particular car
         $rentQuery = <<<SQL
             UPDATE Cars SET renter = :SSN, rentStart = CURRENT_TIMESTAMP
             WHERE registration = :registration;
 SQL;
-
 
         $statement = $this->db->prepare($rentQuery);
         if(!$statement) die();
@@ -77,8 +77,8 @@ SQL;
         $statement->execute(["registration" => $registration, "SSN" => $SSN]);
     }
 
+    // Return rented car
     public function returnCar($registration, $renter, $rentStart) {
-        // Return rented car
         // Add it to History and make it possible to rent the car again
         $addToHistoryQuery = <<<SQL
         INSERT INTO History(registrationHistory, renterHistory, rentStartHistory, returnTimeHistory)
@@ -126,7 +126,8 @@ SQL;
     public function getCarHistoryData($registration, $rentStartHistory) {
 
         $carHistoryQuery = <<<SQL
-            SELECT * FROM History WHERE registrationHistory = :registration AND rentStartHistory = :rentStartHistory;
+            SELECT * FROM History WHERE registrationHistory = :registration 
+                                    AND rentStartHistory = :rentStartHistory;
 SQL;
         $carHistoryStatement = $this->db->prepare($carHistoryQuery);
         if (!$carHistoryQuery) die($this->db->errorInfo());

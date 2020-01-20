@@ -2,13 +2,12 @@
 
 namespace Main\models;
 
-use Main\exceptions\NotFoundException;
-use Main\utils\DependencyInjector;
 use PDOException;
 
 
 class CarsModel extends AbstractModel {
 
+    // Get an array of all cars
     public function getCars() {
 
         $carsDB = $this->db->query("SELECT * FROM Cars");
@@ -27,21 +26,28 @@ class CarsModel extends AbstractModel {
             $rentStart = htmlspecialchars($carFromDB["rentStart"]);
 
             // Save variables from each loop as car
-            $car = ["reg" => $reg, "make" => $make, "model" => $model,
-                    "color" => $color, "year" => $year, "cost" => $cost, "renter" => $renter, "rentStart" => $rentStart];
+            $car = ["reg" => $reg,
+                "make" => $make,
+                "model" => $model,
+                "color" => $color,
+                "year" => $year,
+                "cost" => $cost,
+                "renter" => $renter,
+                "rentStart" => $rentStart];
 
             // Push car into array of all Cars
             $carArray[] = $car;
         }
         return $carArray; // gets sent back to the controller to be sent to the view
   }
-
+    // Get data of a particular car
     public function getCar($registration) {
         $carDB = $this->db->query("SELECT * FROM Cars WHERE registration = $registration");
         $car = $carDB->fetch();
         return $car;
     }
 
+    // Get an array of all valid makes
     public function getMakes() {
         $makesDB = $this->db->query("SELECT * FROM Makes");
 
@@ -55,6 +61,7 @@ class CarsModel extends AbstractModel {
             return $makesArray;
     }
 
+    // Get an array of all valid colors
     public function getColors() {
         $colorsDB = $this->db->query("SELECT * FROM Colors");
 
@@ -67,6 +74,7 @@ class CarsModel extends AbstractModel {
         return $colorsArray;
     }
 
+    // Insert new car data into database
     public function addCar($registration,$year, $cost, $make, $model, $color, $renter, $rentStart){
         $query = "INSERT INTO Cars(registration, year, cost, make, model, color, renter, rentStart) " .
             "VALUES (:registration, :year, :cost, :make, :model, :color, :renter, :rentStart)";
@@ -84,9 +92,9 @@ class CarsModel extends AbstractModel {
             die($e->getMessage());
                 #die("Duplicate entry, you can´t add a car twice!");
         }
-
     }
 
+    // Send updated car data to the database
     public function editCar($registration, $yearNew, $costNew, $makeNew, $modelNew, $colorNew){
 
         $yearNew = htmlspecialchars($yearNew);
@@ -95,13 +103,13 @@ class CarsModel extends AbstractModel {
         $modelNew = htmlspecialchars($modelNew);
         $colorNew = htmlspecialchars($colorNew);
 
-        $query = "UPDATE Cars SET year = :year ," .
-            "year = :year ," .
-            "cost = :cost ," .
-            "make = :make ," .
-            "model = :model ," .
-            "color = :color " .
-            "WHERE registration = :registration";
+        $query = "UPDATE Cars SET " .
+                "year = :year ," .
+                "cost = :cost ," .
+                "make = :make ," .
+                "model = :model ," .
+                "color = :color " .
+                "WHERE registration = :registration";
 
         $statement = $this->db->prepare($query);
         $car = ["registration" => $registration, "year" => $yearNew, "cost" => $costNew,
@@ -111,6 +119,7 @@ class CarsModel extends AbstractModel {
         if (!$result) die($this->db->errorInfo());
     }
 
+    // Delete a particular car from the database
     public function removeCar($registration) {
         $query = "DELETE FROM Cars WHERE registration = :registration";
         $statement = $this->db->prepare($query);

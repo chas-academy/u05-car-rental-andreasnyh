@@ -33,6 +33,8 @@ class HistoryController extends AbstractController {
         return $this->render("RentCar.twig", $carsAndCustomers);
     }
 
+    // Get data from the form about which car is getting rented
+    // by which customer and run rentCar method in the model
     public function rentCar(){
         $historyModel = new HistoryModel($this->db);
 
@@ -49,6 +51,8 @@ class HistoryController extends AbstractController {
         return $this->render("CarRented.twig", $rented);
     }
 
+    // Display the view to return a car.
+    //Send a list of all customers, cars and makes to view
     public function returnCar(){
         $customersModel = new CustomersModel($this->db);
         $carModel = new CarsModel($this->db);
@@ -63,7 +67,9 @@ class HistoryController extends AbstractController {
 
     public function carReturned() {
         $form = $this->request->getForm();
-        $form = explode("|", $form["returnedCar"]); // Split values returned from view
+        // Split values returned from view into array $form
+        // returnedCar has "registration", "renter" and "rentStart" as values separated by a '|'
+        $form = explode("|", $form["returnedCar"]);
         $registration = $form[0];
         $renter = intval($form[1]);
         $rentStartTimeString = $form[2];
